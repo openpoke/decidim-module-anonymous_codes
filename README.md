@@ -2,8 +2,8 @@
 
 [![[CI] Lint](https://github.com/openpoke/decidim-module-anonymous_codes/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-anonymous_codes/actions/workflows/lint.yml)
 [![[CI] Test](https://github.com/openpoke/decidim-module-anonymous_codes/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-anonymous_codes/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7d9a138a045b30851a33/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-anonymous_codes/maintainability)
-[![codecov](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes/branch/main/graph/badge.svg?token=OZ4AKZGKTC)](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c6a5d8808df0ea76bc30/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-anonymous_codes/maintainability)
+[![codecov](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes/graph/badge.svg?token=Hbc6Uq50qe)](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes)
 
 TODO...
 
