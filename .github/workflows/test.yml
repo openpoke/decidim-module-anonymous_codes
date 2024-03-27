@@ -53,9 +53,12 @@ jobs:
           CODECOV: 1
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: openpoke/decidim-module-anonymous_codes
 
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
