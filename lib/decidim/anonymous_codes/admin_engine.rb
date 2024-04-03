@@ -30,7 +30,7 @@ module Decidim
           menu.add_item :anonymous_codes_menu,
                         I18n.t("menu.anonymous_codes", scope: "decidim.admin"),
                         decidim_admin_anonymous_codes.code_groups_path,
-                        icon_name: "fire",
+                        icon_name: "hard-drive",
                         position: 7.5,
                         active: is_active_link?(decidim_admin_anonymous_codes.code_groups_path, :inclusive),
                         if: defined?(current_user) && current_user&.read_attribute("admin")

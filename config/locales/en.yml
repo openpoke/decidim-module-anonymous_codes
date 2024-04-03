@@ -1,2 +1,6 @@
 ---
 en:
+  decidim:
+    admin:
+      menu:
+        anonymous_codes: Anonymous Codes
