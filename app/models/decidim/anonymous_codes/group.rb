@@ -10,8 +10,13 @@ module Decidim
         throw(:abort) if tokens.where(usage_count: 1..Float::INFINITY).count.positive?
       end
 
+      belongs_to :organization, class_name: "Decidim::Organization", foreign_key: "decidim_organization_id"
       has_many :tokens, class_name: "Decidim::AnonymousCodes::Token", dependent: :destroy
       belongs_to :resource, polymorphic: true, optional: true
+
+      def self.for(organization)
+        where(organization: organization)
+      end
     end
   end
 end

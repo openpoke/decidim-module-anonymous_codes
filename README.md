@@ -38,7 +38,16 @@ TODO...
 
 ### Configuration
 
-TODO...
+By default, the module is configured to read the configuration from ENV variables.
+
+Currently, the following ENV variables are supported:
+
+| ENV variable | Description | Default value |
+| ------------ | ----------- |-------|
+| ANONYMOUS_CODES_DEFAULT_TOKEN_LENGTH | The length of the codes generated if using the default token generator | `10` |
+| ANONYMOUS_CODES_TOKEN_STYLE | The type of codes generated if using the default token generator (options are `alphanumeric`, `numeric`). (note that "numeric" still returns a string, just only formed by number chars) | `alphanumeric` |
+
+It is also possible to configure the module using the `decidim-anonymous_codes` initializer:
 
 Create an initializer (for instance `config/initializers/anonymous_codes.rb`) and configure the following:
 
@@ -46,6 +55,14 @@ Create an initializer (for instance `config/initializers/anonymous_codes.rb`) an
 # config/initializers/anonymous_codes.rb
 
 Decidim::AnonymousCodes.configure do |config|
+  # The length of the codes generated if using the default alphanumeric generator
+  config.default_token_length = 10
+
+  # The generator to use for the codes (defaults to an alphanumeric uppercase string of length "default_token_length")
+  # if you customize this, the default_token_length will be ignored
+  def self.token_generator
+    SecureRandom.hex(25)
+  end
 end
 ```
 

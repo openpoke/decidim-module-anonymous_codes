@@ -1,0 +1,18 @@
+<% groups = Decidim::AnonymousCodes::Group.for(@component.organization).where(resource: resource) %>
+<% if groups.any? %>
+  <div class="callout alert">
+    <p><strong><%= t(".group_locked") %></strong></p>
+    <ul>
+      <% groups.each do |group| %>
+        <li><%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id) %></li>
+      <% end %>
+    </ul>
+    <p class="help-text"><%= t(".group_locked_desc") %></p>
+</div>
+<% else %>
+  <div class="callout warning">
+    <p><strong><%= t(".group_unlocked") %></strong></p>
+    <p><%= link_to t(".new_group"), decidim_admin_anonymous_codes.code_groups_path %></p>
+    <p class="help-text"><%= t(".group_unlocked_desc") %></p>
+  </div>
+<% end %>

@@ -11,10 +11,15 @@ module Decidim
 
       describe "associations" do
         it { expect(described_class.reflect_on_association(:tokens).macro).to eq(:has_many) }
+        it { expect(described_class.reflect_on_association(:organization).macro).to eq(:belongs_to) }
       end
 
       context "when tokens exist" do
         let!(:token) { create(:anonymous_codes_token, group: group) }
+
+        it "has an organization" do
+          expect(group.organization).to be_a(Decidim::Organization)
+        end
 
         it "destroys the tokens when destroyed" do
           expect { group.destroy }.to change(Token, :count).by(-1)

@@ -1,0 +1,5 @@
+<!-- insert_after "erb[loud]:contains('settings_attribute_input')" -->
+
+<% if manifest.name == :surveys && field_name == :allow_unregistered %>
+  <%= render "decidim/anonymous_codes/admin/surveys_component_settings/callout", resource: Decidim::Surveys::Survey.find_by(component: @component) %>
+<% end %>
