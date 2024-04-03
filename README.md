@@ -18,9 +18,19 @@ gem 'decidim-anonymous_codes', github: 'openpoke/decidim-module-anonymous_codes'
 
 And then execute:
 
-```
+```bash
 bundle
+bin/rails decidim:upgrade
+bin/rails db:migrate
 ```
+
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-anonymous_codes` gem will run the following (that can also be run manually if you consider):
+> 
+> ```bash
+> bin/rails decidim_anonymous_codes:install:migrations
+> ```
 
 ## Usage
 

@@ -4,6 +4,7 @@ PATH
     decidim-anonymous_codes (1.0)
       decidim-admin (>= 0.27.0, < 0.28)
       decidim-core (>= 0.27.0, < 0.28)
+      decidim-surveys (>= 0.27.0, < 0.28)
 
 GEM
   remote: https://rubygems.org/
