@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "decidim/anonymous_codes/admin"
 require "decidim/anonymous_codes/engine"
 require "decidim/anonymous_codes/admin_engine"
 

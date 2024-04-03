@@ -19,20 +19,20 @@ module Decidim
         nil
       end
 
-      initializer "decidim_decidim_awesome.admin_mount_routes" do
+      initializer "decidim_decidim-anonymous_codes.admin_mount_routes" do
         Decidim::Core::Engine.routes do
-          mount Decidim::DecidimAwesome::AdminEngine, at: "/admin/decidim_awesome", as: "decidim_admin_decidim_awesome"
+          mount Decidim::AnonymousCodes::AdminEngine, at: "/admin/anonymous_codes", as: "decidim_admin_anonymous_codes"
         end
       end
 
-      initializer "decidim_awesome.admin_menu" do
+      initializer "decidim-anonymous_codes.admin_menu" do
         Decidim.menu :admin_menu do |menu|
-          menu.add_item :awesome_menu,
-                        I18n.t("menu.decidim_awesome", scope: "decidim.admin"),
-                        decidim_admin_decidim_awesome.config_path(:editors),
+          menu.add_item :anonymous_codes_menu,
+                        I18n.t("menu.anonymous_codes", scope: "decidim.admin"),
+                        decidim_admin_anonymous_codes.code_groups_path,
                         icon_name: "fire",
                         position: 7.5,
-                        active: is_active_link?(decidim_admin_decidim_awesome.config_path(:editors), :inclusive),
+                        active: is_active_link?(decidim_admin_anonymous_codes.code_groups_path, :inclusive),
                         if: defined?(current_user) && current_user&.read_attribute("admin")
         end
       end
