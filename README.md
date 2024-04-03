@@ -61,7 +61,7 @@ Decidim::AnonymousCodes.configure do |config|
   # The generator to use for the codes (defaults to an alphanumeric uppercase string of length "default_token_length")
   # if you customize this, the default_token_length will be ignored
   def self.token_generator
-  	SecureRandom.hex(25)
+    SecureRandom.hex(25)
   end
 end
 ```

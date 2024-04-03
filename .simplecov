@@ -4,6 +4,7 @@ SimpleCov.start do
   root ENV.fetch("ENGINE_ROOT", nil)
 
   add_filter "lib/decidim/anonymous_codes/version.rb"
+  add_filter "lib/decidim/anonymous_codes/test"
   add_filter "/spec"
 end
 
