@@ -1,2 +1,17 @@
 ---
 en:
+  decidim:
+    anonymous_codes:
+      admin:
+        surveys_component_settings:
+          callout:
+            group_locked: This survey can only be answered by using a valid code.
+            group_locked_desc: Note that, unless "Allow unregistered users to answer"
+              is enabled, only registered users can answer this survey (and they also
+              will have to provide the code).
+            group_unlocked: Anyone can answer this survey, but you can choose to restrict
+              this by using a answer codes.
+            group_unlocked_desc: Note that "Allow unregistered users to answer" will
+              still apply if you choose to use this option.
+            groups: 'Edit groups:'
+            new_group: "\U0001F449 Create answer codes here"
