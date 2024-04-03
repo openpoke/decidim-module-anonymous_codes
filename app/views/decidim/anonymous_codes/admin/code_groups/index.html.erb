@@ -1,1 +1,32 @@
-<h1>Hola</h1>
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">Access code groups</h2>
+    <a class="button tiny button--title" href="#">New access code group</a>
+  </div>
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("decidim.admin.code_group.index.title") %></th>
+            <th><%= t("decidim.admin.code_group.index.expires_at") %></th>
+            <th><%= t("decidim.admin.code_group.index.active") %></th>
+            <th><%= t("decidim.admin.code_group.index.num_of_tockens") %></th>
+            <th><%= t("decidim.admin.code_group.index.max_reuses") %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% groups.each do |group| %>
+          <tr>
+            <td><%= translated_attribute(group.title)%></td>
+            <td><%= translated_attribute(group.expires_at) %></td>
+            <td><%= translated_attribute(group.active) %></td>
+            <td><%= translated_attribute(group.max_reuses) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

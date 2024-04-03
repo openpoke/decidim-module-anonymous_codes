@@ -2,5 +2,12 @@
 en:
   decidim:
     admin:
+      code_group:
+        index:
+          title: Title
+          expires_at: Expires at
+          active: Active
+          num_of_tockens: Num. of Tockens
+          max_reuses: Re-use max
       menu:
-        anonymous_codes: Anonymous Codes
+        anonymous_codes: Access Codes
