@@ -2,7 +2,7 @@
   <div class="card-divider">
     <h2 class="card-title">
       Access code groups
-      <a class="button tiny button--title new-access" href="<%= new_code_group_path %>" ><%= t("decidim.admin.code_group.index.new_access_code_group_button") %></a>
+      <a class="button tiny button--title new-access" href="<%= new_code_group_path %>"><%= t("decidim.admin.code_group.index.new_access_code_group_button") %></a>
     </h2>
   </div>
   <div class="card-section">
@@ -27,9 +27,9 @@
             <td><%= group.tokens.count %></td>
             <td><%= group.max_reuses %></td>
             <td class="table-list__actions">
-              <%= icon "data-transfer-download", class: "action-icon--edit" %>
-              <%= icon "pencil", class: "action-icon--edit" %>
-              <%= icon "eye" %>
+              <%= icon_link_to "data-transfer-download", t("decidim.admin.actions.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t("decidim.admin.actions.confirm_destroy") } %>
+              <%= icon_link_to "pencil", edit_code_group_path(group), t("decidim.admin.actions.edit"), class: "action-icon--edit" %>
+              <%= icon_link_to "eye", t("decidim.admin.actions.preview"), class: "action-icon--preview" %>
             </td>
           </tr>
           <% end %>

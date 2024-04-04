@@ -2,6 +2,11 @@
 en:
   decidim:
     admin:
+      actions:
+        confirm_destroy: Are you sure you want to delete this %{name}?
+        destroy: Delete
+        edit: Edit
+        preview: Preview
       code_group:
         index:
           active: Active
