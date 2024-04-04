@@ -28,8 +28,8 @@
               <td><%= group.tokens.count %></td>
               <td><%= group.max_reuses %></td>
               <td class="table-list__actions">
-                <%= icon_link_to "data-transfer-download", t("decidim.admin.actions.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t("decidim.admin.actions.confirm_destroy") } %>
-                <%= icon_link_to "pencil", edit_code_group_path(group), t("decidim.admin.actions.edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "data-transfer-download", code_group_path(group.id), t("decidim.admin.actions.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t("decidim.admin.actions.confirm_destroy") } %>
+                <%= icon_link_to "pencil", edit_code_group_path(group.id), t("decidim.admin.actions.edit"), class: "action-icon--edit" %>
                 <%= icon_link_to "eye", t("decidim.admin.actions.preview"), class: "action-icon--preview" %>
               </td>
             </tr>
