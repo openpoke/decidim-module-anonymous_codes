@@ -9,9 +9,9 @@ module Decidim
       isolate_namespace Decidim::AnonymousCodes
 
       initializer "decidim_anonymous_codes.overrides", after: "decidim.action_controller" do
-        # config.to_prepare do
-
-        # end
+        config.to_prepare do
+          Decidim::Surveys::SurveysController.include(Decidim::AnonymousCodes::SurveysControllerOverride)
+        end
       end
 
       initializer "decidim-anonymous_codes.webpacker.assets_path" do

@@ -15,3 +15,10 @@ en:
               still apply if you choose to use this option.
             groups: 'Edit groups:'
             new_group: "\U0001F449 Create answer codes here"
+      invalid_code: The introduced code is invalid. Please try again.
+      surveys:
+        code_required:
+          title: Form restricted
+          body: This form can only be accessed using a valid code. If you have a valid code, please enter it below.
+          label: Code
+          submit: Continue
