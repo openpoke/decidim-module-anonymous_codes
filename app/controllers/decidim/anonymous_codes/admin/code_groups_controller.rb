@@ -15,7 +15,7 @@ module Decidim
         private
 
         def groups
-          AnonymousCodes::Group.all
+          AnonymousCodes::Group.for(current_organization)
         end
       end
     end
