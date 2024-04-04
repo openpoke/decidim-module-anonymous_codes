@@ -8,7 +8,9 @@ module Decidim
 
         def index; end
 
-        def new; end
+        def new
+          @form = form(CodeGroupsForm).instance
+        end
 
         def create; end
 
