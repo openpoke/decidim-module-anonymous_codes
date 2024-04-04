@@ -4,11 +4,11 @@ en:
     admin:
       code_group:
         index:
-          title: Title
-          expires_at: Expires at
           active: Active
-          num_of_tockens: Num. of Tockens
+          expires_at: Expires at
           max_reuses: Re-use max
+          num_of_tockens: Num. of Tockens
+          title: Title
       menu:
         anonymous_codes: Access Codes
     anonymous_codes:

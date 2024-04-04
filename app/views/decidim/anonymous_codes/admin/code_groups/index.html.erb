@@ -20,9 +20,11 @@
             <% groups.each do |group| %>
           <tr>
             <td><%= translated_attribute(group.title) %></td>
-            <td><%= translated_attribute(group.expires_at) %></td>
+            <td><%= translated_attribute(l(group.expires_at, format: :decidim_short)) %></td>
             <td><%= translated_attribute(group.active) %></td>
+            <td><%= translated_attribute(group.tokens.count) %></td>
             <td><%= translated_attribute(group.max_reuses) %></td>
+            <td></td>
           </tr>
           <% end %>
         </tbody>
