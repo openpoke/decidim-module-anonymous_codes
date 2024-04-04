@@ -15,10 +15,13 @@ en:
               still apply if you choose to use this option.
             groups: 'Edit groups:'
             new_group: "\U0001F449 Create answer codes here"
+      expired_code: The introduced code has expired. Please try again.
       invalid_code: The introduced code is invalid. Please try again.
       surveys:
         code_required:
-          title: Form restricted
-          body: This form can only be accessed using a valid code. If you have a valid code, please enter it below.
+          body: This form can only be accessed using a valid code. If you have a valid
+            code, please enter it below.
           label: Code
           submit: Continue
+          title: Form restricted
+      used_code: The introduced code has already been used. Please try again.
