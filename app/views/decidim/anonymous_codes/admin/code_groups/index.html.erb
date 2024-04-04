@@ -6,35 +6,42 @@
     </h2>
   </div>
   <div class="card-section">
-    <div class="table-scroll">
-      <table class="table-list">
-        <thead>
-          <tr>
-            <th><%= t("decidim.admin.code_group.index.title") %></th>
-            <th><%= t("decidim.admin.code_group.index.expires_at") %></th>
-            <th><%= t("decidim.admin.code_group.index.active") %></th>
-            <th><%= t("decidim.admin.code_group.index.num_of_tockens") %></th>
-            <th><%= t("decidim.admin.code_group.index.max_reuses") %></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            <% groups.each do |group| %>
-          <tr>
-            <td><%= translated_attribute(group.title) %></td>
-            <td><%= l(group.expires_at, format: :decidim_short) %></td>
-            <td><%= t("booleans.#{group.active}") %></td>
-            <td><%= group.tokens.count %></td>
-            <td><%= group.max_reuses %></td>
-            <td class="table-list__actions">
-              <%= icon_link_to "data-transfer-download", t("decidim.admin.actions.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t("decidim.admin.actions.confirm_destroy") } %>
-              <%= icon_link_to "pencil", edit_code_group_path(group), t("decidim.admin.actions.edit"), class: "action-icon--edit" %>
-              <%= icon_link_to "eye", t("decidim.admin.actions.preview"), class: "action-icon--preview" %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <% if groups.any? %>
+      <div class="table-scroll">
+        <table class="table-list">
+          <thead>
+            <tr>
+              <th><%= t("decidim.admin.code_group.index.title") %></th>
+              <th><%= t("decidim.admin.code_group.index.expires_at") %></th>
+              <th><%= t("decidim.admin.code_group.index.active") %></th>
+              <th><%= t("decidim.admin.code_group.index.num_of_tockens") %></th>
+              <th><%= t("decidim.admin.code_group.index.max_reuses") %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              <% groups.each do |group| %>
+            <tr>
+              <td><%= translated_attribute(group.title) %></td>
+              <td><%= l(group.expires_at, format: :decidim_short) %></td>
+              <td><%= t("booleans.#{group.active}") %></td>
+              <td><%= group.tokens.count %></td>
+              <td><%= group.max_reuses %></td>
+              <td class="table-list__actions">
+                <%= icon_link_to "data-transfer-download", t("decidim.admin.actions.destroy"), method: :delete, class: "action-icon--remove", data: { confirm: t("decidim.admin.actions.confirm_destroy") } %>
+                <%= icon_link_to "pencil", edit_code_group_path(group), t("decidim.admin.actions.edit"), class: "action-icon--edit" %>
+                <%= icon_link_to "eye", t("decidim.admin.actions.preview"), class: "action-icon--preview" %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div>
+        <p>No access code groups available.</p>
+        <p>Stert by adding an access code group from the "<a href="<%= new_code_group_path %>">New access code group</a>" button.</p>
+      </div>
+    <% end %>
   </div>
 </div>
