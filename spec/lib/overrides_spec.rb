@@ -7,8 +7,15 @@ require "spec_helper"
 # file should be updated to match any change/bug fix introduced in the core
 checksums = [
   {
-    package: "decidim-core",
+    package: "decidim-surveys",
     files: {
+      "/app/controllers/decidim/surveys/surveys_controller.rb" => "f443ed19838d251fd9d9b960e5908418"
+    }
+  },
+  {
+    package: "decidim-forms",
+    files: {
+      "/app/views/decidim/forms/questionnaires/show.html.erb" => "b54864ffbdaab74bfc82f7b047cbf170"
     }
   }
 ]
