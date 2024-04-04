@@ -8,6 +8,7 @@ describe "Surveys Component Settings", type: :system do
   let(:user) { create :user, :confirmed, organization: organization }
   let(:group) { create :anonymous_codes_group, organization: organization, expires_at: expires, resource: resource, active: active }
   let!(:token) { create :anonymous_codes_token, group: group, usage_count: usage }
+  let!(:another_token) { create :anonymous_codes_token }
   let(:usage) { 0 }
   let(:active) { true }
   let(:expires) { nil }
@@ -122,6 +123,16 @@ describe "Surveys Component Settings", type: :system do
   shared_examples "cannot be answered with bad codes" do
     it "sends the code and fails" do
       fill_in :token, with: "dirty-things"
+      click_button("Continue")
+      expect(page).to have_css(".callout.alert")
+      expect(page).to have_content("The introduced code is invalid.")
+      expect(page).to have_content("Form restricted")
+      expect(page).to have_field("token")
+      expect(page).not_to have_content(first_question.body["en"])
+    end
+
+    it "sends another code and fails" do
+      fill_in :token, with: another_token.token
       click_button("Continue")
       expect(page).to have_css(".callout.alert")
       expect(page).to have_content("The introduced code is invalid.")
