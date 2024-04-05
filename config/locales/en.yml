@@ -1,5 +1,12 @@
 ---
 en:
+  activerecord:
+    errors:
+      models:
+        decidim/anonymous_codes/token_resource:
+          invalid_questionnaire: The attached answer belongs to a different questionnaire.
+          max_uses_exceeded: The code has already been used the maximum number of
+            times.
   decidim:
     anonymous_codes:
       admin:

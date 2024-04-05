@@ -10,8 +10,9 @@ module Decidim
         throw(:abort) if usage_count.positive?
       end
 
-      belongs_to :group, class_name: "Decidim::AnonymousCodes::Group"
-      belongs_to :resource, polymorphic: true, optional: true
+      belongs_to :group, class_name: "Decidim::AnonymousCodes::Group", counter_cache: true
+      has_many :token_resources, class_name: "Decidim::AnonymousCodes::TokenResource", dependent: :destroy
+      has_many :answers, through: :token_resources, source_type: "Decidim::Forms::Answer", source: :resource
 
       delegate :active?, to: :group
 

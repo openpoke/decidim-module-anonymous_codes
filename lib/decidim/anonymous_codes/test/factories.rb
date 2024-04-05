@@ -12,7 +12,15 @@ FactoryBot.define do
 
   factory :anonymous_codes_token, class: "Decidim::AnonymousCodes::Token" do
     token { Decidim::AnonymousCodes.token_generator }
-    usage_count { 0 }
     group { create(:anonymous_codes_group) }
+
+    trait :used do
+      token_resources { [create(:anonymous_codes_token_resource)] }
+    end
+  end
+
+  factory :anonymous_codes_token_resource, class: "Decidim::AnonymousCodes::TokenResource" do
+    token { create(:anonymous_codes_token) }
+    resource { create(:answer, questionnaire: token.group.resource.questionnaire) }
   end
 end
