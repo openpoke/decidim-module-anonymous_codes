@@ -48,7 +48,15 @@ module Decidim
           end
         end
 
-        def destroy; end
+        def destroy
+          Decidim.traceability.perform_action!("delete", code_group, current_user) do
+            code_group.destroy!
+          end
+
+          flash[:notice] = I18n.t("code_groups.destroy.success", scope: "decidim.anonymous_codes.admin")
+
+          redirect_to code_groups_path
+        end
 
         private
 
