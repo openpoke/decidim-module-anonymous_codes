@@ -32,7 +32,21 @@ module Decidim
           @form = form(CodeGroupForm).from_model(code_group)
         end
 
-        def update; end
+        def update
+          @form = form(CodeGroupForm).from_params(params)
+
+          UpdateCodeGroup.call(@form, code_group) do
+            on(:ok) do
+              flash[:notice] = I18n.t("code_groups.update.success", scope: "decidim.anonymous_codes.admin")
+              redirect_to code_groups_path
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("code_groups.update.invalid", scope: "decidim.anonymous_codes.admin")
+              render action: "edit"
+            end
+          end
+        end
 
         def destroy; end
 

@@ -31,6 +31,9 @@ en:
             title: Title
           new:
             title: New access code group
+          update:
+            invalid: There was a problem updating this access code group
+            success: Access code group successfully updated
         surveys_component_settings:
           callout:
             group_locked: This survey can only be answered by using a valid code.
