@@ -5,14 +5,13 @@ module Decidim
     module Admin
       class CodeGroupsForm < Decidim::Form
         include TranslatableAttributes
-        include TranslationsHelper
 
         translatable_attribute :title, String
         attribute :expires_at, Decidim::Attributes::LocalizedDate
-        attribute :active, Boolean
-        attribute :max_reuses, Integer
+        attribute :active, Boolean, default: true
+        attribute :max_reuses, Integer, default: 1
 
-        validates :expires_at, presence: true
+        validates :max_reuses, presence: true
         validates :title, translatable_presence: true
       end
     end
