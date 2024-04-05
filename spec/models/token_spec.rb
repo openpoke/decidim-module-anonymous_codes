@@ -151,6 +151,22 @@ module Decidim
             expect { token.destroy }.not_to change(Token, :count)
           end
         end
+
+        context "and another one is created with the same token" do
+          let(:another_token) { build(:anonymous_codes_token, token: token.token, group: token.group) }
+
+          it "cannot be created" do
+            expect { another_token.save! }.to raise_error(ActiveRecord::RecordInvalid)
+          end
+
+          context "and a different group" do
+            let(:another_token) { build(:anonymous_codes_token, token: token.token) }
+
+            it "can be created" do
+              expect { another_token.save! }.to change(Token, :count).by(1)
+            end
+          end
+        end
       end
     end
   end

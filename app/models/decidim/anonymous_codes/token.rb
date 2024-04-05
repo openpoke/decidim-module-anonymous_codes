@@ -15,6 +15,8 @@ module Decidim
       has_many :answers, through: :token_resources, source_type: "Decidim::Forms::Answer", source: :resource
 
       delegate :active?, to: :group
+      validates :token, presence: true
+      validates :token, uniqueness: { scope: [:group] }
 
       def available?
         !used? && !expired? && active?
