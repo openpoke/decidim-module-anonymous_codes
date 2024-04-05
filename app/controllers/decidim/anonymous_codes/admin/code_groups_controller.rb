@@ -14,7 +14,9 @@ module Decidim
 
         def create; end
 
-        def edit; end
+        def edit
+          @form = form(CodeGroupsForm).from_model(code_group)
+        end
 
         def update; end
 
@@ -24,6 +26,10 @@ module Decidim
 
         def groups
           AnonymousCodes::Group.for(current_organization)
+        end
+
+        def code_group
+          @code_group ||= groups.find(params[:id])
         end
       end
     end

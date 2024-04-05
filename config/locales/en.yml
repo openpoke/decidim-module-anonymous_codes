@@ -7,18 +7,27 @@ en:
         destroy: Delete
         edit: Edit
         preview: Preview
-      code_group:
-        index:
-          active: Active
-          expires_at: Expires at
-          max_reuses: Re-use max
-          new_access_code_group_button: New access code group
-          num_of_tockens: Num. of Tockens
-          title: Title
       menu:
         anonymous_codes: Access Codes
     anonymous_codes:
       admin:
+        code_groups:
+          edit:
+            title: Edit access code group
+          form:
+            active: Active
+            expires_at: Expires At
+            max_reuses: Re-use max
+            title: Title
+          index:
+            active: Active
+            expires_at: Expires at
+            max_reuses: Re-use max
+            new_access_code_group_button: New access code group
+            num_of_tockens: Num. of Tockens
+            title: Title
+          new:
+            title: New access code group
         surveys_component_settings:
           callout:
             group_locked: This survey can only be answered by using a valid code.
