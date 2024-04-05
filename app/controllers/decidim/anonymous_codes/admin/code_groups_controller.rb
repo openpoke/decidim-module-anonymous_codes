@@ -9,13 +9,27 @@ module Decidim
         def index; end
 
         def new
-          @form = form(CodeGroupsForm).instance
+          @form = form(CodeGroupForm).instance
         end
 
-        def create; end
+        def create
+          @form = form(CodeGroupForm).from_params(params)
+
+          CreateCodeGroup.call(@form, current_organization) do
+            on(:ok) do
+              flash[:notice] = I18n.t("code_groups.create.success", scope: "decidim.anonymous_codes.admin")
+              redirect_to code_groups_path
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("code_groups.create.invalid", scope: "decidim.anonymous_codes.admin")
+              render action: "new"
+            end
+          end
+        end
 
         def edit
-          @form = form(CodeGroupsForm).from_model(code_group)
+          @form = form(CodeGroupForm).from_model(code_group)
         end
 
         def update; end

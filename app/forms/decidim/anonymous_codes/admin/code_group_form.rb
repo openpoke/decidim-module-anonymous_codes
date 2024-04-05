@@ -3,7 +3,7 @@
 module Decidim
   module AnonymousCodes
     module Admin
-      class CodeGroupsForm < Decidim::Form
+      class CodeGroupForm < Decidim::Form
         include TranslatableAttributes
 
         translatable_attribute :title, String

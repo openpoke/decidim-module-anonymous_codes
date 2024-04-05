@@ -12,6 +12,9 @@ en:
     anonymous_codes:
       admin:
         code_groups:
+          create:
+            invalid: There was a problem creating this access code group
+            success: Access code group successfully created
           edit:
             title: Edit access code group
           form:
