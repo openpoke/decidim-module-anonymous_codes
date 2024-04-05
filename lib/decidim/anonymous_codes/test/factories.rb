@@ -15,7 +15,9 @@ FactoryBot.define do
     group { create(:anonymous_codes_group) }
 
     trait :used do
-      token_resources { [create(:anonymous_codes_token_resource)] }
+      after(:create) do |object|
+        object.token_resources << create(:anonymous_codes_token_resource, token: object)
+      end
     end
   end
 

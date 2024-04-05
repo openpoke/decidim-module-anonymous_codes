@@ -8,6 +8,7 @@ module Decidim
       included do
         before_action do
           next unless current_settings.allow_answers? && survey.open?
+          next if visitor_already_answered?
 
           if token_groups.any?
             next if current_token&.available?
@@ -21,6 +22,14 @@ module Decidim
             end
             render "decidim/anonymous_codes/surveys/code_required"
           end
+        end
+
+        after_action only: :answer do
+          next unless current_token&.available?
+
+          # find any answer for the current user and questionnaire that would be used as a resource to link the usage counter
+          answer = Decidim::Forms::Answer.find_by(questionnaire: questionnaire, user: current_user, session_token: @form.context.session_token)
+          current_token.answers << answer if answer.present?
         end
 
         private

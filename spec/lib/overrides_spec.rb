@@ -15,6 +15,7 @@ checksums = [
   {
     package: "decidim-forms",
     files: {
+      "/app/controllers/decidim/forms/concerns/has_questionnaire.rb" => "3e68234b1e489158b3377426236db093",
       "/app/views/decidim/forms/questionnaires/show.html.erb" => "b54864ffbdaab74bfc82f7b047cbf170"
     }
   }
