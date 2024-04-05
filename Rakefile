@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require "decidim/dev/common_rake"
 require "fileutils"
+require "decidim/dev/common_rake"
+require "decidim/anonymous_codes/engine"
 
 def install_module(path)
   Dir.chdir(path) do
@@ -13,6 +14,7 @@ end
 def seed_db(path)
   Dir.chdir(path) do
     system("bundle exec rake db:seed")
+    system("bundle exec rake decidim_anonymous_codes:db:seed")
   end
 end
 

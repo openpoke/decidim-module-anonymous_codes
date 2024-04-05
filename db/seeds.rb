@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 if !Rails.env.production? || ENV.fetch("SEED", nil)
+  organization = Decidim::Organization.first
+  participatory_processes = Decidim::ParticipatoryProcess.where(organization: organization)
+
+  unless participatory_processes.count.positive?
+    puts "No participatory processes found. Skipping seeds for decidim_anonymous_codes..."
+    return
+  end
   print "Creating seeds for decidim_anonymous_codes...\n" unless Rails.env.test?
 
-  organization = Decidim::Organization.first
   admin = Decidim::User.where(admin: true).first
-  participatory_processes = Decidim::ParticipatoryProcess.where(organization: organization)
   survey_components = Decidim::Component.where(manifest_name: "surveys", participatory_space: participatory_processes)
   survey_components.each do |component|
     form = OpenStruct.new(name: component.name, weight: component.weight, settings: component.settings, default_step_settings: component.default_step_settings,
@@ -16,11 +21,11 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
     end
     Decidim::Admin::UpdateComponent.call(form, component, admin) do
       on(:ok) do
-        puts "Component #{component.id} updated"
+        puts "Component #{component.id} updated for allowing answers and unregistered users"
       end
 
       on(:invalid) do
-        puts "ERROR: Component #{component.id} not updated"
+        puts "ERROR: Component #{component.id} not updated for allowing answers and unregistered users"
       end
     end
 
@@ -40,8 +45,10 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
       },
       visibility: "admin-only"
     )
-    rand(25).times do
+    total = rand(1..25)
+    total.times do
       Decidim::AnonymousCodes::Token.create!(token: Decidim::AnonymousCodes.token_generator, group: group)
     end
+    puts "Created #{total} tokens for survey #{survey.id}"
   end
 end
