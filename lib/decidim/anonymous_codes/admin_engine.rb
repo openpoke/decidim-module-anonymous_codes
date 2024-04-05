@@ -28,7 +28,7 @@ module Decidim
       initializer "decidim-anonymous_codes.admin_menu" do
         Decidim.menu :admin_menu do |menu|
           menu.add_item :anonymous_codes_menu,
-                        I18n.t("menu.anonymous_codes", scope: "decidim.admin"),
+                        I18n.t("menu_title", scope: "decidim.anonymous_codes.admin"),
                         decidim_admin_anonymous_codes.code_groups_path,
                         icon_name: "hard-drive",
                         position: 7.5,

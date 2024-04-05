@@ -4,7 +4,7 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CodeGroupsController < ApplicationController
-        helper_method :groups
+        helper_method :groups, :resource_path
 
         def index; end
 
@@ -66,6 +66,10 @@ module Decidim
 
         def code_group
           @code_group ||= groups.find(params[:id])
+        end
+
+        def resource_path
+          "#"
         end
       end
     end
