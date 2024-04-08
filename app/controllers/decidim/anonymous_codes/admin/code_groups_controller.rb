@@ -68,8 +68,10 @@ module Decidim
           @code_group ||= groups.find(params[:id])
         end
 
-        def resource_path
-          "#"
+        def resource_path(group)
+          return nil unless group.resource
+
+          Decidim::ResourceLocatorPresenter.new(group.resource).path
         end
       end
     end
