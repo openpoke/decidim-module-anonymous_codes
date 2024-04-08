@@ -20,19 +20,19 @@
             </tr>
           </thead>
           <tbody>
-              <% groups.each do |group| %>
-            <tr>
-              <td><%= translated_attribute(group.title) %></td>
-              <td><%= l(group.expires_at, format: :decidim_short) %></td>
-              <td><%= t("booleans.#{group.active}") %></td>
-              <td><%= group.tokens.count %></td>
-              <td><%= group.max_reuses %></td>
-              <td class="table-list__actions">
-                <%= icon_link_to "circle-x", code_group_path(group.id), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
-                <%= icon_link_to "pencil", edit_code_group_path(group.id), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit" %>
-                <%= icon_link_to "eye", resource_path(group), t("actions.preview", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{group.resource} ? '':' invisible'", target: :_blank %>
-              </td>
-            </tr>
+            <% groups.each do |group| %>
+              <tr>
+                <td><%= translated_attribute(group.title) %></td>
+                <td><%= l(group.expires_at, format: :decidim_short) %></td>
+                <td><%= t("booleans.#{group.active}") %></td>
+                <td><%= group.tokens.count %></td>
+                <td><%= group.max_reuses %></td>
+                <td class="table-list__actions">
+                  <%= icon_link_to "circle-x", code_group_path(group.id), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
+                  <%= icon_link_to "pencil", edit_code_group_path(group.id), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit" %>
+                  <%= icon_link_to "eye", resource_path(group), t("actions.preview", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{group.resource} ? '':' invisible'", target: :_blank %>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>
