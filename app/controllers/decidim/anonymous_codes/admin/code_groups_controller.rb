@@ -4,9 +4,12 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CodeGroupsController < ApplicationController
+        include Decidim::Admin::Paginable
         helper_method :groups, :resource_path
 
-        def index; end
+        def index
+          @groups = paginate(groups.order(created_at: :desc))
+        end
 
         def new
           @form = form(CodeGroupForm).instance

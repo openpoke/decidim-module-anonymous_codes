@@ -6,7 +6,7 @@
     </h2>
   </div>
   <div class="card-section">
-    <% if groups.any? %>
+    <% if @groups.any? %>
       <div class="table-scroll">
         <table class="table-list">
           <thead>
@@ -36,6 +36,7 @@
             <% end %>
           </tbody>
         </table>
+        <%= paginate @groups, theme: "decidim" %>
       </div>
     <% else %>
       <div>
