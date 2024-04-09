@@ -12,7 +12,7 @@ module Decidim
 
         before do
           request.env["decidim.current_organization"] = current_organization
-          sign_in current_user
+          sign_in current_user, scope: :user
         end
 
         describe "GET #index" do
@@ -36,6 +36,43 @@ module Decidim
             get :new
             expect(assigns(:form)).to be_a(CodeGroupForm)
             expect(response).to render_template("new")
+          end
+        end
+
+        describe "POST #create" do
+          it "creates a new code group" do
+            expect do
+              post :create, params: { title: "New Group", expires_at: 1.day.from_now, active: true, max_reuses: 10 }
+            end.to change(Decidim::AnonymousCodes::Group, :count).by(1)
+            expect(response).to redirect_to(code_groups_path)
+            expect(flash[:notice]).to eq(I18n.t("code_groups.create.success", scope: "decidim.anonymous_codes.admin"))
+          end
+        end
+
+        context "when updating a group" do
+          let(:current_organization) { create(:organization) }
+          let(:group) do
+            Decidim::AnonymousCodes::Group.create(
+              title: "Sample Group",
+              expires_at: 1.day.from_now,
+              active: true,
+              max_reuses: 10,
+              organization: current_organization
+            )
+          end
+
+          it "assigns the requested group to @group and renders the edit template" do
+            get :edit, params: { id: group.id }
+            expect(assigns(:code_group)).to eq(group)
+            expect(response).to render_template("edit")
+          end
+
+          it "updates the group" do
+            put :update, params: { id: group.id, title: "Updated Group" }
+            group.reload
+            expect(group.title).to eq("Updated Group")
+            expect(response).to redirect_to(code_groups_path)
+            expect(flash[:notice]).to eq(I18n.t("code_groups.update.success", scope: "decidim.anonymous_codes.admin"))
           end
         end
       end
