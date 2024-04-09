@@ -8,6 +8,8 @@ on:
 
 env:
   RUBY_VERSION: 3.0.6
+  CI: 1
+  SIMPLECOV: 1
 
 jobs:
   test-report:
