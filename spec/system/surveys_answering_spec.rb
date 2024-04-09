@@ -56,7 +56,7 @@ describe "Surveys Component Settings", type: :system do
     end
   end
 
-  shared_examples "form is enabled" do
+  shared_examples "form requires codes" do
     it "sends the code and the form" do
       fill_in :token, with: code
       click_button("Continue")
@@ -88,7 +88,7 @@ describe "Surveys Component Settings", type: :system do
   end
 
   shared_examples "can be answered with codes" do
-    it_behaves_like "form is enabled"
+    it_behaves_like "form requires codes"
 
     context "and code group is inactive" do
       let(:active) { false }
@@ -113,7 +113,7 @@ describe "Surveys Component Settings", type: :system do
     context "and group has an expiration" do
       let(:expires) { 1.hour.from_now }
 
-      it_behaves_like "form is enabled"
+      it_behaves_like "form requires codes"
     end
 
     context "and group has expired" do
