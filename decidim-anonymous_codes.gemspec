@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "decidim-admin", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-core", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
+  spec.add_dependency "decidim-forms", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-surveys", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
   spec.add_dependency "deface", ">= 1.9.0"
 
