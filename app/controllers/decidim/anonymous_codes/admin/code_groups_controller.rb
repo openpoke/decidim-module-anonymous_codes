@@ -18,7 +18,7 @@ module Decidim
         def create
           @form = form(CodeGroupForm).from_params(params)
 
-          CreateCodeGroup.call(@form, current_organization) do
+          CreateCodeGroup.call(@form) do
             on(:ok) do
               flash[:notice] = I18n.t("code_groups.create.success", scope: "decidim.anonymous_codes.admin")
               redirect_to code_groups_path
@@ -72,7 +72,7 @@ module Decidim
         end
 
         def resource_path(group)
-          return nil unless group.resource
+          return nil unless group&.resource
 
           Decidim::ResourceLocatorPresenter.new(group.resource).path
         end

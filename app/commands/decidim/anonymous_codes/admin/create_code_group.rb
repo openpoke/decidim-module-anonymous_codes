@@ -4,16 +4,15 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CreateCodeGroup < Decidim::Command
-        def initialize(form, organization)
+        def initialize(form)
           @form = form
-          @organization = organization
         end
 
         def call
           return broadcast(:invalid) if @form.invalid?
 
           transaction do
-            create_code_group
+            create_code_group!
           end
 
           broadcast(:ok)
@@ -23,7 +22,7 @@ module Decidim
 
         attr_reader :code_group, :form
 
-        def create_code_group
+        def create_code_group!
           @code_group = Decidim.traceability.create!(
             Group,
             @form.current_user,
@@ -31,7 +30,7 @@ module Decidim
             expires_at: form.expires_at,
             active: form.active,
             max_reuses: form.max_reuses,
-            organization: @organization
+            organization: form.context.current_organization
           )
         end
       end
