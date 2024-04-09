@@ -31,5 +31,22 @@ describe "Access codes admin menu", type: :system do
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
+
+    click_link "Edit"
+    fill_in_i18n(
+      :code_group_title,
+      "#code_group-title-tabs",
+      en: "My new Group",
+      es: "Mi nuevo Grupo",
+      ca: "El meu nou Group"
+    )
+    fill_in "Re-use max", with: 2
+
+    click_on "update"
+
+    expect(page).to have_content("Access code group successfully updated")
+    within "table" do
+      expect(page).to have_content("My new Group")
+    end
   end
 end
