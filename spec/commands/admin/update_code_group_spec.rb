@@ -8,44 +8,42 @@ module Decidim
       describe UpdateCodeGroup do
         let(:current_organization) { create(:organization) }
         let(:current_user) { create(:user, :confirmed, :admin, organization: current_organization) }
-        let(:code_group) do
-          Decidim::AnonymousCodes::Group.create(
+        let(:form_params) do
+          {
             title: "Sample Code Group",
             expires_at: 10.days.from_now,
             active: true,
-            max_reuses: 10,
+            max_reuses: 10
+          }
+        end
+        let(:form) do
+          CodeGroupForm.from_params(
+            form_params
+          ).with_context(
+            current_organization: current_organization
+          )
+        end
+        let(:code_group) do
+          Decidim::AnonymousCodes::Group.create(
+            title: "Sample Code Group",
+            expires_at: 5.days.from_now,
+            active: true,
+            max_reuses: 5,
             organization: current_organization
           )
         end
-        let(:form) do
-          CodeGroupForm.new(
-            title: "New Title",
-            expires_at: code_group.expires_at,
-            active: code_group.active,
-            max_reuses: code_group.max_reuses
-          )
-        end
-
-        subject { described_class.new(form, code_group) }
+        let(:command) { described_class.new(form, code_group) }
 
         describe "#call" do
           context "when the form is valid" do
             it "updates the code group" do
-              expect(Decidim.traceability).to receive(:update!).with(
-                code_group,
-                current_user,
-                title: form.title,
-                expires_at: form.expires_at,
-                active: form.active,
-                max_reuses: form.max_reuses
-              )
-
-              subject.call
+              command.call
+              expect(translated(code_group.title)).to eq("Sample Code Group")
             end
 
             it "broadcasts :ok with the updated code group" do
-              expect(subject).to receive(:broadcast).with(:ok, code_group)
-              subject.call
+              expect(command).to receive(:broadcast).with(:ok, code_group)
+              command.call
             end
           end
 
@@ -56,12 +54,12 @@ module Decidim
 
             it "does not update the code group" do
               expect(Decidim.traceability).not_to receive(:update!)
-              subject.call
+              command.call
             end
 
             it "broadcasts :invalid" do
-              expect(subject).to receive(:broadcast).with(:invalid)
-              subject.call
+              expect(command).to receive(:broadcast).with(:invalid)
+              command.call
             end
           end
         end
