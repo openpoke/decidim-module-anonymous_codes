@@ -23,7 +23,7 @@ describe "Access codes admin menu", type: :system do
       es: "NuevoGrupo",
       ca: "Nou group"
     )
-    fill_in "Expires At", with: (Date.today + 1.day).strftime("%d/%m/%Y %H:%M")
+    fill_in "Expires At", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y %H:%M")
     check "Active"
     fill_in "Re-use max", with: 10
 
