@@ -31,6 +31,8 @@ describe "Access codes admin menu", type: :system do
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
+    last_group = Decidim::AnonymousCodes::Group.last
+    expect(last_group.title["en"]).to eq("New Group")
 
     click_link "Edit"
     fill_in_i18n(

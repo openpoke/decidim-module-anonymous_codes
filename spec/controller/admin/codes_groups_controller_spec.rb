@@ -16,15 +16,9 @@ module Decidim
         end
 
         describe "GET #index" do
-          it "assigns @groups and renders the index template" do
-            group = Decidim::AnonymousCodes::Group.create(
-              title: "Sample Group",
-              expires_at: 1.day.from_now,
-              active: true,
-              max_reuses: 10,
-              organization: current_organization
-            )
+          let!(:group) { create(:anonymous_codes_group, expires_at: 1.day.from_now, active: true, max_reuses: 10, organization: current_organization) }
 
+          it "assigns @groups and renders the index template" do
             get :index
             expect(assigns(:groups)).to eq([group])
             expect(response).to render_template("index")
