@@ -10,7 +10,9 @@ module Decidim
         let(:current_user) { create(:user, :confirmed, :admin, organization: current_organization) }
         let(:form_params) do
           {
-            title: "Sample Code Group",
+            title_en: "Sample Code Group",
+            title_ca: "Grup de codis de mostra",
+            title_es: "Muestra de Códigos de Grupo",
             expires_at: 10.days.from_now,
             active: true,
             max_reuses: 10
@@ -24,13 +26,7 @@ module Decidim
           )
         end
         let(:code_group) do
-          Decidim::AnonymousCodes::Group.create(
-            title: "Sample Code Group",
-            expires_at: 5.days.from_now,
-            active: true,
-            max_reuses: 5,
-            organization: current_organization
-          )
+          create(:anonymous_codes_group, expires_at: 5.days.from_now, active: true, max_reuses: 5, organization: current_organization)
         end
         let(:command) { described_class.new(form, code_group) }
 

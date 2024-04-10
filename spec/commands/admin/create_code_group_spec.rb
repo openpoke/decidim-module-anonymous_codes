@@ -10,7 +10,9 @@ module Decidim
         let(:current_user) { create(:user, :confirmed, :admin, organization: current_organization) }
         let(:form_params) do
           {
-            title: "Sample Title",
+            title_en: "Sample Title",
+            title_ca: "Títol de la mostra",
+            title_es: "Titulo de ejemplo",
             expires_at: 1.day.from_now,
             active: true,
             max_reuses: 10
