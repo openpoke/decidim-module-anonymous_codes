@@ -9,7 +9,7 @@ module Decidim
         end
 
         def call
-          return broadcast(:invalid) if @form.invalid?
+          return broadcast(:invalid) if form.invalid?
 
           transaction do
             create_code_group!
@@ -25,7 +25,7 @@ module Decidim
         def create_code_group!
           @code_group = Decidim.traceability.create!(
             Group,
-            @form.current_user,
+            form.current_user,
             title: form.title,
             expires_at: form.expires_at,
             active: form.active,

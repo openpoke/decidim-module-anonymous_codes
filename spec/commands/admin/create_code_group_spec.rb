@@ -43,7 +43,7 @@ module Decidim
 
         describe "when the form is valid" do
           it "broadcasts ok" do
-            expect { command.call }.to broadcast(:ok)
+            expect { command.call }.to change(Group, :count).by(1).and broadcast(:ok)
           end
         end
       end
