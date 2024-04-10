@@ -10,13 +10,13 @@ module Decidim
         end
 
         def call
-          return broadcast(:invalid) if @form.invalid?
+          return broadcast(:invalid) if form.invalid?
 
           transaction do
             update_code_group
           end
 
-          broadcast(:ok, @code_group)
+          broadcast(:ok, code_group)
         end
 
         private
