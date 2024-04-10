@@ -67,7 +67,8 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ env.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: openpoke/decidim-module-anonymous_codes
 
       - uses: actions/upload-artifact@v4
         if: always()
