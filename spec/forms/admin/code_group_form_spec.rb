@@ -33,7 +33,7 @@ module Decidim
             end
           end
 
-          context "when title is missing" do
+          context "when max reuses is less than 1" do
             let(:form_params) do
               {
                 title_en: "Sample Title",
@@ -49,6 +49,23 @@ module Decidim
             it "is invalid" do
               expect(form).not_to be_valid
               expect(form.errors[:max_reuses]).to include("must be greater than 0")
+            end
+          end
+
+          context "when expires_at is in the past" do
+            let(:form_params) do
+              {
+                title_en: "Sample Title",
+                expires_at: 1.day.ago,
+                active: true,
+                max_reuses: 10
+              }
+            end
+            let(:form) { described_class.new(form_params) }
+
+            it "is invalid" do
+              expect(form).not_to be_valid
+              expect(form.errors[:expires_at]).to include("must be after 2024-04-11")
             end
           end
         end
