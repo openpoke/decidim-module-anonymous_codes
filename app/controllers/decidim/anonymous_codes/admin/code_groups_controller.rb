@@ -5,7 +5,8 @@ module Decidim
     module Admin
       class CodeGroupsController < ApplicationController
         include Decidim::Admin::Paginable
-        helper_method :groups, :resource_path
+        include TranslatableAttributes
+        helper_method :groups, :resource_path, :surveys
 
         def index
           @groups = paginate(groups.order(created_at: :desc))
@@ -75,6 +76,26 @@ module Decidim
           return nil unless group&.resource
 
           Decidim::ResourceLocatorPresenter.new(group.resource).path
+        end
+
+        def surveys
+          @surveys ||= begin
+            classes = Decidim.participatory_space_manifests.pluck :model_class_name
+            components = []
+            classes.each do |klass|
+              spaces = klass.safe_constantize.where(organization: current_organization)
+              spaces.each do |space|
+                components.concat Decidim::Component.where(participatory_space: space).pluck(:id)
+              end
+            end
+            Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
+              component = survey.component
+              [
+                "#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
+                survey.id
+              ]
+            end
+          end
         end
       end
     end

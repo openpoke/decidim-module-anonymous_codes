@@ -30,6 +30,7 @@ module Decidim
             expires_at: form.expires_at,
             active: form.active,
             max_reuses: form.max_reuses,
+            resource: form.resource,
             organization: form.context.current_organization
           )
         end

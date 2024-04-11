@@ -27,6 +27,7 @@ en:
             active: Active
             expires_at: Expires At
             max_reuses: Re-use max
+            resource: Linked resource (surveys)
             title: Title
           index:
             active: Active

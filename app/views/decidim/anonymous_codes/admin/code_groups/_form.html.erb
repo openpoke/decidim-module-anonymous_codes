@@ -19,5 +19,9 @@
     <div class="row column">
       <%= form.number_field :max_reuses, label: t(".max_reuses") %>
     </div>
+
+    <div class="row column">
+      <%= form.select :resource_id, surveys, include_blank: true, label: t(".resource") %>
+    </div>
   </div>
 </div>
