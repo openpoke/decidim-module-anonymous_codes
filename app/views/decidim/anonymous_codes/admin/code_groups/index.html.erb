@@ -24,7 +24,7 @@
               <tr>
                 <td><%= translated_attribute(group.title) %></td>
                 <td><%= t("booleans.#{group.active}") %></td>
-                <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? 'warning' : ''}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : t('.never') %></td>
+                <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? "warning" : ""}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : t(".never") %></td>
                 <td><%= group.tokens_count %></td>
                 <td><%= group.max_reuses %></td>
                 <td class="table-list__actions">

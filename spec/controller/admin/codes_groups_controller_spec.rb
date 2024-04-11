@@ -46,13 +46,7 @@ module Decidim
         context "when updating a group" do
           let(:current_organization) { create(:organization) }
           let(:group) do
-            Decidim::AnonymousCodes::Group.create(
-              title: "Sample Group",
-              expires_at: 1.day.from_now,
-              active: true,
-              max_reuses: 10,
-              organization: current_organization
-            )
+            create(:anonymous_codes_group, expires_at: 1.day.from_now, active: true, max_reuses: 10, organization: current_organization)
           end
 
           it "assigns the requested group to @group and renders the edit template" do
