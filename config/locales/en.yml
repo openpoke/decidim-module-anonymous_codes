@@ -33,6 +33,7 @@ en:
             expires_at: Expires at
             header_table_title: Title
             max_reuses: Re-use max
+            never: Never
             new_access_code_group_button: New access code group
             no_access_code_groups_records: No access code groups available.
             num_of_tockens: Num. of Tockens
