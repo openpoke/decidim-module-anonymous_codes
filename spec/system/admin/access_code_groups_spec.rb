@@ -53,4 +53,26 @@ describe "Access codes admin menu", type: :system do
       expect(page).to have_content("My new Group")
     end
   end
+
+  it "adds a new access code group with nil expiration date" do
+    visit decidim_admin_anonymous_codes.code_groups_path
+
+    click_on "New access code group"
+    fill_in_i18n(:code_group_title, "#code_group-title-tabs", en: "New Group", es: "Nuevo Grupo", ca: "Nou Grup")
+    check "Active"
+    fill_in "Re-use max", with: 10
+    click_on "create"
+
+    expect(page).to have_content("Access code group successfully created")
+    expect(page).to have_content("New access code group")
+
+    last_group = Decidim::AnonymousCodes::Group.last
+    expect(last_group.title["en"]).to eq("New Group")
+    expect(last_group.max_reuses).to eq(10)
+    expect(last_group.active).to be(true)
+
+    visit decidim_admin_anonymous_codes.code_groups_path
+    expect(page).to have_content("New Group")
+    expect(page).to have_content("Never")
+  end
 end
