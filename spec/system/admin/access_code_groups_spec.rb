@@ -3,8 +3,10 @@
 require "spec_helper"
 
 describe "Access codes admin menu", type: :system do
-  let(:organization) { create(:organization) }
+  let(:organization) { component.organization }
   let(:user) { create :user, :admin, :confirmed, organization: organization }
+  let(:component) { survey.component }
+  let!(:survey) { create(:survey) }
 
   before do
     switch_to_host(organization.host)
@@ -26,6 +28,7 @@ describe "Access codes admin menu", type: :system do
     fill_in "Expires At", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y %H:%M")
     check "Active"
     fill_in "Re-use max", with: 10
+    select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
     click_on "create"
 
@@ -45,6 +48,7 @@ describe "Access codes admin menu", type: :system do
       ca: "El meu nou Group"
     )
     fill_in "Re-use max", with: 2
+    select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
     click_on "update"
 
@@ -61,6 +65,8 @@ describe "Access codes admin menu", type: :system do
     fill_in_i18n(:code_group_title, "#code_group-title-tabs", en: "New Group", es: "Nuevo Grupo", ca: "Nou Grup")
     check "Active"
     fill_in "Re-use max", with: 10
+    select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
+
     click_on "create"
 
     expect(page).to have_content("Access code group successfully created")
