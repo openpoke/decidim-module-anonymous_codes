@@ -13,10 +13,12 @@ module Decidim
         end
 
         def new
+          enforce_permission_to :create, :anonymous_code_group
           @form = form(CodeGroupForm).instance
         end
 
         def create
+          enforce_permission_to :create, :anonymous_code_group
           @form = form(CodeGroupForm).from_params(params)
 
           CreateCodeGroup.call(@form) do
@@ -33,10 +35,12 @@ module Decidim
         end
 
         def edit
+          enforce_permission_to :update, :anonymous_code_group
           @form = form(CodeGroupForm).from_model(code_group)
         end
 
         def update
+          enforce_permission_to :update, :anonymous_code_group
           @form = form(CodeGroupForm).from_params(params)
 
           UpdateCodeGroup.call(@form, code_group) do
@@ -53,6 +57,7 @@ module Decidim
         end
 
         def destroy
+          enforce_permission_to :destroy, :anonymous_code_group
           Decidim.traceability.perform_action!("delete", code_group, current_user) do
             code_group.destroy!
           end
