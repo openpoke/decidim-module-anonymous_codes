@@ -15,6 +15,7 @@ en:
           destroy: Delete
           edit: Edit
           preview: Preview
+          export_csv: Export codes as csv
         code_groups:
           create:
             invalid: There was a problem creating this access code group

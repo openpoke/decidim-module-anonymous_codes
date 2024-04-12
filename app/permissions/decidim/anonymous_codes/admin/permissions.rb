@@ -18,7 +18,7 @@ module Decidim
         def anonymous_codes_group_action?
           return unless permission_action.subject == :anonymous_code_group
 
-          allow! if permission_action.action.in?([:create, :update, :destroy])
+          allow! if permission_action.action.in?([:create, :update, :destroy, :export])
         end
       end
     end
