@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title"><%= title %></h2>
+  </div>
+
+  <div class="card-section">
+    <div class="row column">
+      <%= form.translated :text_field, :title, label: t(".title") %>
+    </div>
+
+    <div class="row column">
+      <%= form.datetime_field :expires_at, label: t(".expires_at") %>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :active, label: t(".active") %>
+    </div>
+
+    <div class="row column">
+      <%= form.number_field :max_reuses, label: t(".max_reuses") %>
+    </div>
+
+    <div class="row column">
+      <%= form.select :resource_id, surveys, include_blank: true, label: t(".resource") %>
+    </div>
+  </div>
+</div>
