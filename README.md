@@ -85,9 +85,9 @@ end
 
 ![Survey admin side](docs/survey_admin.png)
 
-Admin panel
+**Codes admin panel:**
 
-TODO
+![Code groups](docs/code_groups.png)
 
 ## Contributing
 
