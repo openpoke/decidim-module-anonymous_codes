@@ -56,17 +56,34 @@ module Decidim
             let(:form_params) do
               {
                 title_en: "Sample Title",
-                expires_at: 1.day.ago,
+                expires_at: expires,
                 active: active,
                 max_reuses: 10
               }
             end
-            let(:form) { described_class.new(form_params) }
             let(:active) { true }
+            let(:expires) { 1.day.ago }
+            let(:form) { described_class.new(form_params) }
 
-            it "is invalid" do
-              form.valid?
-              expect(form.errors[:expires_at]).to include("must be after #{I18n.l(Date.current)}")
+            it "is valid" do
+              expect(form).to be_valid
+            end
+
+            context "when active" do
+              let(:active) { true }
+
+              it "is invalid" do
+                expect(form).to be_invalid
+                expect(form.errors[:expires_at]).to include("must be after #{I18n.l(Date.current)}")
+              end
+            end
+
+            context "and date is not present" do
+              let(:expires) { nil }
+
+              it "is valid" do
+                expect(form).to be_valid
+              end
             end
           end
         end
