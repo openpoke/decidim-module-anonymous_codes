@@ -77,7 +77,13 @@ end
 
 ## Screenshots
 
+**Component public side:**
+
 ![Survey restriction](docs/survey.png)
+
+**Component Admin announcement:**
+
+![Survey admin side](docs/survey_admin.png)
 
 Admin panel
 
