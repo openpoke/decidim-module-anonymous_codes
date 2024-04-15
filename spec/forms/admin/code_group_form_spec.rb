@@ -57,15 +57,16 @@ module Decidim
               {
                 title_en: "Sample Title",
                 expires_at: 1.day.ago,
-                active: true,
+                active: active,
                 max_reuses: 10
               }
             end
             let(:form) { described_class.new(form_params) }
+            let(:active) { true }
 
             it "is invalid" do
-              expect(form).not_to be_valid
-              expect(form.errors[:expires_at]).to include("must be after 2024-04-11")
+              form.valid?
+              expect(form.errors[:expires_at]).to include("must be after #{I18n.l(Date.current)}")
             end
           end
         end
