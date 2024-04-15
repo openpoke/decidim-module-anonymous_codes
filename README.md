@@ -77,7 +77,7 @@ end
 
 ## Screenshots
 
-![Survey restriction](docs/surveys.png)
+![Survey restriction](docs/survey.png)
 
 Admin panel
 
