@@ -36,7 +36,7 @@ bin/rails db:migrate
 
 TODO...
 
-### Configuration
+## Configuration
 
 By default, the module is configured to read the configuration from ENV variables.
 
@@ -68,7 +68,7 @@ end
 
 ## Screenshots
 
-TODO....
+![Surveys](docs/surveys.png)
 
 ## Contributing
 
