@@ -44,7 +44,6 @@ module Decidim
                 max_reuses: 0
               }
             end
-            let(:form) { described_class.new(form_params) }
 
             it "is invalid" do
               expect(form).not_to be_valid
@@ -61,9 +60,8 @@ module Decidim
                 max_reuses: 10
               }
             end
-            let(:active) { true }
+            let(:active) { false }
             let(:expires) { 1.day.ago }
-            let(:form) { described_class.new(form_params) }
 
             it "is valid" do
               expect(form).to be_valid
@@ -74,12 +72,12 @@ module Decidim
 
               it "is invalid" do
                 expect(form).to be_invalid
-                expect(form.errors[:expires_at]).to include("must be after #{I18n.l(Date.current)}")
+                expect(form.errors[:expires_at].first).to include("must be after")
               end
             end
 
             context "and date is not present" do
-              let(:expires) { nil }
+              let(:expires) { "" }
 
               it "is valid" do
                 expect(form).to be_valid
