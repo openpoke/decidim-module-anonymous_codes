@@ -45,6 +45,10 @@ en:
           update:
             invalid: There was a problem updating this access code group
             success: Access code group successfully updated
+        codes:
+          index:
+            new_codes_button: Generate new codes
+            title: Codes for group %{group}
         menu_title: Access Codes
         surveys_component_settings:
           callout:
