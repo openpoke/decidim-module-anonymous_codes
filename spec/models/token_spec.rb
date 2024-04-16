@@ -15,6 +15,10 @@ module Decidim
 
       it { is_expected.not_to be_used }
 
+      it "is not included in the used scope" do
+        expect(described_class.used.count).to eq(0)
+      end
+
       it "has an empty counter cache" do
         expect(token.usage_count).to eq(0)
       end
@@ -57,6 +61,10 @@ module Decidim
         let!(:token) { create(:anonymous_codes_token, :used) }
 
         it { is_expected.to be_used }
+
+        it "is included in the used scope" do
+          expect(described_class.used.count).to eq(1)
+        end
 
         it "has a counter cache" do
           expect(token.usage_count).to eq(1)

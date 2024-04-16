@@ -18,6 +18,8 @@ module Decidim
       validates :token, presence: true
       validates :token, uniqueness: { scope: [:group] }
 
+      scope :used, -> { where("usage_count > 0") }
+
       def available?
         !used? && !expired? && active?
       end
