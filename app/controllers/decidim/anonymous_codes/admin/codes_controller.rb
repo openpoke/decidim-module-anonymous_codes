@@ -7,7 +7,7 @@ module Decidim
         include Decidim::Admin::Paginable
         include TranslatableAttributes
 
-        helper_method :tokens, :code_group
+        helper_method :tokens, :code_group, :export_manifests
 
         def index
           @tokens = paginate(tokens.order(created_at: :desc))
@@ -28,11 +28,22 @@ module Decidim
         private
 
         def tokens
-          AnonymousCodes::Token.where(group: code_group)
+          AnonymousCodes::Token.for(code_group)
         end
 
         def code_group
           @code_group ||= AnonymousCodes::Group.for(current_organization).find(params[:code_group_id])
+        end
+
+        def export_manifests
+          @export_manifests ||= [
+            Decidim::Exporters::ExportManifest.new(:all_tokens, "export_all").tap do |manifest|
+              manifest.formats(Decidim::AnonymousCodes.export_formats)
+              manifest.collection do
+                tokens
+              end
+            end
+          ]
         end
       end
     end

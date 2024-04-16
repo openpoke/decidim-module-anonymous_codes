@@ -17,6 +17,10 @@ module Decidim
       ENV.fetch("ANONYMOUS_CODES_TOKEN_STYLE", "alphanumeric")
     end
 
+    config_accessor :export_formats do
+      ENV.fetch("ANONYMOUS_CODES_EXPORT_FORMATS", "CSV JSON Excel FormPDF").split
+    end
+
     def self.token_generator(length = nil)
       length ||= AnonymousCodes.default_token_length
       case AnonymousCodes.token_style

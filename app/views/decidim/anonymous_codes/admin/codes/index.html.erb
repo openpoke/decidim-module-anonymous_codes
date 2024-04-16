@@ -1,9 +1,18 @@
 <div class="card">
   <div class="card-divider">
-    <h2 class="card-title">
-      <%= t("codes.index.title", scope: "decidim.anonymous_codes.admin", group: translated_attribute(code_group.title)) %>
-      <a class="button tiny button--title new-access" href="<%= code_groups_path(code_group) %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
-      <a class="button tiny button--title new-access" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
+    <h2 class="card-title flex--sbc">
+      <div>
+        <%= t("codes.index.title", scope: "decidim.anonymous_codes.admin", group: translated_attribute(code_group.title)) %>
+      </div>
+
+      <div class="flex--cc flex-gap--1">
+        <div id="js-other-actions-wrapper">
+          <%= render "export_dropdown" %>
+        </div>
+
+        <a class="button tiny button--title new-access" href="<%= code_groups_path(code_group) %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
+        <a class="button tiny button--title new-access" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
+      </div>
     </h2>
   </div>
   <div class="card-section">

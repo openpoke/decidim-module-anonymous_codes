@@ -20,6 +20,10 @@ module Decidim
 
       scope :used, -> { where("usage_count > 0") }
 
+      def self.for(group)
+        where(group: group)
+      end
+
       def available?
         !used? && !expired? && active?
       end
