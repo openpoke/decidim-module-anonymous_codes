@@ -9,6 +9,7 @@ module Decidim
           return permission_action unless user&.admin?
 
           anonymous_codes_group_action?
+          anonymous_codes_token_action?
 
           permission_action
         end
@@ -19,6 +20,12 @@ module Decidim
           return unless permission_action.subject == :anonymous_code_group
 
           allow! if permission_action.action.in?([:create, :update, :destroy, :export])
+        end
+
+        def anonymous_codes_token_action?
+          return unless permission_action.subject == :anonymous_code_token
+
+          allow! if permission_action.action.in?([:view, :create, :destroy, :export])
         end
       end
     end

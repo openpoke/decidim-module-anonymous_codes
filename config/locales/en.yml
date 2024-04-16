@@ -10,8 +10,6 @@ en:
   decidim:
     anonymous_codes:
       admin:
-        exports:
-          all_tokens: All tokens
         actions:
           confirm_destroy: Are you sure you want to delete this access code group?
           destroy: Delete
@@ -53,6 +51,8 @@ en:
             back: Back to group
             new_codes_button: Generate new codes
             title: Codes for group %{group}
+        exports:
+          all_tokens: All tokens
         menu_title: Access Codes
         surveys_component_settings:
           callout:

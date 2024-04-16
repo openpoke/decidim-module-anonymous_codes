@@ -15,9 +15,9 @@ module Decidim
       def serialize
         {
           token: token.token,
+          resource_url: resource_url,
           resource_type: token.group.resource_type,
           resource_id: token.group.resource_id,
-          resource_url: resource_url,
           group: translated_attribute(token.group.title),
           available: token.available?,
           used: token.used?,
@@ -35,7 +35,7 @@ module Decidim
       def resource_url
         return nil unless token.group.resource
 
-        Decidim::ResourceLocatorPresenter.new(token.group.resource).url
+        Decidim::ResourceLocatorPresenter.new(token.group.resource).url(token: token.token)
       end
     end
   end

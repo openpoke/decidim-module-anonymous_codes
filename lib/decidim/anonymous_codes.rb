@@ -18,7 +18,7 @@ module Decidim
     end
 
     config_accessor :export_formats do
-      ENV.fetch("ANONYMOUS_CODES_EXPORT_FORMATS", "CSV JSON Excel FormPDF").split
+      ENV.fetch("ANONYMOUS_CODES_EXPORT_FORMATS", "CSV JSON Excel").split
     end
 
     def self.token_generator(length = nil)
