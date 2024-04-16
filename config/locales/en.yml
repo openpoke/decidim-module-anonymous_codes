@@ -14,6 +14,7 @@ en:
           confirm_destroy: Are you sure you want to delete this access code group?
           destroy: Delete
           edit: Edit
+          list_tokens: List tokens
           preview: Preview
         code_groups:
           create:
@@ -47,6 +48,7 @@ en:
             success: Access code group successfully updated
         codes:
           index:
+            back: Back to group
             new_codes_button: Generate new codes
             title: Codes for group %{group}
         menu_title: Access Codes
