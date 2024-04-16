@@ -5,7 +5,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c6a5d8808df0ea76bc30/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-anonymous_codes/maintainability)
 [![codecov](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes/graph/badge.svg?token=Hbc6Uq50qe)](https://codecov.io/gh/openpoke/decidim-module-anonymous_codes)
 
-TODO...
+This module provides the ability restrict access to certain resources (currently Surveys) in Decidim by using anonymous codes. The implementation is based on the idea of providing a code to the user that allows them to access the resource without the need to be logged in.
+
+However, it is also compatible with the setting "allow users to answer the survey without login" so administrators can decide wheter if users with valid codes need to be logged in or not.
 
 ## Installation
 
@@ -34,9 +36,16 @@ bin/rails db:migrate
 
 ## Usage
 
-TODO...
+The first step is to create a group of codes in the admin, for this there is a specific menu in the admin panel.
 
-### Configuration
+When a group is created, then the admin can generate codes for that group. The codes can be generated in bulk.
+A group can be set with and expiration date, make it active or not and link it to a particular resource (a survey in Decidim). Many groups can be linked to the same resource as well.
+
+When a user tries to access a resource that is protected by anonymous codes, they will be prompted to enter the code.
+
+Codes can also be exported and the final URL to answer the survey is provided in the exported file (with this URL the survey access will be granted without the need to enter the code).
+
+## Configuration
 
 By default, the module is configured to read the configuration from ENV variables.
 
@@ -68,7 +77,17 @@ end
 
 ## Screenshots
 
-TODO....
+**Component public side:**
+
+![Survey restriction](docs/survey.png)
+
+**Component Admin announcement:**
+
+![Survey admin side](docs/survey_admin.png)
+
+**Codes admin panel:**
+
+![Code groups](docs/code_groups.png)
 
 ## Contributing
 

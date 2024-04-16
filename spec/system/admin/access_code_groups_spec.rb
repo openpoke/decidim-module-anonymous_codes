@@ -7,6 +7,9 @@ describe "Access codes admin menu", type: :system do
   let(:user) { create :user, :admin, :confirmed, organization: organization }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
+  let!(:existing_group) { create(:anonymous_codes_group, organization: organization, resource: survey) }
+  let!(:anonymous_codes_token1) { create(:anonymous_codes_token, group: existing_group) }
+  let!(:anonymous_codes_token2) { create(:anonymous_codes_token, :used, group: existing_group) }
 
   before do
     switch_to_host(organization.host)
@@ -16,6 +19,9 @@ describe "Access codes admin menu", type: :system do
   it "adds a new access code group" do
     visit decidim_admin_anonymous_codes.code_groups_path
 
+    within find("tr", text: existing_group.title["en"]) do
+      expect(page).to have_content("1 / 2")
+    end
     click_on "New access code group"
 
     fill_in_i18n(
@@ -39,7 +45,9 @@ describe "Access codes admin menu", type: :system do
     expect(last_group.max_reuses).to eq(10)
     expect(last_group.active).to be(true)
 
-    click_link "Edit"
+    within find("tr", text: last_group.title["en"]) do
+      click_link "Edit"
+    end
     fill_in_i18n(
       :code_group_title,
       "#code_group-title-tabs",
@@ -53,8 +61,11 @@ describe "Access codes admin menu", type: :system do
     click_on "update"
 
     expect(page).to have_content("Access code group successfully updated")
-    within "table" do
-      expect(page).to have_content("My new Group")
+    within find("tr", text: "My new Group") do
+      expect(page).to have_content("0 / 0")
+    end
+    within find("tr", text: existing_group.title["en"]) do
+      expect(page).to have_content("1 / 2")
     end
   end
 

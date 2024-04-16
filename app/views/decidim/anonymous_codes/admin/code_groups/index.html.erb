@@ -14,7 +14,7 @@
               <th><%= t("code_groups.index.header_table_title", scope: "decidim.anonymous_codes.admin") %></th>
               <th><%= t("code_groups.index.active", scope: "decidim.anonymous_codes.admin") %></th>
               <th><%= t("code_groups.index.expires_at", scope: "decidim.anonymous_codes.admin") %></th>
-              <th><%= t("code_groups.index.num_of_tockens", scope: "decidim.anonymous_codes.admin") %></th>
+              <th><%= t("code_groups.index.num_of_tokens", scope: "decidim.anonymous_codes.admin") %></th>
               <th><%= t("code_groups.index.max_reuses", scope: "decidim.anonymous_codes.admin") %></th>
               <th></th>
             </tr>
@@ -25,19 +25,12 @@
                 <td><%= translated_attribute(group.title) %></td>
                 <td><%= t("booleans.#{group.active}") %></td>
                 <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? "warning" : ""}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : t(".never") %></td>
-                <td><%= group.tokens_count %></td>
+                <td><%= "#{group.tokens.used.count} / #{group.tokens_count}" %></td>
                 <td><%= group.max_reuses %></td>
                 <td class="table-list__actions">
+                  <%= icon_link_to "circle-x", code_group_path(group.id), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
+                  <%= icon_link_to "pencil", edit_code_group_path(group.id), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit" %>
                   <%= icon_link_to "eye", resource_path(group), t("actions.preview", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{group&.resource ? '':' invisible'}", target: :_blank %>
-                  <% if allowed_to? :export, :anonymous_code_group %>
-                    <%= icon_link_to "data-transfer-download", "#todo_export_as_csv", t("actions.export_csv", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit" %>
-                  <% end %>
-                  <% if allowed_to? :update, :anonymous_code_group %>
-                    <%= icon_link_to "pencil", edit_code_group_path(group.id), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit" %>
-                  <% end %>
-                  <% if allowed_to? :destroy, :anonymous_code_group %>
-                    <%= icon_link_to "circle-x", code_group_path(group.id), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
-                  <% end %>
                 </td>
               </tr>
             <% end %>

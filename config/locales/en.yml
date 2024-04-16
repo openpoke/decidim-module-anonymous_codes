@@ -15,7 +15,6 @@ en:
           destroy: Delete
           edit: Edit
           preview: Preview
-          export_csv: Export codes as csv
         code_groups:
           create:
             invalid: There was a problem creating this access code group
@@ -38,7 +37,7 @@ en:
             never: Never
             new_access_code_group_button: New access code group
             no_access_code_groups_records: No access code groups available.
-            num_of_tockens: Num. of Tockens
+            num_of_tokens: Num. of Tokens
             start_by: Start by adding an access code group from the "%{button}" button.
             title: Access code groups
           new:

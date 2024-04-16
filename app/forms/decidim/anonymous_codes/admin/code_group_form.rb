@@ -7,13 +7,13 @@ module Decidim
         include TranslatableAttributes
 
         translatable_attribute :title, String
-        attribute :expires_at, Decidim::Attributes::LocalizedDate
+        attribute :expires_at, Decidim::Attributes::TimeWithZone
         attribute :active, Boolean, default: true
         attribute :max_reuses, Integer, default: 1
         attribute :resource_id, Integer
 
         validates :title, translatable_presence: true
-        validates :expires_at, date: { after: Date.current }, if: ->(form) { form.expires_at.present? }
+        validates :expires_at, date: { after: Time.current }, if: ->(form) { form.expires_at.present? && form.active }
         validates :max_reuses, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
         def resource
