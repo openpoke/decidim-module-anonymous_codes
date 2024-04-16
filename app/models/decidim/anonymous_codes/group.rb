@@ -17,6 +17,10 @@ module Decidim
       def self.for(organization)
         where(organization: organization)
       end
+
+      def expired?
+        expires_at.present? && expires_at < Time.current
+      end
     end
   end
 end

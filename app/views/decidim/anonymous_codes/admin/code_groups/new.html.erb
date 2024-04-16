@@ -1,0 +1,7 @@
+<%= decidim_form_for(@form, url: code_groups_path, html: { class: "form new_code_group" }) do |f| %>
+  <%= render partial: "form", object: f, locals: { title: t(".title") } %>
+
+  <div class="button--double form-general-submit">
+    <%= f.submit "create" %>
+  </div>
+<% end %>

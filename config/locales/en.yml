@@ -10,6 +10,42 @@ en:
   decidim:
     anonymous_codes:
       admin:
+        actions:
+          confirm_destroy: Are you sure you want to delete this access code group?
+          destroy: Delete
+          edit: Edit
+          preview: Preview
+        code_groups:
+          create:
+            invalid: There was a problem creating this access code group
+            success: Access code group successfully created
+          destroy:
+            success: Access code group successfully destroyed
+          edit:
+            title: Edit access code group
+          form:
+            active: Active
+            expires_at: Expires At
+            max_reuses: Re-use max
+            resource: Linked resource (surveys)
+            title: Title
+          index:
+            active: Active
+            expires_at: Expires at
+            header_table_title: Title
+            max_reuses: Re-use max
+            never: Never
+            new_access_code_group_button: New access code group
+            no_access_code_groups_records: No access code groups available.
+            num_of_tokens: Num. of Tokens
+            start_by: Start by adding an access code group from the "%{button}" button.
+            title: Access code groups
+          new:
+            title: New access code group
+          update:
+            invalid: There was a problem updating this access code group
+            success: Access code group successfully updated
+        menu_title: Access Codes
         surveys_component_settings:
           callout:
             group_locked: This survey can only be answered by using a valid code.

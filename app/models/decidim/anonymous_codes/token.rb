@@ -14,9 +14,11 @@ module Decidim
       has_many :token_resources, class_name: "Decidim::AnonymousCodes::TokenResource", dependent: :destroy
       has_many :answers, through: :token_resources, source_type: "Decidim::Forms::Answer", source: :resource
 
-      delegate :active?, to: :group
+      delegate :active?, :expired?, to: :group
       validates :token, presence: true
       validates :token, uniqueness: { scope: [:group] }
+
+      scope :used, -> { where("usage_count > 0") }
 
       def available?
         !used? && !expired? && active?
@@ -24,10 +26,6 @@ module Decidim
 
       def used?
         usage_count.to_i >= group.max_reuses.to_i
-      end
-
-      def expired?
-        group.expires_at.present? && group.expires_at < Time.current
       end
     end
   end

@@ -1,0 +1,7 @@
+<%= decidim_form_for(@form, html: { class: "form edit_code_group" }) do |f| %>
+  <%= render partial: "form", object: f, locals: { title: t(".title") } %>
+
+  <div class="button--double form-general-submit">
+    <%= f.submit "update" %>
+  </div>
+<% end %>
