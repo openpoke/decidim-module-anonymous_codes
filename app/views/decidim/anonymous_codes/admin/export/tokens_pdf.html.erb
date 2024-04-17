@@ -1,0 +1,25 @@
+<div class="tokens">
+  <div class="header">
+    <h1><%= t(".tokens_for", group: translated_attribute(code_group.title)) %></h1>
+        <% if collection.count > 1 %>
+      <h2><%= t(".totals", total: collection.count) %></h2>
+      <h2><%= t(".expires", expires: t("booleans.#{code_group.expires?}")) %></h2>
+      <%= content_tag "h3", t(".expires_at", expires_at: l(code_group.expires_at, format: :decidim_short)) if code_group.expires? %>
+    <% end %>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class='token'><%= t("token", scope: "decidim.anonymous_codes.tokens_serializer") %></th>
+        <th><%= t("resource_url", scope: "decidim.anonymous_codes.tokens_serializer") %></th>
+        <th><%= t("available", scope: "decidim.anonymous_codes.tokens_serializer") %></th>
+        <th><%= t("used", scope: "decidim.anonymous_codes.tokens_serializer") %></th>
+        <th><%= t("usage_count", scope: "decidim.anonymous_codes.tokens_serializer") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "decidim/anonymous_codes/admin/export/token_tr", collection: collection, locals: { code_group: code_group }, as: :token %>
+    </tbody>
+  </table>
+</div>

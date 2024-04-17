@@ -8,6 +8,10 @@ en:
           max_uses_exceeded: The code has already been used the maximum number of
             times.
   decidim:
+    admin:
+      exports:
+        formats:
+          AnonymousTokensPDF: PDF
     anonymous_codes:
       admin:
         actions:
@@ -62,6 +66,18 @@ en:
           new:
             button_generate_tokens: Generate Tokens
             title: Generate tokens for "Access code group %{group}"
+          index:
+            back: Back to groups
+            new_codes_button: Generate new codes
+            title: Codes for group %{group}
+        export:
+          tokens_pdf:
+            expires: Expires? %{expires}
+            expires_at: 'Expires at: %{expires_at}'
+            tokens_for: Tokens for "%{group}"
+            totals: "%{total} total tokens"
+        exports:
+          all_tokens: All tokens
         menu_title: Access Codes
         surveys_component_settings:
           callout:
@@ -84,4 +100,10 @@ en:
           label: Code
           submit: Continue
           title: Form restricted
+      tokens_serializer:
+        available: Available?
+        resource_url: Resource URL
+        token: Code
+        usage_count: Num. of uses
+        used: Used?
       used_code: The introduced code has already been used. Please try again.

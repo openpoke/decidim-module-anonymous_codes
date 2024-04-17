@@ -7,7 +7,7 @@ module Decidim
 
       # prevent destroying if token has been used
       before_destroy do
-        throw(:abort) if usage_count.positive?
+        throw(:abort) unless destroyable?
       end
 
       belongs_to :group, class_name: "Decidim::AnonymousCodes::Group", counter_cache: true
@@ -20,12 +20,20 @@ module Decidim
 
       scope :used, -> { where("usage_count > 0") }
 
+      def self.for(group)
+        where(group: group)
+      end
+
       def available?
         !used? && !expired? && active?
       end
 
       def used?
         usage_count.to_i >= group.max_reuses.to_i
+      end
+
+      def destroyable?
+        !usage_count.positive?
       end
     end
   end

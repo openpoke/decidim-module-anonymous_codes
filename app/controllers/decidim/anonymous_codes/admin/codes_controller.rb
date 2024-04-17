@@ -10,14 +10,20 @@ module Decidim
         helper_method :tokens, :code_group
 
         def index
+          enforce_permission_to :view, :anonymous_code_token
+
           @tokens = paginate(tokens.order(created_at: :desc))
         end
 
         def new
+          enforce_permission_to :create, :anonymous_code_token
+
           @form = form(TokensForm).instance
         end
 
         def create
+          enforce_permission_to :create, :anonymous_code_token
+
           @form = form(TokensForm).from_params(params)
 
           CreateTokens.call(@form, code_group) do
@@ -34,9 +40,8 @@ module Decidim
         end
 
         def destroy
-          Decidim.traceability.perform_action!("delete", code_group, token, current_user) do
-            token.destroy!
-          end
+          enforce_permission_to :destroy, :anonymous_code_token, token: token
+          token.destroy!
 
           flash[:notice] = I18n.t("codes.destroy.success", scope: "decidim.anonymous_codes.admin")
 
@@ -50,7 +55,7 @@ module Decidim
         end
 
         def token
-          tokens.find_by(id: params[:id])
+          tokens.find(params[:id])
         end
 
         def code_group

@@ -55,6 +55,7 @@ Currently, the following ENV variables are supported:
 | ------------ | ----------- |-------|
 | ANONYMOUS_CODES_DEFAULT_TOKEN_LENGTH | The length of the codes generated if using the default token generator | `10` |
 | ANONYMOUS_CODES_TOKEN_STYLE | The type of codes generated if using the default token generator (options are `alphanumeric`, `numeric`). (note that "numeric" still returns a string, just only formed by number chars) | `alphanumeric` |
+| ANONYMOUS_CODES_EXPORT_FORMATS | Limit the formats for exporting (defaults to all available in Decidim). | `CSV JSON Excel FormPDF` |
 
 It is also possible to configure the module using the `decidim-anonymous_codes` initializer:
 
