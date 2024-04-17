@@ -7,7 +7,8 @@ describe "Access codes admin menu", type: :system do
   let(:user) { create :user, :admin, :confirmed, organization: organization }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
-  let!(:existing_group) { create(:anonymous_codes_group, organization: organization, resource: survey) }
+  let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization: organization, resource: survey) }
+  let!(:existing_empty_group) { create(:anonymous_codes_group, title: { en: "Existing empty group" }, organization: organization, resource: survey) }
   let!(:anonymous_codes_token1) { create(:anonymous_codes_token, group: existing_group) }
   let!(:anonymous_codes_token2) { create(:anonymous_codes_token, :used, group: existing_group) }
 
@@ -91,5 +92,23 @@ describe "Access codes admin menu", type: :system do
     visit decidim_admin_anonymous_codes.code_groups_path
     expect(page).to have_content("New Group")
     expect(page).to have_content("Never")
+  end
+
+  it "destroys existing access code group" do
+    visit decidim_admin_anonymous_codes.code_groups_path
+
+    within find("tr", text: existing_group.title["en"]) do
+      expect(page).not_to have_link("Delete")
+    end
+
+    within find("tr", text: existing_empty_group.title["en"]) do
+      expect(page).to have_link("Delete")
+      accept_confirm do
+        click_link "Delete"
+      end
+    end
+
+    expect(page).to have_content("Access code group successfully destroyed")
+    expect(page).not_to have_content(existing_empty_group.title["en"])
   end
 end

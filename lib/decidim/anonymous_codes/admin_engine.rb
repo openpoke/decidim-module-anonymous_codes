@@ -11,7 +11,11 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :code_groups
+        resources :code_groups do
+          resources :codes, only: [:index, :new, :create, :destroy] do
+            post :export, on: :collection
+          end
+        end
         root to: "code_groups#index"
       end
 

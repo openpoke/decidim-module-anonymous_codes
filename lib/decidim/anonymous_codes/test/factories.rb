@@ -8,6 +8,12 @@ FactoryBot.define do
     active { true }
     max_reuses { 1 }
     resource { create(:survey) }
+
+    trait :with_used_tokens do
+      after(:create) do |group|
+        create(:anonymous_codes_token, :used, group: group)
+      end
+    end
   end
 
   factory :anonymous_codes_token, class: "Decidim::AnonymousCodes::Token" do
