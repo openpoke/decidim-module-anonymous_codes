@@ -19,7 +19,11 @@ module Decidim
       end
 
       def expired?
-        expires_at.present? && expires_at < Time.current
+        expires? && expires_at < Time.current
+      end
+
+      def expires?
+        expires_at.present?
       end
     end
   end

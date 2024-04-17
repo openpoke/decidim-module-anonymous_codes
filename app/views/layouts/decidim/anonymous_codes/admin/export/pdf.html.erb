@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" class="no-js">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title><%= @title %></title>
+      <style type="text/css">
+        .tokens .header h1 {
+          margin: 0;
+          padding: 25px;
+          background: rgb(59, 69, 87);
+          color: white;
+          border-radius: 4px 4px 0 0;
+        }
+        .tokens table th,tokens table td {
+          text-align: left;
+        }
+        .tokens table a {
+          font-size: 0.9em;
+        }
+        .tokens table .token {
+          font-weight: bold;
+        }
+      </style>
+    </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<tr>
+  <td><%= token[:token] %></td>
+  <td><a href="<%= token[:resource_url] %>"><%= token[:resource_url] %></a></td>
+  <td><%= t("booleans.#{token[:available]}") %></td>
+  <td><%= t("booleans.#{token[:used]}") %></td>
+  <td><%= token[:usage_count] %></td>
+</tr>
