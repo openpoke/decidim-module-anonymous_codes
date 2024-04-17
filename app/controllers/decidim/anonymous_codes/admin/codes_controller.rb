@@ -28,7 +28,7 @@ module Decidim
         end
 
         def destroy
-          enforce_permission_to :destroy, :anonymous_code_token
+          enforce_permission_to :destroy, :anonymous_code_token, token: token
           # todo
         end
 
@@ -50,6 +50,10 @@ module Decidim
 
         def tokens
           AnonymousCodes::Token.for(code_group)
+        end
+
+        def token
+          @token ||= tokens.find(params[:id])
         end
 
         def code_group

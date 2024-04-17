@@ -7,7 +7,7 @@ module Decidim
 
       # prevent destroying if tokens have been used
       before_destroy do
-        throw(:abort) if tokens.where(usage_count: 1..Float::INFINITY).count.positive?
+        throw(:abort) unless destroyable?
       end
 
       belongs_to :organization, class_name: "Decidim::Organization", foreign_key: "decidim_organization_id"
@@ -24,6 +24,10 @@ module Decidim
 
       def expires?
         expires_at.present?
+      end
+
+      def destroyable?
+        tokens.used.count.zero?
       end
     end
   end

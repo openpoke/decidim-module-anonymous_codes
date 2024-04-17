@@ -19,13 +19,31 @@ module Decidim
         def anonymous_codes_group_action?
           return unless permission_action.subject == :anonymous_code_group
 
-          allow! if permission_action.action.in?([:create, :update, :destroy, :export])
+          case permission_action.action
+          when :create, :update, :export
+            allow!
+          when :destroy
+            toggle_allow(code_group.destroyable?) if code_group
+          end
         end
 
         def anonymous_codes_token_action?
           return unless permission_action.subject == :anonymous_code_token
 
-          allow! if permission_action.action.in?([:view, :create, :destroy, :export])
+          case permission_action.action
+          when :view, :create, :export
+            allow!
+          when :destroy
+            toggle_allow(token.destroyable?) if token
+          end
+        end
+
+        def code_group
+          context.fetch(:code_group, nil)
+        end
+
+        def token
+          context.fetch(:token, nil)
         end
       end
     end
