@@ -65,11 +65,11 @@ module Decidim
         private
 
         def tokens
-          AnonymousCodes::Token.where(group: code_group)
+          AnonymousCodes::Token.for(code_group)
         end
 
         def token
-          tokens.find(params[:id])
+          @token ||= tokens.find(params[:id])
         end
 
         def code_group
