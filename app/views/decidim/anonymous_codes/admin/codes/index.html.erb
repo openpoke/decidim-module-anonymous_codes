@@ -28,8 +28,8 @@
             <% @tokens.each do |token| %>
               <tr>
                 <td><%= token.token %></td>
-                <td>
-                  <%= icon_link_to "circle-x", code_group_code_path(code_group,token), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
+                <td class="table-list__actions">
+                  <%= icon_link_to "circle-x", code_group_code_path(code_group, token), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_token, token: token) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
                 </td>
               </tr>
               <% end %>

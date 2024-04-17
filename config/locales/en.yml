@@ -60,16 +60,12 @@ en:
             number_of_tokens_to_generate: Number of tokens to generate
           index:
             back: Back to groups
-            new_codes_button: Generate new codes
             header_table_title: Tokens
+            new_codes_button: Generate new codes
             title: Codes for group %{group}
           new:
             button_generate_tokens: Generate Tokens
             title: Generate tokens for "Access code group %{group}"
-          index:
-            back: Back to groups
-            new_codes_button: Generate new codes
-            title: Codes for group %{group}
         export:
           tokens_pdf:
             expires: Expires? %{expires}
