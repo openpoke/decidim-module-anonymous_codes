@@ -14,6 +14,9 @@ module Decidim::AnonymousCodes
     let(:max_reuses) { 1 }
     let(:token) { create(:anonymous_codes_token, group: group) }
     let(:serialized) { subject.serialize }
+    let(:resource_url) do
+      "#{Decidim::ResourceLocatorPresenter.new(resource).url}?token=#{token.token}"
+    end
 
     it "returns a hash with the serialized data for the token" do
       expect(serialized).to include(token: token.token)
@@ -26,7 +29,7 @@ module Decidim::AnonymousCodes
       expect(serialized).to include(created_at: I18n.l(token.created_at, format: :decidim_short))
       expect(serialized).to include(resource_type: resource.class.name)
       expect(serialized).to include(resource_id: resource.id)
-      expect(serialized).to include(resource_url: Decidim::ResourceLocatorPresenter.new(resource).url)
+      expect(serialized).to include(resource_url: resource_url)
     end
 
     context "when the group has an expiration date" do
