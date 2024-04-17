@@ -44,7 +44,7 @@
     <% else %>
       <div>
         <%= t("code_groups.index.no_access_code_groups_records", scope: "decidim.anonymous_codes.admin") %>
-        <p><%= t("code_groups.index.start_by", scope: "decidim.anonymous_codes.admin", button: link_to(t("code_groups.index.new_access_code_group_button", scope: "decidim.anonymous_codes.admin"), new_code_group_path)) %></p>
+        <p><%= link_to t("code_groups.index.start_by", scope: "decidim.anonymous_codes.admin"), new_code_group_path %></p>
       </div>
     <% end %>
   </div>
