@@ -48,7 +48,7 @@ en:
             success: Access code group successfully updated
         codes:
           index:
-            back: Back to group
+            back: Back to groups
             new_codes_button: Generate new codes
             title: Codes for group %{group}
         exports:

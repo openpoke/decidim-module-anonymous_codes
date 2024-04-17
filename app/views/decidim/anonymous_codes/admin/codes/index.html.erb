@@ -10,7 +10,7 @@
           <%= render "export_dropdown" %>
         </div>
 
-        <a class="button tiny button--title new-access" href="<%= code_groups_path(code_group) %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
+        <a class="button tiny button--title new-access" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
         <a class="button tiny button--title new-access" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
       </div>
     </h2>
