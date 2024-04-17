@@ -11,7 +11,7 @@ en:
     admin:
       exports:
         formats:
-          AnonymousTokensPDF: PDF
+          AnonymousTokensPdf: PDF
     anonymous_codes:
       admin:
         actions:

@@ -7,9 +7,9 @@ module Decidim
     # Inherits from abstract PDF exporter. This class is used to set
     # the parameters used to create a PDF when exporting Survey Answers.
     #
-    class AnonymousTokensPDF < PDF
+    class AnonymousTokensPdf < PDF
       def controller
-        @controller ||= AnonymousTokensPDFControllerHelper.new
+        @controller ||= AnonymousTokensPdfControllerHelper.new
       end
 
       def template
