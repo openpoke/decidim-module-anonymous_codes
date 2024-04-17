@@ -16,6 +16,7 @@ en:
       admin:
         actions:
           confirm_destroy: Are you sure you want to delete this access code group?
+          confirm_destroy_code: Are you sure you want to delete this code?
           destroy: Delete
           edit: Edit
           list_tokens: List tokens
@@ -52,24 +53,25 @@ en:
             success: Access code group successfully updated
         codes:
           create:
-            invalid: There was a problem creating this access code token
-            success: Access code token successfully created
+            invalid: There was a problem generating the codes
+            success: Codes are being generated in the background. Please wait a few
+              seconds and refresh the page.
           destroy:
             success: Access code token successfully destroyed
           form:
             number_of_tokens_to_generate: Number of tokens to generate
           index:
-            back: Back to groups
-            token: Token
-            resource_url: Resource URL
-            used: Used?
             available: Available?
-            usage_count: Num. of uses
+            back: Back to groups
+            back_to_codes: Back to codes
             new_codes_button: Generate new codes
             title: Codes for group %{group}
+            token: Token
+            usage_count: Num. of uses
+            used: Used?
           new:
             button_generate_tokens: Generate Tokens
-            title: Generate tokens for "Access code group %{group}"
+            title: Generate tokens for "%{group}"
         export:
           tokens_pdf:
             expires: Expires? %{expires}

@@ -6,11 +6,11 @@
       </div>
 
       <div class="flex--cc flex-gap--1">
+        <a class="button tiny button--title hollow" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
         <div id="js-other-actions-wrapper">
           <%= render "export_dropdown" %>
         </div>
 
-        <a class="button tiny button--title new-access" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
         <a class="button tiny button--title new-access" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
       </div>
     </h2>
@@ -21,20 +21,23 @@
           <thead>
             <tr>
               <th><%= t(".token") %></th>
-              <th><%= t(".resource_url") %></th>
               <th><%= t(".available") %></th>
               <th><%= t(".used") %></th>
               <th><%= t(".usage_count") %></th>
-
               <th></th>
             </tr>
           </thead>
           <tbody>
             <% @tokens.each do |token| %>
+              <% serialized = Decidim::AnonymousCodes::TokenSerializer.new(token).serialize %>
               <tr>
                 <td><%= token.token %></td>
+                <td><%= t("booleans.#{token.available?}") %></td>
+                <td><%= t("booleans.#{token.used?}") %></td>
+                <td><%= token.usage_count %></td>
                 <td class="table-list__actions">
-                  <%= icon_link_to "circle-x", code_group_code_path(code_group, token), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_token, token: token) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
+                  <%= icon_link_to "eye", serialized[:resource_url], t("actions.destroy", scope: "decidim.anonymous_codes.admin"), class: "#{serialized[:resource_url].present? ? '' : ' invisible'}", target: "_blank" %>
+                  <%= icon_link_to "circle-x", code_group_code_path(code_group, token), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_token, token: token) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy_code", scope: "decidim.anonymous_codes.admin") } %>
                 </td>
               </tr>
               <% end %>
