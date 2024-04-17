@@ -14,6 +14,9 @@ module Decidim
       has_many :tokens, class_name: "Decidim::AnonymousCodes::Token", dependent: :destroy
       belongs_to :resource, polymorphic: true, optional: true
 
+      scope :active, -> { where(active: true) }
+      scope :inactive, -> { where(active: false) }
+
       def self.for(organization)
         where(organization: organization)
       end

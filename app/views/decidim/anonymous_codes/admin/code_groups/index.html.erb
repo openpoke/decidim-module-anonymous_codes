@@ -25,7 +25,7 @@
             <% groups.each do |group| %>
               <tr>
                 <td><%= translated_attribute(group.title) %></td>
-                <td><%= t("booleans.#{group.active}") %></td>
+                <td><strong class="<%= group.active? ? "text-success" : "text-alert" %>"><%= t("booleans.#{group.active}") %></strong></td>
                 <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? "warning" : ""}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : t(".never") %></td>
                 <td><%= "#{group.tokens.used.count} / #{group.tokens_count}" %></td>
                 <td><%= group.max_reuses %></td>

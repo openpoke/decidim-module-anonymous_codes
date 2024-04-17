@@ -10,7 +10,7 @@ module Decidim
           next unless current_settings.allow_answers? && survey.open?
           next if visitor_already_answered?
 
-          if token_groups.any?
+          if token_groups.active.any?
             next if current_token&.available?
 
             if current_token.blank?
@@ -21,6 +21,10 @@ module Decidim
               flash.now[:alert] = I18n.t("decidim.anonymous_codes.expired_code")
             end
             render "decidim/anonymous_codes/surveys/code_required"
+          end
+
+          if token_groups.inactive.any? && current_user&.admin?
+            flash.now[:alert] = I18n.t("decidim.anonymous_codes.inactive_group", path: decidim_admin_anonymous_codes.edit_code_group_path(token_groups.inactive.first)).html_safe
           end
         end
 
@@ -35,11 +39,11 @@ module Decidim
         private
 
         def token_groups
-          @token_groups ||= Decidim::AnonymousCodes::Group.where(resource: survey, active: true)
+          @token_groups ||= Decidim::AnonymousCodes::Group.where(resource: survey)
         end
 
         def current_token
-          @current_token ||= Decidim::AnonymousCodes::Token.where(group: token_groups).find_by(token: token_param)
+          @current_token ||= Decidim::AnonymousCodes::Token.where(group: token_groups.active).find_by(token: token_param)
         end
 
         def token_param

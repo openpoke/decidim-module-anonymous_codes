@@ -83,6 +83,8 @@ en:
         menu_title: Access Codes
         surveys_component_settings:
           callout:
+            inactive: "- ⚠️ This group is inactive! You need to activate it in order to restrict
+              access to the survey."
             group_locked: This survey can only be answered by using a valid code.
             group_locked_desc: Note that, unless "Allow unregistered users to answer"
               is enabled, only registered users can answer this survey (and they also
@@ -95,6 +97,7 @@ en:
             new_group: "\U0001F449 Create answer codes here"
       expired_code: The introduced code has expired. Please try again.
       invalid_code: The introduced code is invalid. Please try again.
+      inactive_group: <strong>Warning:</strong> This survey is restricted with codes, but the group is inactive. You can activate it in the <a href="%{path}">access code groups</a> section.
       surveys:
         code_required:
           body: This form can only be accessed using a valid code. If you have a valid
