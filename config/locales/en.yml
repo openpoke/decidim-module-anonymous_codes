@@ -60,7 +60,11 @@ en:
             number_of_tokens_to_generate: Number of tokens to generate
           index:
             back: Back to groups
-            header_table_title: Tokens
+            token: Token
+            resource_url: Resource URL
+            used: Used?
+            available: Available?
+            usage_count: Num. of uses
             new_codes_button: Generate new codes
             title: Codes for group %{group}
           new:
