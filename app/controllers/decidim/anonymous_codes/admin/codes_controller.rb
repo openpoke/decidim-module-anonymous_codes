@@ -14,11 +14,11 @@ module Decidim
         end
 
         def new
-          # todo
+          @form = form(CodeForm).instance
         end
 
         def create
-          # todo
+          @form = form(CodeForm).from_params(params)
         end
 
         def destroy

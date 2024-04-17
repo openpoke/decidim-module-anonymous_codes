@@ -47,10 +47,15 @@ en:
             invalid: There was a problem updating this access code group
             success: Access code group successfully updated
         codes:
+          form:
+            number_of_tokens_to_generate: Number of tokens to generate
           index:
             back: Back to groups
             new_codes_button: Generate new codes
             title: Codes for group %{group}
+          new:
+            button_generate_tokens: Generate Tokens
+            title: Generate tokens for "Access code group %{group}"
         menu_title: Access Codes
         surveys_component_settings:
           callout:
