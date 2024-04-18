@@ -41,6 +41,23 @@ module Decidim
             expect(response).to render_template(:index)
           end
         end
+
+        describe "GET #new" do
+          it "enforces permission to create anonymous code tokens" do
+            expect(controller).to receive(:enforce_permission_to).with(:create, :anonymous_code_token)
+            get :new, params: { code_group_id: code_group.id }
+          end
+
+          it "assigns a new instance of TokensForm to @form" do
+            get :new, params: { code_group_id: code_group.id }
+            expect(assigns(:form)).to be_an_instance_of(TokensForm)
+          end
+
+          it "renders the new template" do
+            get :new, params: { code_group_id: code_group.id }
+            expect(response).to render_template(:new)
+          end
+        end
       end
     end
   end
