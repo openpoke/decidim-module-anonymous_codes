@@ -59,6 +59,44 @@ module Decidim
           end
         end
 
+        describe "POST #create" do
+          context "with valid parameters" do
+            let(:valid_params) do
+              {
+                code_group_id: code_group.id,
+                num_tokens: 5
+              }
+            end
+
+            it "enqueues a job to create tokens and redirects to code group codes path" do
+              expect(CreateTokensJob).to receive(:perform_later).with(code_group, valid_params[:num_tokens])
+
+              post :create, params: valid_params
+
+              expect(response).to redirect_to(code_group_codes_path(code_group))
+              expect(flash[:notice]).to be_present
+            end
+          end
+
+          context "with invalid parameters" do
+            let(:invalid_params) do
+              {
+                code_group_id: code_group.id,
+                num_tokens: 0
+              }
+            end
+
+            it "does not enqueue a job and renders the new template with an alert message" do
+              expect(CreateTokensJob).not_to receive(:perform_later)
+
+              post :create, params: invalid_params
+
+              expect(response).to render_template("new")
+              expect(flash[:alert]).to be_present
+            end
+          end
+        end
+
         describe "DELETE #destroy" do
           let(:token) { create(:anonymous_codes_token, group: code_group, created_at: 2.days.ago) }
           let!(:group) { create(:anonymous_codes_group, expires_at: 1.day.from_now, active: true, max_reuses: 10, organization: current_organization) }
