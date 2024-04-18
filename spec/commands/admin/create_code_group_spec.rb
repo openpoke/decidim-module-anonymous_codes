@@ -6,8 +6,8 @@ module Decidim
   module AnonymousCodes
     module Admin
       describe CreateCodeGroup do
-        let(:current_organization) { create(:organization) }
-        let(:current_user) { create(:user, :confirmed, :admin, organization: current_organization) }
+        let(:organization) { create(:organization) }
+        let(:current_user) { create(:user, :confirmed, :admin, organization: organization) }
         let(:form_params) do
           {
             title_en: "Sample Title",
@@ -15,14 +15,16 @@ module Decidim
             title_es: "Titulo de ejemplo",
             expires_at: 1.day.from_now,
             active: true,
-            max_reuses: 10
+            max_reuses: 10,
+            num_tokens: num_tokens
           }
         end
+        let(:num_tokens) { nil }
         let(:form) do
           CodeGroupForm.from_params(
             form_params
           ).with_context(
-            current_organization: current_organization
+            current_organization: organization
           )
         end
         let(:command) { described_class.new(form) }
@@ -45,7 +47,21 @@ module Decidim
 
         describe "when the form is valid" do
           it "broadcasts ok" do
-            expect { command.call }.to change(Group, :count).by(1).and broadcast(:ok)
+            perform_enqueued_jobs do
+              expect { command.call }.to change(Group, :count).by(1).and broadcast(:ok)
+              expect(Token.count).to eq(0)
+            end
+          end
+
+          context "and num_tokens is specified" do
+            let(:num_tokens) { 10 }
+
+            it "broadcasts ok" do
+              perform_enqueued_jobs do
+                expect { command.call }.to change(Token, :count).by(10).and broadcast(:ok)
+                expect(Group.count).to eq(1)
+              end
+            end
           end
         end
       end

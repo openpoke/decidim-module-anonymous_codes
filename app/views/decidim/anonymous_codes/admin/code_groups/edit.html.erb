@@ -1,5 +1,15 @@
 <%= decidim_form_for(@form, html: { class: "form edit_code_group" }) do |f| %>
-  <%= render partial: "form", object: f, locals: { title: t(".title") } %>
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title"><%= t(".title") %>
+        <a class="button tiny button--title hollow" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
+      </h2>
+    </div>
+
+    <div class="card-section">
+      <%= render partial: "form", object: f %>
+    </div>
+  </div>
 
   <div class="button--double form-general-submit">
     <%= f.submit "update" %>

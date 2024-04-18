@@ -43,10 +43,11 @@ en:
             never: Never
             new_access_code_group_button: New access code group
             no_access_code_groups_records: No access code groups available.
-            num_of_tokens: Num. of Tokens
+            num_of_tokens: Num. of tokens
             start_by: Start by adding an access code group.
             title: Access code groups
           new:
+            num_tokens: Num. of tokens to generate (you can do it later too)
             title: New access code group
           update:
             invalid: There was a problem updating this access code group
