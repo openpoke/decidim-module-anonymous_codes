@@ -19,8 +19,8 @@ module Decidim
         end
 
         describe "GET #index" do
-          let!(:token1) { Token.create(group: code_group, created_at: 2.days.ago) }
-          let!(:token2) { Token.create(group: code_group, created_at: 1.day.ago) }
+          let!(:token1) { create(:anonymous_codes_token, group: code_group, created_at: 2.days.ago) }
+          let!(:token2) { create(:anonymous_codes_token, group: code_group, created_at: 1.day.ago) }
 
           it "enforces permission to view anonymous code tokens" do
             expect(controller).to receive(:enforce_permission_to).with(:view, :anonymous_code_token)
