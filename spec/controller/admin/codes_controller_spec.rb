@@ -58,6 +58,19 @@ module Decidim
             expect(response).to render_template(:new)
           end
         end
+
+        describe "DELETE #destroy" do
+          let(:token) { create(:anonymous_codes_token, group: code_group, created_at: 2.days.ago) }
+          let!(:group) { create(:anonymous_codes_group, expires_at: 1.day.from_now, active: true, max_reuses: 10, organization: current_organization) }
+          let(:code_group) { create(:anonymous_codes_group, organization: current_organization) }
+
+          it "destroys the token" do
+            delete :destroy, params: { code_group_id: code_group.id, id: token.id }
+            expect(response).to redirect_to(code_group_codes_path)
+            expect(flash[:notice]).to be_present
+            expect { token.reload }.to raise_error(ActiveRecord::RecordNotFound)
+          end
+        end
       end
     end
   end
