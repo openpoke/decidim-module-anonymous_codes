@@ -28,9 +28,6 @@ module Decidim
           end
 
           it "assigns @tokens with paginated tokens ordered by creation date" do
-            token1
-            token2
-
             get :index, params: { code_group_id: code_group.id }
 
             expect(assigns(:tokens)).to eq([token2, token1])

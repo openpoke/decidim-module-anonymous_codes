@@ -11,12 +11,12 @@ module Decidim
         let(:command) { described_class.new(form, code_group) }
 
         describe "#call" do
-          context "when the form is valid" do
-            before do
-              allow(CreateTokensJob).to receive(:perform_later)
-              command.call
-            end
+          before do
+            allow(CreateTokensJob).to receive(:perform_later)
+            command.call
+          end
 
+          context "when the form is valid" do
             it "queues a background job to create tokens" do
               expect(CreateTokensJob).to have_received(:perform_later).with(code_group, 10)
             end
@@ -34,8 +34,6 @@ module Decidim
             end
 
             it "does not queue a background job" do
-              allow(CreateTokensJob).to receive(:perform_later)
-              command.call
               expect(CreateTokensJob).not_to have_received(:perform_later)
               expect(CreateTokensJob).not_to have_received(:perform_later).with(code_group, 10)
             end
