@@ -4,19 +4,14 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CodesController < ApplicationController
-        include Decidim::Admin::Paginable
-        include TranslatableAttributes
-        include Decidim::AnonymousCodes::Admin::Filterable
+        include Decidim::Admin::Filterable
 
         helper_method :tokens, :code_group, :export_jobs
 
         def index
           enforce_permission_to :view, :anonymous_code_token
 
-          @tokens = paginate(tokens.order(created_at: :desc))
-        end
-
-        def collection
+          @tokens = paginate(query.result)
         end
 
         def new
@@ -67,6 +62,10 @@ module Decidim
         end
 
         private
+
+        def base_query
+          tokens
+        end
 
         def tokens
           AnonymousCodes::Token.for(code_group)
