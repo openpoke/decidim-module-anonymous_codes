@@ -16,6 +16,9 @@ module Decidim
           @tokens = paginate(tokens.order(created_at: :desc))
         end
 
+        def collection
+        end
+
         def new
           enforce_permission_to :create, :anonymous_code_token
 
