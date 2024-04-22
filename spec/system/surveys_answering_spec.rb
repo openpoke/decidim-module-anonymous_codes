@@ -91,7 +91,25 @@ describe "Surveys Component Settings", type: :system do
     it_behaves_like "form requires codes"
 
     context "and code group is inactive" do
+      before do
+        login_as user, scope: :user
+        visit_component
+      end
+
       let(:active) { false }
+
+      it "has no alert callout" do
+        expect(page).not_to have_css(".callout.alert")
+      end
+
+      context "when user is an admin" do
+        let(:user) { create :user, :confirmed, :admin, organization: organization }
+
+        it "has a alert callout" do
+          expect(page).to have_css(".callout.alert")
+          expect(page).to have_content("This survey is restricted with codes, but the group is inactive")
+        end
+      end
 
       it_behaves_like "can be answered without codes"
     end

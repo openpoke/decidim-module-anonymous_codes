@@ -77,21 +77,21 @@ describe "Access codes admin menu", type: :system do
     fill_in_i18n(:code_group_title, "#code_group-title-tabs", en: "New Group", es: "Nuevo Grupo", ca: "Nou Grup")
     check "Active"
     fill_in "Re-use max", with: 10
+    fill_in "Num. of tokens to generate (you can do it later too)", with: 10
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
-    click_on "create"
+    perform_enqueued_jobs do
+      click_on "create"
+    end
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
 
-    last_group = Decidim::AnonymousCodes::Group.last
-    expect(last_group.title["en"]).to eq("New Group")
-    expect(last_group.max_reuses).to eq(10)
-    expect(last_group.active).to be(true)
-
-    visit decidim_admin_anonymous_codes.code_groups_path
-    expect(page).to have_content("New Group")
-    expect(page).to have_content("Never")
+    within find("tr", text: "New Group") do
+      expect(page).to have_content("0 / 10")
+      expect(page).to have_content("Yes")
+      expect(page).to have_content("Never")
+    end
   end
 
   it "destroys existing access code group" do

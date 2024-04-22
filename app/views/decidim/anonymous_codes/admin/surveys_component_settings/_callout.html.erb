@@ -4,7 +4,10 @@
     <p><strong><%= t(".group_locked") %></strong></p>
     <ul>
       <% groups.each do |group| %>
-        <li><%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id) %></li>
+        <li>
+          <%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id) %>
+          <%= content_tag "small", t(".inactive"), class: "help-text" unless group.active? %>
+        </li>
       <% end %>
     </ul>
     <p class="help-text"><%= t(".group_locked_desc") %></p>

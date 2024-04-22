@@ -25,15 +25,15 @@
             <% groups.each do |group| %>
               <tr>
                 <td><%= translated_attribute(group.title) %></td>
-                <td><%= t("booleans.#{group.active}") %></td>
-                <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? "warning" : ""}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : t(".never") %></td>
+                <td><strong class="<%= group.active? ? "text-success" : "text-alert" %>"><%= t("booleans.#{group.active}") %></strong></td>
+                <td><%= group.expires_at.present? ? ("<span class=\"text-#{ group.expired? ? "warning" : ""}\">#{l(group.expires_at, format: :decidim_short)}</span>".html_safe) : content_tag(:em, t(".never")) %></td>
                 <td><%= "#{group.tokens.used.count} / #{group.tokens_count}" %></td>
                 <td><%= group.max_reuses %></td>
                 <td class="table-list__actions">
                   <%= icon_link_to "eye", resource_path(group), t("actions.preview", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{group&.resource ? '':' invisible'}", target: :_blank %>
-                  <%= icon_link_to "list", code_group_codes_path(group), t("actions.list_tokens", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{group&.resource ? '':' invisible'}" %>
-                  <%= icon_link_to "pencil", edit_code_group_path(group.id), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit#{allowed_to?(:update, :anonymous_code_group, code_group: group) ? '' : ' invisible'}" %>
-                  <%= icon_link_to "circle-x", code_group_path(group.id), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_group, code_group: group) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
+                  <%= icon_link_to "list", code_group_codes_path(group), t("actions.list_tokens", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{allowed_to?(:view, :anonymous_code_token) ? '':' invisible'}" %>
+                  <%= icon_link_to "pencil", edit_code_group_path(group), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit#{allowed_to?(:update, :anonymous_code_group, code_group: group) ? '' : ' invisible'}" %>
+                  <%= icon_link_to "circle-x", code_group_path(group), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_group, code_group: group) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
                 </td>
               </tr>
             <% end %>
@@ -44,7 +44,7 @@
     <% else %>
       <div>
         <%= t("code_groups.index.no_access_code_groups_records", scope: "decidim.anonymous_codes.admin") %>
-        <p><%= t("code_groups.index.start_by", scope: "decidim.anonymous_codes.admin", button: link_to(t("code_groups.index.new_access_code_group_button", scope: "decidim.anonymous_codes.admin"), new_code_group_path)) %></p>
+        <p><%= link_to t("code_groups.index.start_by", scope: "decidim.anonymous_codes.admin"), new_code_group_path %></p>
       </div>
     <% end %>
   </div>

@@ -13,6 +13,7 @@ module Decidim
 
           transaction do
             create_code_group!
+            CreateTokensJob.perform_later(code_group, form.num_tokens) if form.num_tokens.present?
           end
 
           broadcast(:ok)
