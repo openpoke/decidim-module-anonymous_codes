@@ -4,7 +4,7 @@ de:
     errors:
       models:
         decidim/anonymous_codes/token_resource:
-          invalid_questionnaire: The attached answer belongs to a different questionnaire.
+          invalid_questionnaire: Die angehängte Antwort gehört zu einem anderen Fragebogen.
           max_uses_exceeded: The code has already been used the maximum number of times.
   decidim:
     admin:
@@ -14,11 +14,11 @@ de:
     anonymous_codes:
       admin:
         actions:
-          confirm_destroy: Are you sure you want to delete this access code group?
-          destroy: Delete
-          edit: Edit
-          list_tokens: List tokens
-          preview: Preview
+          confirm_destroy: Möchten Sie diese Code-Gruppe wirklich löschen?
+          destroy: Löschen
+          edit: Bearbeiten
+          list_tokens: Tokens auflisten
+          preview: Vorschau
         code_groups:
           create:
             invalid: There was a problem creating this access code group
@@ -28,17 +28,17 @@ de:
           edit:
             title: Edit access code group
           form:
-            active: Active
-            expires_at: Expires At
-            max_reuses: Re-use max
-            resource: Linked resource (surveys)
-            title: Title
+            active: Aktiv
+            expires_at: Verfällt am
+            max_reuses: Max. Verwendungen
+            resource: Verknüpfte Ressource (Umfragen)
+            title: Titel
           index:
-            active: Active
-            expires_at: Expires at
-            header_table_title: Title
-            max_reuses: Re-use max
-            never: Never
+            active: Aktiv
+            expires_at: Verfällt am
+            header_table_title: Titel
+            max_reuses: Max. Verwendungen
+            never: Niemals
             new_access_code_group_button: New access code group
             no_access_code_groups_records: No access code groups available.
             num_of_tokens: Num. of Tokens
