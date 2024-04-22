@@ -5,28 +5,29 @@ de:
       models:
         decidim/anonymous_codes/token_resource:
           invalid_questionnaire: Die angehängte Antwort gehört zu einem anderen Fragebogen.
-          max_uses_exceeded: The code has already been used the maximum number of times.
+          max_uses_exceeded: Der Code wurde bereits die maximal erlaubte Anzahl Male verwendet.
   decidim:
     admin:
       exports:
         formats:
-          AnonymousTokensPDF: PDF
+          AnonymousTokensPdf: PDF
     anonymous_codes:
       admin:
         actions:
-          confirm_destroy: Möchten Sie diese Code-Gruppe wirklich löschen?
+          confirm_destroy: Möchten Sie diese Zugangscode-Gruppe wirklich löschen?
+          confirm_destroy_code: Sind Sie sicher, dass Sie diesen Code löschen möchten?
           destroy: Löschen
           edit: Bearbeiten
           list_tokens: Tokens auflisten
           preview: Vorschau
         code_groups:
           create:
-            invalid: There was a problem creating this access code group
-            success: Access code group successfully created
+            invalid: Beim Erstellen dieser Zugangscode-Gruppe ist ein Problem aufgetreten
+            success: Zugangscode-Gruppe erfolgreich erstellt
           destroy:
-            success: Access code group successfully destroyed
+            success: Zugriffscode Gruppe erfolgreich gelöscht
           edit:
-            title: Edit access code group
+            title: Zugangscode-Gruppe bearbeiten
           form:
             active: Aktiv
             expires_at: Verfällt am
@@ -39,50 +40,68 @@ de:
             header_table_title: Titel
             max_reuses: Max. Verwendungen
             never: Niemals
-            new_access_code_group_button: New access code group
-            no_access_code_groups_records: No access code groups available.
-            num_of_tokens: Num. of Tokens
-            start_by: Start by adding an access code group from the "%{button}" button.
-            title: Access code groups
+            new_access_code_group_button: Neue Zugangscode-Gruppe
+            no_access_code_groups_records: Keine Zugangscode-Gruppen verfügbar.
+            num_of_tokens: Anzahl der Tokens
+            start_by: Beginnen Sie mit dem Hinzufügen einer Zugangscode-Gruppe.
+            title: Zugangscode-Gruppen
           new:
-            title: New access code group
+            num_tokens: Anzahl zu generierender Tokens. Sie können später weitere generieren lassen.
+            title: Neue Zugangscode-Gruppe
           update:
-            invalid: There was a problem updating this access code group
-            success: Access code group successfully updated
+            invalid: Beim Aktualisieren dieser Zugangscode-Gruppe ist ein Problem aufgetreten
+            success: Zugangscode-Gruppe erfolgreich aktualisiert
         codes:
+          create:
+            invalid: Beim Generieren der Codes ist ein Problem aufgetreten
+            success: Codes werden im Hintergrund generiert. Bitte warten Sie ein paar Sekunden und aktualisieren Sie die Seite.
+          destroy:
+            success: Zugangscode-Token erfolgreich gelöscht
+          form:
+            number_of_tokens_to_generate: Anzahl der zu generierenden Tokens
           index:
-            back: Back to groups
-            new_codes_button: Generate new codes
-            title: Codes for group %{group}
+            available: Verfügbar?
+            back: Zurück zu den Gruppen
+            back_to_codes: Zurück zu den Codes
+            new_codes_button: Neue Codes generieren
+            title: Codes für Gruppe %{group}
+            token: Token
+            usage_count: Anzahl der Verwendungen
+            used: Verwendet?
+          new:
+            button_generate_tokens: Tokens generieren
+            title: Tokens für "%{group}" generieren
         export:
           tokens_pdf:
-            expires: Expires? %{expires}
-            expires_at: 'Expires at: %{expires_at}'
-            tokens_for: Tokens for "%{group}"
-            totals: "%{total} total tokens"
+            expires: Läuft ab? %{expires}
+            expires_at: 'Läuft ab am: %{expires_at}'
+            tokens_for: Tokens für "%{group}"
+            totals: "%{total} Tokens insgesamt"
         exports:
-          all_tokens: All tokens
-        menu_title: Access Codes
+          all_tokens: Alle Tokens
+        menu_title: Zugangscodes
         surveys_component_settings:
           callout:
-            group_locked: This survey can only be answered by using a valid code.
-            group_locked_desc: Note that, unless "Allow unregistered users to answer" is enabled, only registered users can answer this survey (and they also will have to provide the code).
-            group_unlocked: Anyone can answer this survey, but you can choose to restrict this by using a answer codes.
-            group_unlocked_desc: Note that "Allow unregistered users to answer" will still apply if you choose to use this option.
-            groups: 'Edit groups:'
-            new_group: "\U0001F449 Create answer codes here"
-      expired_code: The introduced code has expired. Please try again.
-      invalid_code: The introduced code is invalid. Please try again.
+            group_locked: Diese Umfrage kann nur mit einem gültigen Code beantwortet werden.
+            group_locked_desc: Beachten Sie, dass nur registrierte Benutzer diese Umfrage beantworten können, ausser wenn "Nicht registrierten Benutzern die Antwort erlauben" aktiviert ist. Sie müssen dennoch einen Code angeben.
+            group_unlocked: Jeder kann diese Umfrage beantworten. Sie können dies mit der Verwendung von Antwortcodes einschränken.
+            group_unlocked_desc: Beachten Sie, dass "Nicht registrierten Benutzern die Antwort erlauben" weiterhin gilt, wenn Sie diese Option verwenden.
+            groups: 'Gruppen bearbeiten:'
+            inactive: "- ⚠️ Diese Gruppe ist inaktiv! Sie müssen sie aktivieren, um den Zugriff auf die Umfrage zu beschränken."
+            new_group: "\U0001F449 Erstellen Sie hier Antwortcodes"
+      expired_code: Der eingegebene Code ist abgelaufen. Bitte versuchen Sie es erneut.
+      inactive_group: <strong>Warnung:</strong> Diese Umfrage wird mit Codes eingeschränkt, aber die Gruppe ist inaktiv. Sie können sie im Bereich <a href="%{path}">Zugangscode-Gruppen</a> aktivieren.
+      invalid_code: Der eingegebene Code ist ungültig. Bitte versuchen Sie es erneut.
       surveys:
         code_required:
-          body: This form can only be accessed using a valid code. If you have a valid code, please enter it below.
+          body: Auf dieses Formular kann nur mit einem gültigen Code zugegriffen werden. Wenn Sie einen gültigen Code haben, geben Sie ihn bitte unten ein.
           label: Code
-          submit: Continue
-          title: Form restricted
+          submit: Fortfahren
+          title: Formular eingeschränkt
       tokens_serializer:
-        available: Available?
-        resource_url: Resource URL
+        available: Verfügbar?
+        resource_url: Ressourcen-URL
         token: Code
-        usage_count: Num. of uses
-        used: Used?
-      used_code: The introduced code has already been used. Please try again.
+        usage_count: Anzahl der Verwendungen
+        used: Verwendet?
+      used_code: Der eingeführte Code wurde bereits verwendet. Bitte versuchen Sie es erneut.
