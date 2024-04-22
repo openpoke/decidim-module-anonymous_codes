@@ -6,6 +6,7 @@ module Decidim
       class CodesController < ApplicationController
         include Decidim::Admin::Paginable
         include TranslatableAttributes
+        include Decidim::AnonymousCodes::Admin::Filterable
 
         helper_method :tokens, :code_group, :export_jobs
 
