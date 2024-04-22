@@ -69,4 +69,25 @@ describe "Token codes", type: :system do
 
     expect(page).to have_content("Access code token successfully destroyed")
   end
+
+  it "allows sorting columns" do
+    click_link "Generate new codes"
+
+    fill_in "Number of tokens to generate", with: 15
+
+    perform_enqueued_jobs do
+      click_on "Generate Tokens"
+    end
+
+    within("thead tr") do
+      expect(page).to have_css("th:nth-child(1)", text: "Token")
+      expect(page).to have_css("th:nth-child(2)", text: "Available?")
+      expect(page).to have_css("th:nth-child(3)", text: "Used?")
+      expect(page).to have_css("th:nth-child(4)", text: "Num. of uses")
+    end
+
+    click_on "Token"
+    token_column = all(".table-list tbody tr td:first-child").map(&:text)
+    expect(token_column).to eq(token_column.sort)
+  end
 end
