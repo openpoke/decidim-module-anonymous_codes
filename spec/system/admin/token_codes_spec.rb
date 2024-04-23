@@ -90,4 +90,34 @@ describe "Token codes", type: :system do
     token_column = all(".table-list tbody tr td:first-child").map(&:text)
     expect(token_column).to eq(token_column.sort)
   end
+
+  context "when some token codes are available and used" do
+    let!(:available_token) { create(:anonymous_codes_token) }
+    let!(:used_token) { create(:anonymous_codes_token) }
+    let!(:mixed_tokens) { create_list(:anonymous_codes_token, 3) }
+
+    before do
+      used_token.update(usage_count: used_token.group.max_reuses)
+      available_token.update(usage_count: 2)
+    end
+
+    it "sorts tokens based on availability and usage" do
+      visit decidim_admin_anonymous_codes.code_groups_path
+
+      within find("tr", text: existing_empty_group.title["en"]) do
+        expect(page).to have_link("List")
+        click_link "List"
+      end
+
+      click_on "Available?"
+
+      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
+      expect(page).to have_content(used_token.token)
+      expect(page).to have_content(available_token.token)
+
+      click_on "Available?"
+
+      expect(page.body.index(available_token.token)).to be < page.body.index(used_token.token)
+    end
+  end
 end
