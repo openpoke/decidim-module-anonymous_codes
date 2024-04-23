@@ -92,19 +92,14 @@ describe "Token codes", type: :system do
   end
 
   context "when some token codes are available and used" do
-    let!(:available_token) { create(:anonymous_codes_token) }
-    let!(:used_token) { create(:anonymous_codes_token) }
-    let!(:mixed_tokens) { create_list(:anonymous_codes_token, 3) }
-
-    before do
-      used_token.update(usage_count: used_token.group.max_reuses)
-      available_token.update(usage_count: 2)
-    end
+    let!(:available_token) { create(:anonymous_codes_token, group: existing_group) }
+    let!(:used_token) { create(:anonymous_codes_token, :used, group: existing_group) }
+    let!(:mixed_tokens) { create_list(:anonymous_codes_token, 3, group: existing_group) }
 
     it "sorts tokens based on availability and usage" do
       visit decidim_admin_anonymous_codes.code_groups_path
 
-      within find("tr", text: existing_empty_group.title["en"]) do
+      within find("tr", text: existing_group.title["en"]) do
         expect(page).to have_link("List")
         click_link "List"
       end
