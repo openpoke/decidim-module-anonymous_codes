@@ -1,0 +1,107 @@
+---
+fr:
+  activerecord:
+    errors:
+      models:
+        decidim/anonymous_codes/token_resource:
+          invalid_questionnaire: The attached answer belongs to a different questionnaire.
+          max_uses_exceeded: The code has already been used the maximum number of times.
+  decidim:
+    admin:
+      exports:
+        formats:
+          AnonymousTokensPdf: PDF
+    anonymous_codes:
+      admin:
+        actions:
+          confirm_destroy: Are you sure you want to delete this access code group?
+          confirm_destroy_code: Are you sure you want to delete this code?
+          destroy: Delete
+          edit: Edit
+          list_tokens: List tokens
+          preview: Preview
+        code_groups:
+          create:
+            invalid: There was a problem creating this access code group
+            success: Access code group successfully created
+          destroy:
+            success: Access code group successfully destroyed
+          edit:
+            title: Edit access code group
+          form:
+            active: Active
+            expires_at: Expires At
+            max_reuses: Re-use max
+            resource: Linked resource (surveys)
+            title: Title
+          index:
+            active: Active
+            expires_at: Expires at
+            header_table_title: Title
+            max_reuses: Re-use max
+            never: Never
+            new_access_code_group_button: New access code group
+            no_access_code_groups_records: No access code groups available.
+            num_of_tokens: Num. of tokens
+            start_by: Start by adding an access code group.
+            title: Access code groups
+          new:
+            num_tokens: Num. of tokens to generate (you can do it later too)
+            title: New access code group
+          update:
+            invalid: There was a problem updating this access code group
+            success: Access code group successfully updated
+        codes:
+          create:
+            invalid: There was a problem generating the codes
+            success: Codes are being generated in the background. Please wait a few seconds and refresh the page.
+          destroy:
+            success: Access code token successfully destroyed
+          form:
+            number_of_tokens_to_generate: Number of tokens to generate
+          index:
+            available: Available?
+            back: Back to groups
+            back_to_codes: Back to codes
+            new_codes_button: Generate new codes
+            title: Codes for group %{group}
+            token: Token
+            usage_count: Num. of uses
+            used: Used?
+          new:
+            button_generate_tokens: Generate Tokens
+            title: Generate tokens for "%{group}"
+        export:
+          tokens_pdf:
+            expires: Expires? %{expires}
+            expires_at: 'Expires at: %{expires_at}'
+            tokens_for: Tokens for "%{group}"
+            totals: "%{total} total tokens"
+        exports:
+          all_tokens: All tokens
+        menu_title: Access Codes
+        surveys_component_settings:
+          callout:
+            group_locked: This survey can only be answered by using a valid code.
+            group_locked_desc: Note that, unless "Allow unregistered users to answer" is enabled, only registered users can answer this survey (and they also will have to provide the code).
+            group_unlocked: Anyone can answer this survey, but you can choose to restrict this by using a answer codes.
+            group_unlocked_desc: Note that "Allow unregistered users to answer" will still apply if you choose to use this option.
+            groups: 'Edit groups:'
+            inactive: "- ⚠️ This group is inactive! You need to activate it in order to restrict access to the survey."
+            new_group: "\U0001F449 Create answer codes here"
+      expired_code: The introduced code has expired. Please try again.
+      inactive_group: <strong>Warning:</strong> This survey is restricted with codes, but the group is inactive. You can activate it in the <a href="%{path}">access code groups</a> section.
+      invalid_code: The introduced code is invalid. Please try again.
+      surveys:
+        code_required:
+          body: This form can only be accessed using a valid code. If you have a valid code, please enter it below.
+          label: Code
+          submit: Continue
+          title: Form restricted
+      tokens_serializer:
+        available: Available?
+        resource_url: Resource URL
+        token: Code
+        usage_count: Num. of uses
+        used: Used?
+      used_code: The introduced code has already been used. Please try again.

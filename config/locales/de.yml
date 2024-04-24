@@ -1,0 +1,107 @@
+---
+de:
+  activerecord:
+    errors:
+      models:
+        decidim/anonymous_codes/token_resource:
+          invalid_questionnaire: Die angehängte Antwort gehört zu einem anderen Fragebogen.
+          max_uses_exceeded: Der Code wurde bereits die maximal erlaubte Anzahl Male verwendet.
+  decidim:
+    admin:
+      exports:
+        formats:
+          AnonymousTokensPdf: PDF
+    anonymous_codes:
+      admin:
+        actions:
+          confirm_destroy: Möchten Sie diese Zugangscode-Gruppe wirklich löschen?
+          confirm_destroy_code: Sind Sie sicher, dass Sie diesen Code löschen möchten?
+          destroy: Löschen
+          edit: Bearbeiten
+          list_tokens: Tokens auflisten
+          preview: Vorschau
+        code_groups:
+          create:
+            invalid: Beim Erstellen dieser Zugangscode-Gruppe ist ein Problem aufgetreten
+            success: Zugangscode-Gruppe erfolgreich erstellt
+          destroy:
+            success: Zugriffscode Gruppe erfolgreich gelöscht
+          edit:
+            title: Zugangscode-Gruppe bearbeiten
+          form:
+            active: Aktiv
+            expires_at: Verfällt am
+            max_reuses: Max. Verwendungen
+            resource: Verknüpfte Ressource (Umfragen)
+            title: Titel
+          index:
+            active: Aktiv
+            expires_at: Verfällt am
+            header_table_title: Titel
+            max_reuses: Max. Verwendungen
+            never: Niemals
+            new_access_code_group_button: Neue Zugangscode-Gruppe
+            no_access_code_groups_records: Keine Zugangscode-Gruppen verfügbar.
+            num_of_tokens: Anzahl der Tokens
+            start_by: Beginnen Sie mit dem Hinzufügen einer Zugangscode-Gruppe.
+            title: Zugangscode-Gruppen
+          new:
+            num_tokens: Anzahl zu generierender Tokens. Sie können später weitere generieren lassen.
+            title: Neue Zugangscode-Gruppe
+          update:
+            invalid: Beim Aktualisieren dieser Zugangscode-Gruppe ist ein Problem aufgetreten
+            success: Zugangscode-Gruppe erfolgreich aktualisiert
+        codes:
+          create:
+            invalid: Beim Generieren der Codes ist ein Problem aufgetreten
+            success: Codes werden im Hintergrund generiert. Bitte warten Sie ein paar Sekunden und aktualisieren Sie die Seite.
+          destroy:
+            success: Zugangscode-Token erfolgreich gelöscht
+          form:
+            number_of_tokens_to_generate: Anzahl der zu generierenden Tokens
+          index:
+            available: Verfügbar?
+            back: Zurück zu den Gruppen
+            back_to_codes: Zurück zu den Codes
+            new_codes_button: Neue Codes generieren
+            title: Codes für Gruppe %{group}
+            token: Token
+            usage_count: Anzahl der Verwendungen
+            used: Verwendet?
+          new:
+            button_generate_tokens: Tokens generieren
+            title: Tokens für "%{group}" generieren
+        export:
+          tokens_pdf:
+            expires: Läuft ab? %{expires}
+            expires_at: 'Läuft ab am: %{expires_at}'
+            tokens_for: Tokens für "%{group}"
+            totals: "%{total} Tokens insgesamt"
+        exports:
+          all_tokens: Alle Tokens
+        menu_title: Zugangscodes
+        surveys_component_settings:
+          callout:
+            group_locked: Diese Umfrage kann nur mit einem gültigen Code beantwortet werden.
+            group_locked_desc: Beachten Sie, dass nur registrierte Benutzer diese Umfrage beantworten können, ausser wenn "Nicht registrierten Benutzern die Antwort erlauben" aktiviert ist. Sie müssen dennoch einen Code angeben.
+            group_unlocked: Jeder kann diese Umfrage beantworten. Sie können dies mit der Verwendung von Antwortcodes einschränken.
+            group_unlocked_desc: Beachten Sie, dass "Nicht registrierten Benutzern die Antwort erlauben" weiterhin gilt, wenn Sie diese Option verwenden.
+            groups: 'Gruppen bearbeiten:'
+            inactive: "- ⚠️ Diese Gruppe ist inaktiv! Sie müssen sie aktivieren, um den Zugriff auf die Umfrage zu beschränken."
+            new_group: "\U0001F449 Erstellen Sie hier Antwortcodes"
+      expired_code: Der eingegebene Code ist abgelaufen. Bitte versuchen Sie es erneut.
+      inactive_group: <strong>Warnung:</strong> Diese Umfrage wird mit Codes eingeschränkt, aber die Gruppe ist inaktiv. Sie können sie im Bereich <a href="%{path}">Zugangscode-Gruppen</a> aktivieren.
+      invalid_code: Der eingegebene Code ist ungültig. Bitte versuchen Sie es erneut.
+      surveys:
+        code_required:
+          body: Auf dieses Formular kann nur mit einem gültigen Code zugegriffen werden. Wenn Sie einen gültigen Code haben, geben Sie ihn bitte unten ein.
+          label: Code
+          submit: Fortfahren
+          title: Formular eingeschränkt
+      tokens_serializer:
+        available: Verfügbar?
+        resource_url: Ressourcen-URL
+        token: Code
+        usage_count: Anzahl der Verwendungen
+        used: Verwendet?
+      used_code: Der eingeführte Code wurde bereits verwendet. Bitte versuchen Sie es erneut.
