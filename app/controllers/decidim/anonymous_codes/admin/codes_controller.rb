@@ -11,7 +11,7 @@ module Decidim
         def index
           enforce_permission_to :view, :anonymous_code_token
 
-          @tokens = paginate(base_query)
+          @tokens = paginate(query.result)
         end
 
         def new
@@ -64,9 +64,7 @@ module Decidim
         private
 
         def base_query
-          query = tokens
-          query = query.ransack(params[:q]).result if params[:q].present?
-          query.order(:token)
+          tokens
         end
 
         def tokens
