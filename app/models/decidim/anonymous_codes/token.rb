@@ -29,9 +29,15 @@ module Decidim
       end
 
       ransacker :available do
-        Arel.sql("(usage_count > COALESCE(
+        Arel.sql("(usage_count >= COALESCE(
           (SELECT max_reuses FROM decidim_anonymous_codes_groups AS g WHERE g.id=group_id AND g.active=TRUE AND (g.expires_at IS NULL OR g.expires_at > NOW()))
           , 0))")
+      end
+
+      ransacker :used do
+        Arel.sql("(usage_count < COALESCE(
+          (SELECT max_reuses FROM decidim_anonymous_codes_groups AS g WHERE g.id=group_id)
+          , 1))")
       end
 
       def used?

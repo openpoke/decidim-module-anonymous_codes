@@ -106,13 +106,16 @@ describe "Token codes", type: :system do
 
       click_on "Available?"
 
-      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
+      expect(page.body.index(used_token.token)).to be > page.body.index(available_token.token)
       expect(page).to have_content(used_token.token)
       expect(page).to have_content(available_token.token)
 
-      click_on "Available?"
+      click_on "Used?"
+      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
 
-      expect(page.body.index(available_token.token)).to be < page.body.index(used_token.token)
+      click_on "Used?"
+      used_column = all(".table-list tbody tr td:nth-child(3)").map(&:text)
+      expect(used_column).to eq(used_column.sort)
     end
   end
 end
