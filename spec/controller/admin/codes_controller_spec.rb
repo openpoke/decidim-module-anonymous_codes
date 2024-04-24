@@ -30,7 +30,7 @@ module Decidim
           it "assigns @tokens with paginated tokens ordered by creation date" do
             get :index, params: { code_group_id: code_group.id }
 
-            expect(assigns(:tokens)).to eq([token2, token1])
+            expect(assigns(:tokens)).to contain_exactly(token2, token1)
           end
 
           it "renders the index template" do

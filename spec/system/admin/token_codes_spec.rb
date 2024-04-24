@@ -69,4 +69,53 @@ describe "Token codes", type: :system do
 
     expect(page).to have_content("Access code token successfully destroyed")
   end
+
+  it "allows sorting columns" do
+    click_link "Generate new codes"
+
+    fill_in "Number of tokens to generate", with: 15
+
+    perform_enqueued_jobs do
+      click_on "Generate Tokens"
+    end
+
+    within("thead tr") do
+      expect(page).to have_css("th:nth-child(1)", text: "Token")
+      expect(page).to have_css("th:nth-child(2)", text: "Available?")
+      expect(page).to have_css("th:nth-child(3)", text: "Used?")
+      expect(page).to have_css("th:nth-child(4)", text: "Num. of uses")
+    end
+
+    click_on "Token"
+    token_column = all(".table-list tbody tr td:first-child").map(&:text)
+    expect(token_column).to eq(token_column.sort)
+  end
+
+  context "when some token codes are available and used" do
+    let!(:available_token) { create(:anonymous_codes_token, group: existing_group) }
+    let!(:used_token) { create(:anonymous_codes_token, :used, group: existing_group) }
+    let!(:mixed_tokens) { create_list(:anonymous_codes_token, 3, group: existing_group) }
+
+    it "sorts tokens based on availability and usage" do
+      visit decidim_admin_anonymous_codes.code_groups_path
+
+      within find("tr", text: existing_group.title["en"]) do
+        expect(page).to have_link("List")
+        click_link "List"
+      end
+
+      click_on "Available?"
+
+      expect(page.body.index(used_token.token)).to be > page.body.index(available_token.token)
+      expect(page).to have_content(used_token.token)
+      expect(page).to have_content(available_token.token)
+
+      click_on "Used?"
+      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
+
+      click_on "Used?"
+      used_column = all(".table-list tbody tr td:nth-child(3)").map(&:text)
+      expect(used_column).to eq(used_column.sort)
+    end
+  end
 end

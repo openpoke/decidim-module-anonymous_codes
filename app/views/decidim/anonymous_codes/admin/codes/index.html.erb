@@ -20,10 +20,10 @@
         <table class="table-list">
           <thead>
             <tr>
-              <th><%= t(".token") %></th>
-              <th><%= t(".available") %></th>
-              <th><%= t(".used") %></th>
-              <th><%= t(".usage_count") %></th>
+              <th><%= sort_link(query, :token, t(".token")) %></th>
+              <th><%= sort_link(query, :available, t(".available")) %></th>
+              <th><%= sort_link(query, :used, t(".used")) %></th>
+              <th><%= sort_link(query, :usage_count, t(".usage_count")) %></th>
               <th></th>
             </tr>
           </thead>
