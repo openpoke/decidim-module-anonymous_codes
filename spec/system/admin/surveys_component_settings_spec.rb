@@ -24,6 +24,7 @@ describe "Surveys Component Settings", type: :system do
   it "has callout" do
     within ".callout.warning" do
       expect(page).to have_content("Create answer codes here")
+      expect(page).to have_content("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
     end
   end
 

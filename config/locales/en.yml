@@ -21,6 +21,7 @@ en:
           edit: Edit
           list_tokens: List tokens
           preview: Preview
+          survey: Survey
         code_groups:
           create:
             invalid: There was a problem creating this access code group
