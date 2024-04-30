@@ -100,10 +100,11 @@ module Decidim
             end
             Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
               component = survey.component
+              edit_path = Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id)
               {
                 title: "#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
                 survey_id: survey.id,
-                edit_path: decidim.edit_survey_path(survey) # Assuming Decidim's route helpers are used
+                edit_path: edit_path
               }
             end
           end
