@@ -2,6 +2,9 @@
 en:
   activerecord:
     errors:
+      messages:
+        uppercase_only_letters_numbers: must be all uppercase and contain only letters
+          and/or numbers
       models:
         decidim/anonymous_codes/token_resource:
           invalid_questionnaire: The attached answer belongs to a different questionnaire.
