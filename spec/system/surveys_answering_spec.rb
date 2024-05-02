@@ -8,7 +8,7 @@ describe "Surveys Component Settings", type: :system do
   let(:user) { create :user, :confirmed, organization: organization }
   let(:another_user) { create :user, :confirmed, organization: organization }
   let(:group) { create :anonymous_codes_group, organization: organization, expires_at: expires, resource: resource, active: active }
-  let!(:token) { create :anonymous_codes_token, group: group }
+  let!(:token) { create :anonymous_codes_token, token: code, group: group }
   let!(:another_token) { create :anonymous_codes_token }
   let(:active) { true }
   let(:expires) { nil }
@@ -16,7 +16,7 @@ describe "Surveys Component Settings", type: :system do
   let(:questionnaire) { create(:questionnaire) }
   let!(:question) { create(:questionnaire_question, body: { en: "What's the meaning of life?" }, mandatory: true, question_type: :short_answer, questionnaire: questionnaire) }
   let(:resource) { survey }
-  let(:code) { token.token }
+  let(:code) { "SOMECODE" }
   let(:settings) do
     {
       allow_answers: true,
@@ -57,6 +57,12 @@ describe "Surveys Component Settings", type: :system do
   end
 
   shared_examples "form requires codes" do
+    it "code is case insensitve" do
+      fill_in :token, with: code.downcase
+      click_button("Continue")
+      expect(page).to have_content(question.body["en"])
+    end
+
     it "sends the code and the form" do
       fill_in :token, with: code
       click_button("Continue")
