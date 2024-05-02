@@ -15,29 +15,27 @@ module Decidim
         end
 
         def new
-          # todo
           enforce_permission_to :create, :anonymous_code_token
 
-          # @form = form(TokensForm).instance
+          @form = form(TokensForm).instance
         end
 
         def create
-          # todo
           enforce_permission_to :create, :anonymous_code_token
 
-          # @form = form(TokensForm).from_params(params)
+          @form = form(TokensForm).from_params(params)
 
-          # CreateTokens.call(@form, code_group) do
-          #   on(:ok) do
-          #     flash[:notice] = I18n.t("codes.create.success", scope: "decidim.anonymous_codes.admin")
-          #     redirect_to code_group_codes_path
-          #   end
+          CreateTokens.call(@form, code_group) do
+            on(:ok) do
+              flash[:notice] = I18n.t("codes.create.success", scope: "decidim.anonymous_codes.admin")
+              redirect_to code_group_codes_path
+            end
 
-          #   on(:invalid) do
-          #     flash.now[:alert] = I18n.t("codes.create.invalid", scope: "decidim.anonymous_codes.admin")
-          #     render action: "new"
-          #   end
-          # end
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("codes.create.invalid", scope: "decidim.anonymous_codes.admin")
+              render action: "new"
+            end
+          end
         end
 
         def bulk

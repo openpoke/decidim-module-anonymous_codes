@@ -79,6 +79,7 @@ en:
             used: Used?
           new:
             button_create_tokens: create
+            title: Create manual token for "%{group}"
         export:
           tokens_pdf:
             expires: Expires? %{expires}

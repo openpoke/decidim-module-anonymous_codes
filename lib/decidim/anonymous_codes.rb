@@ -21,6 +21,10 @@ module Decidim
       ENV.fetch("ANONYMOUS_CODES_EXPORT_FORMATS", "CSV JSON Excel AnonymousTokensPdf").split
     end
 
+    config_accessor :manual_token_regexp do
+      ENV.fetch("ANONYMOUS_CODES_MANUAL_TOKEN_REGEX", '\A[A-Z0-9]*\z')
+    end
+
     def self.token_generator(length = nil)
       length ||= AnonymousCodes.default_token_length
       case AnonymousCodes.token_style

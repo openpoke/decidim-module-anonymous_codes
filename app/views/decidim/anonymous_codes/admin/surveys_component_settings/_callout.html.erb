@@ -5,7 +5,7 @@
     <ul>
       <% groups.each do |group| %>
         <li>
-          <%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id) %>
+          <%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id), target: "_blank" %>
           <%= content_tag "small", t(".inactive"), class: "help-text" unless group.active? %>
         </li>
       <% end %>

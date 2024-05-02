@@ -100,10 +100,8 @@ module Decidim
             end
             Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
               component = survey.component
-              {
-                title: "#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
-                survey_id: survey.id
-              }
+              ["#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
+               survey.id]
             end
           end
         end
