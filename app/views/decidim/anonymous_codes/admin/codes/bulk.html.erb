@@ -1,4 +1,4 @@
-<%= decidim_form_for(@form, url: code_group_codes_path, html: { class: "form new_code_group_code" }) do |f| %>
+<%= decidim_form_for(@form, url: create_bulk_code_group_codes_path, html: { class: "form bulk_code_group_code" }) do |f| %>
   <%= render partial: "bulk_form", object: f, locals: { title: t(".title", group: translated_attribute(code_group.title)) } %>
 
   <div class="button--double form-general-submit">

@@ -106,12 +106,12 @@ module Decidim
               }
             end
           end
+        end
 
-          def edit_resource_path(resource)
-            return unless resource
+        def edit_resource_path(resource)
+          return unless resource
 
-            Decidim::EngineRouter.admin_proxy(resource.component.participatory_space).edit_component_path(resource.component.id)
-          end
+          Decidim::EngineRouter.admin_proxy(resource.component.participatory_space).edit_component_path(resource.component.id)
         end
       end
     end

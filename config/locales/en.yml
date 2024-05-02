@@ -78,6 +78,7 @@ en:
             usage_count: Num. of uses
             used: Used?
           new:
+            button_create_tokens: create
         export:
           tokens_pdf:
             expires: Expires? %{expires}

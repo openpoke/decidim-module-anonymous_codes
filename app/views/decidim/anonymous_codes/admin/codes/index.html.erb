@@ -12,7 +12,7 @@
         </div>
 
         <% if allowed_to?(:create, :anonymous_code_token) %>
-          <a class="button tiny button--title new-access" href="<%= bulk_code_group_code_path(code_group) %>"><%= t("codes.index.bulk_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
+          <a class="button tiny button--title new-access" href="<%= bulk_code_group_codes_path(code_group) %>"><%= t("codes.index.bulk_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
 
           <a class="button tiny button--title new-access" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
         <% end %>
