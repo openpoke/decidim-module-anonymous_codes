@@ -25,7 +25,7 @@ module Decidim
 
           @form = form(TokensForm).from_params(params)
 
-          CreateTokens.call(@form, code_group) do
+          CreateToken.call(@form, code_group) do
             on(:ok) do
               flash[:notice] = I18n.t("codes.create.success", scope: "decidim.anonymous_codes.admin")
               redirect_to code_group_codes_path

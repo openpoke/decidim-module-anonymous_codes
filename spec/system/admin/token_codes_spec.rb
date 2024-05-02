@@ -31,7 +31,7 @@ describe "Token codes", type: :system do
     expect(page).to have_content("Used?")
     expect(page).to have_content("Num. of uses")
 
-    click_link "Generate new codes"
+    click_link "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 10
     perform_enqueued_jobs do
@@ -50,7 +50,7 @@ describe "Token codes", type: :system do
   end
 
   it "destroys an existing token code" do
-    click_link "Generate new codes"
+    click_link "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 5
 
@@ -71,7 +71,7 @@ describe "Token codes", type: :system do
   end
 
   it "allows sorting columns" do
-    click_link "Generate new codes"
+    click_link "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 15
 

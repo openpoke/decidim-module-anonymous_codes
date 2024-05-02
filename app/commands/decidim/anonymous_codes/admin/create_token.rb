@@ -3,7 +3,7 @@
 module Decidim
   module AnonymousCodes
     module Admin
-      class CreateTokens < Decidim::Command
+      class CreateToken < Decidim::Command
         def initialize(form, code_group)
           @form = form
           @code_group = code_group
@@ -12,21 +12,13 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          transaction do
-            create_code_group!
-          end
-
+          Token.create!(group: code_group, token: form.token)
           broadcast(:ok)
         end
 
         private
 
         attr_reader :form, :code_group
-
-        def create_code_group!
-          Token.create!(group: code_group,
-                        token: form.token)
-        end
       end
     end
   end

@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module AnonymousCodes
     module Admin
-      describe CreateTokens, type: :command do
+      describe CreateToken, type: :command do
         let(:form) { double("FormObject", invalid?: invalid, token: "1SFDRG5SA") }
         let(:code_group) { create(:anonymous_codes_group) }
         let(:command) { described_class.new(form, code_group) }

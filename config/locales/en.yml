@@ -65,8 +65,8 @@ en:
               seconds and refresh the page.
           destroy:
             success: Access code token successfully destroyed
-          form: 
-           code: Token
+          form:
+            code: Token
           index:
             available: Available?
             back: Back to groups
