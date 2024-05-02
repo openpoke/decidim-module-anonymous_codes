@@ -2,9 +2,6 @@
 en:
   activerecord:
     errors:
-      messages:
-        uppercase_only_letters_numbers: must be all uppercase and contain only letters
-          and/or numbers
       models:
         decidim/anonymous_codes/token_resource:
           invalid_questionnaire: The attached answer belongs to a different questionnaire.
@@ -128,3 +125,7 @@ en:
         usage_count: Num. of uses
         used: Used?
       used_code: The introduced code has already been used. Please try again.
+  errors:
+    messages:
+      uppercase_only_letters_numbers: must be all uppercase and contain only letters
+        and/or numbers
