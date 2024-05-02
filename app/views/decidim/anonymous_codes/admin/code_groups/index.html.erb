@@ -3,8 +3,6 @@
     <h2 class="card-title">
       <%= t("code_groups.index.title", scope: "decidim.anonymous_codes.admin") %>
       <% if allowed_to?(:create, :anonymous_code_group) %>
-        <a class="button tiny button--title new-access" href="<%= bulk_code_group_path %>"><%= t("code_groups.index.bulk_access_code_group_button", scope: "decidim.anonymous_codes.admin") %></a>
-
         <a class="button tiny button--title new-access" href="<%= new_code_group_path %>"><%= t("code_groups.index.new_access_code_group_button", scope: "decidim.anonymous_codes.admin") %></a>
       <% end %>
     </h2>
