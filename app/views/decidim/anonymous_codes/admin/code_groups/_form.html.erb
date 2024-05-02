@@ -15,5 +15,5 @@
 </div>
 
 <div class="row column">
-  <%= form.select :resource_id, surveys.map { |survey| [survey[:title], survey[:id]] }, include_blank: true, label: t(".resource") %>
+  <%= form.select :resource_id, options_for_select([["", ""]] + surveys.map { |survey| [survey[:title], survey[:id]] }), include_blank: false, label: t(".resource") %>
 </div>
