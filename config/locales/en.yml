@@ -54,14 +54,19 @@ en:
             invalid: There was a problem updating this access code group
             success: Access code group successfully updated
         codes:
+          bulk:
+            button_generate_tokens: Generate Tokens
+            title: Generate tokens for "%{group}"
+          bulk_form:
+            number_of_tokens_to_generate: Number of tokens to generate
           create:
             invalid: There was a problem generating the codes
             success: Codes are being generated in the background. Please wait a few
               seconds and refresh the page.
           destroy:
             success: Access code token successfully destroyed
-          form:
-            number_of_tokens_to_generate: Number of tokens to generate
+          form: 
+           code: Token code
           index:
             available: Available?
             back: Back to groups
@@ -73,8 +78,6 @@ en:
             usage_count: Num. of uses
             used: Used?
           new:
-            button_generate_tokens: Generate Tokens
-            title: Generate tokens for "%{group}"
         export:
           tokens_pdf:
             expires: Expires? %{expires}
