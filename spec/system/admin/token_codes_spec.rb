@@ -49,6 +49,18 @@ describe "Token codes", type: :system do
     end
   end
 
+  it "creates a token code manually" do
+    click_link "New token"
+    expect(page).to have_content("Token")
+    expect(page).to have_content("Create manual token")
+
+    fill_in "Token", with: "8AEJXSA83SH12"
+    click_on "create"
+
+    expect(page).to have_content("Token is being created successfully")
+    expect(page).to have_css("tr td:first-child", text: "8AEJXSA83SH12")
+  end
+
   it "destroys an existing token code" do
     click_link "Generate tokens in bulk"
 

@@ -57,12 +57,15 @@ en:
           bulk:
             button_generate_tokens: Generate Tokens
             title: Generate tokens for "%{group}"
-          bulk_form:
-            number_of_tokens_to_generate: Number of tokens to generate
-          create:
+          bulk_create:
             invalid: There was a problem generating the codes
             success: Codes are being generated in the background. Please wait a few
               seconds and refresh the page.
+          bulk_form:
+            number_of_tokens_to_generate: Number of tokens to generate
+          create:
+            invalid: There was a problem creating the token
+            success: Token is being created successfully
           destroy:
             success: Access code token successfully destroyed
           form:

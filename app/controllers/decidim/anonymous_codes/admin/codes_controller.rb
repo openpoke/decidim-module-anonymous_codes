@@ -51,12 +51,12 @@ module Decidim
 
           CreateBulkTokens.call(@form, code_group) do
             on(:ok) do
-              flash[:notice] = I18n.t("codes.create.success", scope: "decidim.anonymous_codes.admin")
+              flash[:notice] = I18n.t("codes.bulk_create.success", scope: "decidim.anonymous_codes.admin")
               redirect_to code_group_codes_path
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("codes.create.invalid", scope: "decidim.anonymous_codes.admin")
+              flash.now[:alert] = I18n.t("codes.bulk_create.invalid", scope: "decidim.anonymous_codes.admin")
               render action: "bulk"
             end
           end
