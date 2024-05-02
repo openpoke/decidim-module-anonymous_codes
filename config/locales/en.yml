@@ -66,7 +66,8 @@ en:
             available: Available?
             back: Back to groups
             back_to_codes: Back to codes
-            new_codes_button: Generate new codes
+            bulk_codes_button: Generate tokens in bulk
+            new_codes_button: New token
             title: Codes for group %{group}
             token: Token
             usage_count: Num. of uses

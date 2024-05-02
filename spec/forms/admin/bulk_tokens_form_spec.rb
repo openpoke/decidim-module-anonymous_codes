@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module AnonymousCodes
     module Admin
-      describe TokensForm, type: :form do
+      describe BulkTokensForm, type: :form do
         let(:form) { described_class.new }
 
         it "is valid with valid attributes" do

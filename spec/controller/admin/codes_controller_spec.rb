@@ -39,24 +39,26 @@ module Decidim
           end
         end
 
-        describe "GET #new" do
+        # TODO: Get #new & #create
+
+        describe "GET #bulk" do
           it "enforces permission to create anonymous code tokens" do
             expect(controller).to receive(:enforce_permission_to).with(:create, :anonymous_code_token)
-            get :new, params: { code_group_id: code_group.id }
+            get :bulk, params: { code_group_id: code_group.id }
           end
 
-          it "assigns a new instance of TokensForm to @form" do
-            get :new, params: { code_group_id: code_group.id }
-            expect(assigns(:form)).to be_an_instance_of(TokensForm)
+          it "assigns a bulk instance of BulkTokensForm to @form" do
+            get :bulk, params: { code_group_id: code_group.id }
+            expect(assigns(:form)).to be_an_instance_of(BulkTokensForm)
           end
 
-          it "renders the new template" do
-            get :new, params: { code_group_id: code_group.id }
-            expect(response).to render_template(:new)
+          it "renders the bulk template" do
+            get :bulk, params: { code_group_id: code_group.id }
+            expect(response).to render_template(:bulk)
           end
         end
 
-        describe "POST #create" do
+        describe "POST #create_bulk" do
           context "with valid parameters" do
             let(:valid_params) do
               {
@@ -66,9 +68,9 @@ module Decidim
             end
 
             it "enqueues a job to create tokens and redirects to code group codes path" do
-              expect(CreateTokensJob).to receive(:perform_later).with(code_group, valid_params[:num_tokens])
+              expect(CreateBulkTokensJob).to receive(:perform_later).with(code_group, valid_params[:num_tokens])
 
-              post :create, params: valid_params
+              post :create_bulk, params: valid_params
 
               expect(response).to redirect_to(code_group_codes_path(code_group))
               expect(flash[:notice]).to be_present
@@ -84,11 +86,11 @@ module Decidim
             end
 
             it "does not enqueue a job and renders the new template with an alert message" do
-              expect(CreateTokensJob).not_to receive(:perform_later)
+              expect(CreateBulkTokensJob).not_to receive(:perform_later)
 
-              post :create, params: invalid_params
+              post :create_bulk, params: invalid_params
 
-              expect(response).to render_template("new")
+              expect(response).to render_template("bulk")
               expect(flash[:alert]).to be_present
             end
           end

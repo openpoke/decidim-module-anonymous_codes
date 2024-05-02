@@ -1,5 +1,5 @@
 <%= decidim_form_for(@form, url: code_group_codes_path, html: { class: "form new_code_group_code" }) do |f| %>
-  <%= render partial: "form", object: f, locals: { title: t(".title", group: translated_attribute(code_group.title)) } %>
+  <%= render partial: "bulk_form", object: f, locals: { title: t(".title", group: translated_attribute(code_group.title)) } %>
 
   <div class="button--double form-general-submit">
     <%= f.submit t(".button_generate_tokens") %>

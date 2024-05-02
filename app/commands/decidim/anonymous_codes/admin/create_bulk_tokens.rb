@@ -3,7 +3,7 @@
 module Decidim
   module AnonymousCodes
     module Admin
-      class CreateTokens < Decidim::Command
+      class CreateBulkTokens < Decidim::Command
         def initialize(form, code_group)
           @form = form
           @code_group = code_group
@@ -12,7 +12,7 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          CreateTokensJob.perform_later(code_group, form.num_tokens)
+          CreateBulkTokensJob.perform_later(code_group, form.num_tokens)
 
           broadcast(:ok)
         end

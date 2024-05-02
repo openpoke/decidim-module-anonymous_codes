@@ -5,20 +5,20 @@ require "spec_helper"
 module Decidim
   module AnonymousCodes
     module Admin
-      describe CreateTokens, type: :command do
+      describe CreateBulkTokens, type: :command do
         let(:form) { double("FormObject", invalid?: false, num_tokens: 10) }
         let(:code_group) { double("CodeGroup") }
         let(:command) { described_class.new(form, code_group) }
 
         describe "#call" do
           before do
-            allow(CreateTokensJob).to receive(:perform_later)
+            allow(CreateBulkTokensJob).to receive(:perform_later)
             command.call
           end
 
           context "when the form is valid" do
             it "queues a background job to create tokens" do
-              expect(CreateTokensJob).to have_received(:perform_later).with(code_group, 10)
+              expect(CreateBulkTokensJob).to have_received(:perform_later).with(code_group, 10)
             end
 
             it "broadcasts :ok" do
@@ -34,8 +34,8 @@ module Decidim
             end
 
             it "does not queue a background job" do
-              expect(CreateTokensJob).not_to have_received(:perform_later)
-              expect(CreateTokensJob).not_to have_received(:perform_later).with(code_group, 10)
+              expect(CreateBulkTokensJob).not_to have_received(:perform_later)
+              expect(CreateBulkTokensJob).not_to have_received(:perform_later).with(code_group, 10)
             end
           end
         end

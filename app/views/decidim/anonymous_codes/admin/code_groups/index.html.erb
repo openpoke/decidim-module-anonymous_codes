@@ -3,6 +3,8 @@
     <h2 class="card-title">
       <%= t("code_groups.index.title", scope: "decidim.anonymous_codes.admin") %>
       <% if allowed_to?(:create, :anonymous_code_group) %>
+        <a class="button tiny button--title new-access" href="<%= bulk_code_group_path %>"><%= t("code_groups.index.bulk_access_code_group_button", scope: "decidim.anonymous_codes.admin") %></a>
+
         <a class="button tiny button--title new-access" href="<%= new_code_group_path %>"><%= t("code_groups.index.new_access_code_group_button", scope: "decidim.anonymous_codes.admin") %></a>
       <% end %>
     </h2>
@@ -34,7 +36,7 @@
                   <%= icon_link_to "list", code_group_codes_path(group), t("actions.list_tokens", scope: "decidim.anonymous_codes.admin"), class: "action-icon--preview#{allowed_to?(:view, :anonymous_code_token) ? '':' invisible'}" %>
                   <%= icon_link_to "pencil", edit_code_group_path(group), t("actions.edit", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit#{allowed_to?(:update, :anonymous_code_group, code_group: group) ? '' : ' invisible'}" %>
                   <%= icon_link_to "circle-x", code_group_path(group), t("actions.destroy", scope: "decidim.anonymous_codes.admin"), method: :delete, class: "action-icon--remove#{allowed_to?(:destroy, :anonymous_code_group, code_group: group) ? '' : ' invisible'}", data: { confirm: t("actions.confirm_destroy", scope: "decidim.anonymous_codes.admin") } %>
-                  <%= icon_link_to "cog", surveys.first[:edit_path], t("actions.survey", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit#{group.tokens_count > 0 ? '' : ' invisible'}", target: "_blank" %>
+                  <%= icon_link_to "cog", edit_resource_path(group.resource), t("actions.survey", scope: "decidim.anonymous_codes.admin"), class: "action-icon--edit#{group.resource.present? ? '' : ' invisible'}", target: "_blank" %>
                 </td>
               </tr>
             <% end %>
