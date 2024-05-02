@@ -39,7 +39,22 @@ module Decidim
           end
         end
 
-        # TODO: Get #new & #create
+        describe "GET #new" do
+          it "enforces permission to create anonymous code tokens" do
+            expect(controller).to receive(:enforce_permission_to).with(:create, :anonymous_code_token)
+            get :new, params: { code_group_id: code_group.id }
+          end
+
+          it "assigns a new instance of TokensForm to @form" do
+            get :new, params: { code_group_id: code_group.id }
+            expect(assigns(:form)).to be_an_instance_of(TokensForm)
+          end
+
+          it "renders the new template" do
+            get :new, params: { code_group_id: code_group.id }
+            expect(response).to render_template(:new)
+          end
+        end
 
         describe "GET #bulk" do
           it "enforces permission to create anonymous code tokens" do
@@ -91,6 +106,42 @@ module Decidim
               post :create_bulk, params: invalid_params
 
               expect(response).to render_template("bulk")
+              expect(flash[:alert]).to be_present
+            end
+          end
+        end
+
+        describe "POST #create" do
+          context "with valid parameters" do
+            let(:valid_params) do
+              {
+                code_group_id: code_group.id,
+                token: "5RGTBSSSSSGJ678"
+              }
+            end
+
+            it "creates a new token and redirects to code group codes path" do
+              expect do
+                post :create, params: valid_params
+              end.to change(Token, :count).by(1)
+
+              expect(response).to redirect_to(code_group_codes_path(code_group))
+              expect(flash[:notice]).to be_present
+            end
+          end
+
+          context "with invalid parameters" do
+            let(:invalid_params) do
+              {
+                code_group_id: code_group.id,
+                token: "5RGT@+*asfhveiw6"
+              }
+            end
+
+            it "renders the new template with an alert message" do
+              post :create, params: invalid_params
+
+              expect(response).to render_template("new")
               expect(flash[:alert]).to be_present
             end
           end

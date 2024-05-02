@@ -66,7 +66,7 @@ en:
           destroy:
             success: Access code token successfully destroyed
           form: 
-           code: Token code
+           code: Token
           index:
             available: Available?
             back: Back to groups
