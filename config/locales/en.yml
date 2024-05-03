@@ -21,6 +21,7 @@ en:
           edit: Edit
           list_tokens: List tokens
           preview: Preview
+          survey: Survey
         code_groups:
           create:
             invalid: There was a problem creating this access code group
@@ -53,26 +54,35 @@ en:
             invalid: There was a problem updating this access code group
             success: Access code group successfully updated
         codes:
-          create:
+          bulk:
+            button_generate_tokens: Generate Tokens
+            title: Generate tokens for "%{group}"
+          bulk_create:
             invalid: There was a problem generating the codes
             success: Codes are being generated in the background. Please wait a few
               seconds and refresh the page.
+          bulk_form:
+            number_of_tokens_to_generate: Number of tokens to generate
+          create:
+            invalid: There was a problem creating the token
+            success: Token is being created successfully
           destroy:
             success: Access code token successfully destroyed
           form:
-            number_of_tokens_to_generate: Number of tokens to generate
+            code: Token
           index:
             available: Available?
             back: Back to groups
             back_to_codes: Back to codes
-            new_codes_button: Generate new codes
+            bulk_codes_button: Generate tokens in bulk
+            new_codes_button: New token
             title: Codes for group %{group}
             token: Token
             usage_count: Num. of uses
             used: Used?
           new:
-            button_generate_tokens: Generate Tokens
-            title: Generate tokens for "%{group}"
+            button_create_tokens: create
+            title: Create manual token for "%{group}"
         export:
           tokens_pdf:
             expires: Expires? %{expires}
@@ -115,3 +125,7 @@ en:
         usage_count: Num. of uses
         used: Used?
       used_code: The introduced code has already been used. Please try again.
+  errors:
+    messages:
+      uppercase_only_letters_numbers: must be all uppercase and contain only letters
+        and/or numbers

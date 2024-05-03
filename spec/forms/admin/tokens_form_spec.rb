@@ -9,26 +9,26 @@ module Decidim
         let(:form) { described_class.new }
 
         it "is valid with valid attributes" do
-          form.num_tokens = 5
+          form.token = "5ACVBHRTY8WETRD5"
           expect(form).to be_valid
         end
 
         it "is invalid without num_tokens" do
-          form.num_tokens = nil
+          form.token = nil
           expect(form).to be_invalid
-          expect(form.errors[:num_tokens]).to include("can't be blank")
+          expect(form.errors[:token]).to include("can't be blank")
         end
 
-        it "is invalid with num_tokens not being an integer" do
-          form.num_tokens = "abc"
-          expect(form).to be_invalid
-          expect(form.errors[:num_tokens]).to include("must be greater than 0")
+        it "is invalid with token not being upercase" do
+          form.token = "abc"
+          expect(form).to be_valid
+          expect(form.token).to eq("ABC")
         end
 
-        it "is invalid with num_tokens less than or equal to 0" do
-          form.num_tokens = 0
+        it "is invalid with token with special characters" do
+          form.token = "#@"
           expect(form).to be_invalid
-          expect(form.errors[:num_tokens]).to include("must be greater than 0")
+          expect(form.errors[:token]).to include("must be all uppercase and contain only letters and/or numbers")
         end
       end
     end

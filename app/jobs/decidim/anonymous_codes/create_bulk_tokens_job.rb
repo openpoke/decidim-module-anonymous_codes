@@ -2,7 +2,7 @@
 
 module Decidim
   module AnonymousCodes
-    class CreateTokensJob < ApplicationJob
+    class CreateBulkTokensJob < ApplicationJob
       def perform(code_group, num_tokens)
         @code_group = code_group
         num_tokens.times do
