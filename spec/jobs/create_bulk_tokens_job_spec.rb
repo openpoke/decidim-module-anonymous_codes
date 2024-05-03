@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module AnonymousCodes
-    describe CreateTokensJob do
+    describe CreateBulkTokensJob do
       subject { described_class.perform_now(code_group, num_tokens) }
 
       let(:organization) { create(:organization) }

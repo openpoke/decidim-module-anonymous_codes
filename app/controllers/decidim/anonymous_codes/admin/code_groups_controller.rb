@@ -6,7 +6,7 @@ module Decidim
       class CodeGroupsController < ApplicationController
         include Decidim::Admin::Paginable
         include TranslatableAttributes
-        helper_method :groups, :resource_path, :surveys
+        helper_method :groups, :resource_path, :surveys, :edit_resource_path
 
         def index
           @groups = paginate(groups.order(created_at: :desc))
@@ -100,12 +100,16 @@ module Decidim
             end
             Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
               component = survey.component
-              [
-                "#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
-                survey.id
-              ]
+              ["#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
+               survey.id]
             end
           end
+        end
+
+        def edit_resource_path(resource)
+          return unless resource
+
+          Decidim::EngineRouter.admin_proxy(resource.component.participatory_space).edit_component_path(resource.component.id)
         end
       end
     end

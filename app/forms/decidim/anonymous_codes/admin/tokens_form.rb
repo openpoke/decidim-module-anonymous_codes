@@ -4,9 +4,21 @@ module Decidim
   module AnonymousCodes
     module Admin
       class TokensForm < Decidim::Form
-        attribute :num_tokens, Integer, default: 1
+        attribute :token, String
 
-        validates :num_tokens, presence: true, numericality: { only_integer: true, greater_than: 0 }
+        validates :token, presence: true
+
+        validate :token_matches_regexp
+
+        def token
+          attributes[:token].to_s.upcase
+        end
+
+        private
+
+        def token_matches_regexp
+          errors.add(:token, I18n.t("errors.messages.uppercase_only_letters_numbers")) unless token.match(/#{AnonymousCodes.manual_token_regexp}/)
+        end
       end
     end
   end

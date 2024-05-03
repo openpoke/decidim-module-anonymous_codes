@@ -13,6 +13,8 @@ module Decidim
       routes do
         resources :code_groups do
           resources :codes, only: [:index, :new, :create, :destroy] do
+            get :bulk, on: :collection
+            post :create_bulk, on: :collection
             post :export, on: :collection
           end
         end
