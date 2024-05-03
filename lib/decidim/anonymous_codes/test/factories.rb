@@ -19,6 +19,9 @@ FactoryBot.define do
 
     trait :with_used_tokens do
       after(:create) do |group|
+        process = create(:participatory_process, organization: group.organization)
+        component = create(:surveys_component, participatory_space: process)
+        group.update(resource: create(:survey, component: component))
         create(:anonymous_codes_token, :used, group: group)
       end
     end
@@ -29,8 +32,8 @@ FactoryBot.define do
     group { create(:anonymous_codes_group, :with_resource) }
 
     trait :used do
-      after(:create) do |object|
-        object.token_resources << create(:anonymous_codes_token_resource, token: object)
+      after(:create) do |token|
+        token.token_resources << create(:anonymous_codes_token_resource, token: token)
       end
     end
   end
