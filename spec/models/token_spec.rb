@@ -168,10 +168,22 @@ module Decidim
           end
 
           context "and a different group" do
-            let(:another_token) { build(:anonymous_codes_token, token: token.token) }
+            let(:another_group) { create(:anonymous_codes_group, organization: token.group.organization) }
+            let(:another_token) { build(:anonymous_codes_token, token: token.token, group: another_group) }
 
             it "can be created" do
               expect { another_token.save! }.to change(Token, :count).by(1)
+            end
+
+            context "when the group has the same resource linked" do
+              let!(:group) { create(:anonymous_codes_group, :with_resource) }
+              let!(:token) { create(:anonymous_codes_token, group: group) }
+              let!(:another_group) { create(:anonymous_codes_group, organization: token.group.organization, resource: group.resource) }
+              let(:another_token) { build(:anonymous_codes_token, token: token.token, group: another_group) }
+
+              it "cannot be created" do
+                expect { another_token.save! }.to raise_error(ActiveRecord::RecordInvalid)
+              end
             end
           end
         end

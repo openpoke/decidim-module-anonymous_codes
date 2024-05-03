@@ -43,7 +43,7 @@ module Decidim
         end
 
         def current_token
-          @current_token ||= Decidim::AnonymousCodes::Token.where(group: token_groups.active).find_by(token: token_param)
+          @current_token ||= Decidim::AnonymousCodes::Token.where(group: token_groups.active).find_by("UPPER(token) = ?", token_param.to_s.upcase)
         end
 
         def token_param
