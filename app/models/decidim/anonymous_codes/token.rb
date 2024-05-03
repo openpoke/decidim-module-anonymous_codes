@@ -17,6 +17,7 @@ module Decidim
       delegate :active?, :expired?, to: :group
       validates :token, presence: true
       validates :token, uniqueness: { scope: [:group] }
+      validate :token_uniq_per_resource
 
       scope :used, -> { where("usage_count > 0") }
 
@@ -46,6 +47,14 @@ module Decidim
 
       def destroyable?
         !usage_count.positive?
+      end
+
+      private
+
+      def token_uniq_per_resource
+        return unless group.resource
+
+        errors.add(:token, :taken) if Token.where(group: Group.where(resource: group.resource).where.not(id: group)).exists?(token: token)
       end
     end
   end

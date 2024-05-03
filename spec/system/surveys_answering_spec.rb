@@ -60,6 +60,7 @@ describe "Surveys Component Settings", type: :system do
     it "code is case insensitve" do
       fill_in :token, with: code.downcase
       click_button("Continue")
+      expect(page).not_to have_content("The introduced code is invalid.")
       expect(page).to have_content(question.body["en"])
     end
 
@@ -121,7 +122,7 @@ describe "Surveys Component Settings", type: :system do
     end
 
     context "and code re-uses have exceeded" do
-      let!(:token) { create :anonymous_codes_token, group: group, answers: [create(:answer, questionnaire: questionnaire, user: another_user)] }
+      let!(:token) { create :anonymous_codes_token, token: code, group: group, answers: [create(:answer, questionnaire: questionnaire, user: another_user)] }
 
       it "sends the code and fails" do
         fill_in :token, with: code

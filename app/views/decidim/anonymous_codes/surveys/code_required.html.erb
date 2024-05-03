@@ -35,7 +35,7 @@
             <label class="field__label" for="code"><%= t(".label") %></label>
             <div class="field__input">
               <form method="get">
-                <%= text_field_tag :token, nil, class: "input", required: true %>
+                <%= text_field_tag :token, nil, class: "input", required: true, style: "text-transform: uppercase" %>
                 <button type="submit" class="button"><%= t(".submit") %></button>
               </form>
             </div>
