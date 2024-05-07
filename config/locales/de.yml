@@ -20,7 +20,7 @@ de:
           edit: Bearbeiten
           list_tokens: Tokens auflisten
           preview: Vorschau
-          survey: Survey
+          survey: Umfrage
         code_groups:
           create:
             invalid: Beim Erstellen dieser Zugangscode-Gruppe ist ein Problem aufgetreten
@@ -54,16 +54,16 @@ de:
             success: Zugangscode-Gruppe erfolgreich aktualisiert
         codes:
           bulk:
-            button_generate_tokens: Generate Tokens
-            title: Generate tokens for "%{group}"
+            button_generate_tokens: Tokens generieren
+            title: Tokens für "%{group}" generieren
           bulk_create:
-            invalid: There was a problem generating the codes
-            success: Codes are being generated in the background. Please wait a few seconds and refresh the page.
+            invalid: Beim Generieren der Codes ist ein Problem aufgetreten
+            success: Codes werden im Hintergrund generiert. Bitte warten Sie ein paar Sekunden und aktualisieren Sie die Seite.
           bulk_form:
-            number_of_tokens_to_generate: Number of tokens to generate
+            number_of_tokens_to_generate: Anzahl der zu generierenden Tokens
           create:
-            invalid: There was a problem creating the token
-            success: Token is being created successfully
+            invalid: Beim Erstellen des Tokens ist ein Problem aufgetreten
+            success: Token wurde erfolgreich erstellt
           destroy:
             success: Zugangscode-Token erfolgreich gelöscht
           form:
@@ -72,15 +72,15 @@ de:
             available: Verfügbar?
             back: Zurück zu den Gruppen
             back_to_codes: Zurück zu den Codes
-            bulk_codes_button: Generate tokens in bulk
-            new_codes_button: New token
+            bulk_codes_button: Mehrere Tokens erzeugen
+            new_codes_button: Neuer Token
             title: Codes für Gruppe %{group}
             token: Token
             usage_count: Anzahl der Verwendungen
             used: Verwendet?
           new:
-            button_create_tokens: create
-            title: Create manual token for "%{group}"
+            button_create_tokens: erzeugen
+            title: Manueller Token für "%{group} " erstellen
         export:
           tokens_pdf:
             expires: Läuft ab? %{expires}
@@ -117,4 +117,4 @@ de:
       used_code: Der eingeführte Code wurde bereits verwendet. Bitte versuchen Sie es erneut.
   errors:
     messages:
-      uppercase_only_letters_numbers: must be all uppercase and contain only letters and/or numbers
+      uppercase_only_letters_numbers: darf nur Großbuchstaben und/oder Zahlen enthalten
