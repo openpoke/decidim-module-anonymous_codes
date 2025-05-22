@@ -49,6 +49,7 @@ ca:
           new:
             num_tokens: Num. of tokens to generate (you can do it later too)
             title: New access code group
+            create: Create
           update:
             invalid: There was a problem updating this access code group
             success: Access code group successfully updated
@@ -79,7 +80,7 @@ ca:
             usage_count: Num. of uses
             used: Used?
           new:
-            button_create_tokens: create
+            button_create_tokens: Create
             title: Create manual token for "%{group}"
         export:
           tokens_pdf:
