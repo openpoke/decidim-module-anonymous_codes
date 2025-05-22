@@ -20,7 +20,7 @@ module Decidim
 
       it "generates 2 tokens" do
         expect { subject }.to change(Token, :count).by(2)
-        expect(Token.all.pluck(:token)).to match_array([token1, token2])
+        expect(Token.pluck(:token)).to contain_exactly(token1, token2)
       end
 
       context "when token is repeated" do
@@ -28,7 +28,7 @@ module Decidim
 
         it "skips the repeated" do
           expect { subject }.to change(Token, :count).by(2)
-          expect(Token.all.pluck(:token)).to match_array([token1, token2, token3])
+          expect(Token.pluck(:token)).to contain_exactly(token1, token2, token3)
         end
       end
     end

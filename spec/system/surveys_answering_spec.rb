@@ -2,25 +2,25 @@
 
 require "spec_helper"
 
-describe "Surveys Component Settings", type: :system do
+describe "Surveys Component Settings" do
   let(:organization) { component.organization }
   let(:component) { survey.component }
-  let(:user) { create :user, :confirmed, organization: organization }
-  let(:another_user) { create :user, :confirmed, organization: organization }
-  let(:group) { create :anonymous_codes_group, organization: organization, expires_at: expires, resource: resource, active: active }
-  let!(:token) { create :anonymous_codes_token, token: code, group: group }
+  let(:user) { create :user, :confirmed, organization: }
+  let(:another_user) { create :user, :confirmed, organization: }
+  let(:group) { create :anonymous_codes_group, organization:, expires_at: expires, resource:, active: }
+  let!(:token) { create :anonymous_codes_token, token: code, group: }
   let!(:another_token) { create :anonymous_codes_token }
   let(:active) { true }
   let(:expires) { nil }
-  let(:survey) { create(:survey, questionnaire: questionnaire) }
+  let(:survey) { create(:survey, questionnaire:) }
   let(:questionnaire) { create(:questionnaire) }
-  let!(:question) { create(:questionnaire_question, body: { en: "What's the meaning of life?" }, mandatory: true, question_type: :short_answer, questionnaire: questionnaire) }
+  let!(:question) { create(:questionnaire_question, body: { en: "What's the meaning of life?" }, mandatory: true, question_type: :short_answer, questionnaire:) }
   let(:resource) { survey }
   let(:code) { "SOMECODE" }
   let(:settings) do
     {
       allow_answers: true,
-      allow_unregistered: allow_unregistered
+      allow_unregistered:
     }
   end
   let(:allow_unregistered) { false }
@@ -52,7 +52,7 @@ describe "Surveys Component Settings", type: :system do
       click_button("Continue")
       expect(page).to have_content(question.body["en"])
       expect(page).to have_link("Sign in with your account")
-      expect(page).not_to have_button("Submit")
+      expect(page).to have_no_button("Submit")
     end
   end
 
@@ -60,7 +60,7 @@ describe "Surveys Component Settings", type: :system do
     it "code is case insensitve" do
       fill_in :token, with: code.downcase
       click_button("Continue")
-      expect(page).not_to have_content("The introduced code is invalid.")
+      expect(page).to have_no_content("The introduced code is invalid.")
       expect(page).to have_content(question.body["en"])
     end
 
@@ -106,11 +106,11 @@ describe "Surveys Component Settings", type: :system do
       let(:active) { false }
 
       it "has no alert callout" do
-        expect(page).not_to have_css(".callout.alert")
+        expect(page).to have_no_css(".callout.alert")
       end
 
       context "when user is an admin" do
-        let(:user) { create :user, :confirmed, :admin, organization: organization }
+        let(:user) { create :user, :confirmed, :admin, organization: }
 
         it "has a alert callout" do
           expect(page).to have_css(".callout.alert")
@@ -122,7 +122,7 @@ describe "Surveys Component Settings", type: :system do
     end
 
     context "and code re-uses have exceeded" do
-      let!(:token) { create :anonymous_codes_token, token: code, group: group, answers: [create(:answer, questionnaire: questionnaire, user: another_user)] }
+      let!(:token) { create :anonymous_codes_token, token: code, group:, answers: [create(:answer, questionnaire:, user: another_user)] }
 
       it "sends the code and fails" do
         fill_in :token, with: code
@@ -131,7 +131,7 @@ describe "Surveys Component Settings", type: :system do
         expect(page).to have_content("The introduced code has already been used.")
         expect(page).to have_content("Form restricted")
         expect(page).to have_field("token")
-        expect(page).not_to have_content(question.body["en"])
+        expect(page).to have_no_content(question.body["en"])
       end
     end
 
@@ -151,7 +151,7 @@ describe "Surveys Component Settings", type: :system do
         expect(page).to have_content("The introduced code has expired.")
         expect(page).to have_content("Form restricted")
         expect(page).to have_field("token")
-        expect(page).not_to have_content(question.body["en"])
+        expect(page).to have_no_content(question.body["en"])
       end
     end
   end
@@ -164,7 +164,7 @@ describe "Surveys Component Settings", type: :system do
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")
       expect(page).to have_field("token")
-      expect(page).not_to have_content(question.body["en"])
+      expect(page).to have_no_content(question.body["en"])
     end
 
     it "sends another code and fails" do
@@ -174,7 +174,7 @@ describe "Surveys Component Settings", type: :system do
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")
       expect(page).to have_field("token")
-      expect(page).not_to have_content(question.body["en"])
+      expect(page).to have_no_content(question.body["en"])
     end
   end
 

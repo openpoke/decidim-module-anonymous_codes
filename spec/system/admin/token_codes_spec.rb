@@ -2,13 +2,13 @@
 
 require "spec_helper"
 
-describe "Token codes", type: :system do
+describe "Token codes" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
+  let(:user) { create :user, :admin, :confirmed, organization: }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
-  let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization: organization, resource: survey) }
-  let!(:existing_empty_group) { create(:anonymous_codes_group, title: { en: "Existing empty group" }, organization: organization, resource: survey) }
+  let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization:, resource: survey) }
+  let!(:existing_empty_group) { create(:anonymous_codes_group, title: { en: "Existing empty group" }, organization:, resource: survey) }
   let!(:anonymous_codes_token1) { create(:anonymous_codes_token, group: existing_group) }
   let!(:anonymous_codes_token2) { create(:anonymous_codes_token, :used, group: existing_group) }
   let(:last_token) { Decidim::AnonymousCodes::Token.last }
@@ -18,7 +18,7 @@ describe "Token codes", type: :system do
     login_as user, scope: :user
     visit decidim_admin_anonymous_codes.code_groups_path
 
-    within find("tr", text: existing_empty_group.title["en"]) do
+    within "tr", text: existing_empty_group.title["en"] do
       expect(page).to have_link("List")
       click_link "List"
     end
@@ -41,10 +41,10 @@ describe "Token codes", type: :system do
     expect(page).to have_content("Codes are being generated in the background. Please wait a few seconds and refresh the page.")
 
     click_link "Back to groups"
-    within find("tr", text: "Existing empty group") do
+    within "tr", text: "Existing empty group" do
       expect(page).to have_content("0 / 10")
     end
-    within find("tr", text: "Existing group") do
+    within "tr", text: "Existing group" do
       expect(page).to have_content("1 / 2")
     end
   end
@@ -72,7 +72,7 @@ describe "Token codes", type: :system do
 
     expect(page).to have_content(last_token.reload.token)
 
-    within find("tr", text: last_token.reload.token) do
+    within "tr", text: last_token.reload.token do
       expect(page).to have_link("Delete")
       accept_confirm do
         click_link "Delete", match: :first
@@ -111,7 +111,7 @@ describe "Token codes", type: :system do
     it "sorts tokens based on availability and usage" do
       visit decidim_admin_anonymous_codes.code_groups_path
 
-      within find("tr", text: existing_group.title["en"]) do
+      within "tr", text: existing_group.title["en"] do
         expect(page).to have_link("List")
         click_link "List"
       end

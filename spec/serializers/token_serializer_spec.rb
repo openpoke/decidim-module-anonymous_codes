@@ -7,12 +7,12 @@ module Decidim::AnonymousCodes
     include Decidim::TranslationsHelper
 
     subject { described_class.new(token) }
-    let(:group) { create(:anonymous_codes_group, expires_at: expires_at, active: active, max_reuses: max_reuses, resource: resource) }
+    let(:group) { create(:anonymous_codes_group, expires_at:, active:, max_reuses:, resource:) }
     let(:resource) { create(:survey) }
     let(:active) { true }
     let(:expires_at) { nil }
     let(:max_reuses) { 1 }
-    let(:token) { create(:anonymous_codes_token, group: group) }
+    let(:token) { create(:anonymous_codes_token, group:) }
     let(:serialized) { subject.serialize }
     let(:resource_url) do
       "#{Decidim::ResourceLocatorPresenter.new(resource).url}?token=#{token.token}"
@@ -29,7 +29,7 @@ module Decidim::AnonymousCodes
       expect(serialized).to include(created_at: I18n.l(token.created_at, format: :decidim_short))
       expect(serialized).to include(resource_type: resource.class.name)
       expect(serialized).to include(resource_id: resource.id)
-      expect(serialized).to include(resource_url: resource_url)
+      expect(serialized).to include(resource_url:)
     end
 
     context "when the group has an expiration date" do
@@ -52,7 +52,7 @@ module Decidim::AnonymousCodes
     end
 
     context "when used" do
-      let(:token) { create(:anonymous_codes_token, :used, group: group) }
+      let(:token) { create(:anonymous_codes_token, :used, group:) }
 
       it "returns used as true" do
         expect(serialized).to include(available: false)

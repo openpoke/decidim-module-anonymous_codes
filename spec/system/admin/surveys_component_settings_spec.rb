@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-describe "Surveys Component Settings", type: :system do
+describe "Surveys Component Settings" do
   let(:organization) { component.organization }
   let(:component) { survey.component }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
-  let(:group) { create :anonymous_codes_group, organization: organization, resource: resource }
-  let!(:token) { create :anonymous_codes_token, group: group }
+  let(:user) { create :user, :admin, :confirmed, organization: }
+  let(:group) { create :anonymous_codes_group, organization:, resource: }
+  let!(:token) { create :anonymous_codes_token, group: }
   let!(:survey) { create(:survey) }
   let(:resource) { nil }
 
@@ -41,7 +41,7 @@ describe "Surveys Component Settings", type: :system do
     let(:component) { create :proposal_component }
 
     it "has no callout" do
-      expect(page).not_to have_css(".callout")
+      expect(page).to have_no_css(".callout")
     end
   end
 end

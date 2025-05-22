@@ -2,15 +2,15 @@
 
 require "spec_helper"
 
-describe "Export codes", type: :system do
+describe "Export codes" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
+  let(:user) { create :user, :admin, :confirmed, organization: }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
-  let!(:group) { create(:anonymous_codes_group, organization: organization, resource: survey) }
-  let!(:token1) { create(:anonymous_codes_token, group: group) }
-  let!(:token2) { create(:anonymous_codes_token, group: group) }
-  let!(:token3) { create(:anonymous_codes_token, :used, group: group) }
+  let!(:group) { create(:anonymous_codes_group, organization:, resource: survey) }
+  let!(:token1) { create(:anonymous_codes_token, group:) }
+  let!(:token2) { create(:anonymous_codes_token, group:) }
+  let!(:token3) { create(:anonymous_codes_token, :used, group:) }
 
   before do
     switch_to_host(organization.host)
