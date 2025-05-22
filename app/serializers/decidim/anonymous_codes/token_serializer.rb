@@ -15,7 +15,7 @@ module Decidim
       def serialize
         {
           token: token.token,
-          resource_url: resource_url,
+          resource_url:,
           resource_type: token.group.resource_type,
           resource_id: token.group.resource_id,
           group: translated_attribute(token.group.title),

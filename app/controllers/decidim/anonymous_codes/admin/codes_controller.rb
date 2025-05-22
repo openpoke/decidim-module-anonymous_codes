@@ -63,7 +63,7 @@ module Decidim
         end
 
         def destroy
-          enforce_permission_to :destroy, :anonymous_code_token, token: token
+          enforce_permission_to(:destroy, :anonymous_code_token, token:)
           token.destroy!
 
           flash[:notice] = I18n.t("codes.destroy.success", scope: "decidim.anonymous_codes.admin")

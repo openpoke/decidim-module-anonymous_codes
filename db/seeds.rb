@@ -2,7 +2,7 @@
 
 if !Rails.env.production? || ENV.fetch("SEED", nil)
   organization = Decidim::Organization.first
-  participatory_processes = Decidim::ParticipatoryProcess.where(organization: organization)
+  participatory_processes = Decidim::ParticipatoryProcess.where(organization:)
 
   unless participatory_processes.count.positive?
     puts "No participatory processes found. Skipping seeds for decidim_anonymous_codes..."
@@ -29,7 +29,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
       end
     end
 
-    survey = Decidim::Surveys::Survey.find_by(component: component)
+    survey = Decidim::Surveys::Survey.find_by(component:)
     next unless survey
 
     group = Decidim.traceability.create!(
@@ -37,7 +37,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
       admin,
       {
         title: { en: "Group for Survey #{survey.id}" },
-        organization: organization,
+        organization:,
         expires_at: 1.week.from_now,
         active: rand(2).zero?,
         max_reuses: rand(3),
@@ -47,7 +47,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
     )
     total = rand(1..25)
     total.times do
-      Decidim::AnonymousCodes::Token.create!(token: Decidim::AnonymousCodes.token_generator, group: group)
+      Decidim::AnonymousCodes::Token.create!(token: Decidim::AnonymousCodes.token_generator, group:)
     end
     puts "Created #{total} tokens for survey #{survey.id}"
   end
