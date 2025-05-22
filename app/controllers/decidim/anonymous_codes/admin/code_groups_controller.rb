@@ -4,7 +4,7 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CodeGroupsController < ApplicationController
-        include Decidim::Admin::Paginable
+        include Decidim::Paginable
         include TranslatableAttributes
         helper_method :groups, :resource_path, :surveys, :edit_resource_path
 
