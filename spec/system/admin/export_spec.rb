@@ -19,7 +19,7 @@ describe "Export codes" do
   end
 
   it "shows the export dropdown" do
-    within ".card-title" do
+    within ".item_show__header" do
       find("span", text: "Export all").click
 
       expect(page).to have_content("All tokens as CSV")
@@ -43,7 +43,7 @@ describe "Export codes" do
 
   context "when exporting" do
     before do
-      within ".card-title" do
+      within ".item_show__header" do
         find("span", text: "Export all").click
       end
     end

@@ -51,7 +51,7 @@ describe "Surveys Component Settings" do
       fill_in :token, with: code
       click_on("Continue")
       expect(page).to have_content(question.body["en"])
-      expect(page).to have_link("Sign in with your account")
+      expect(page).to have_content("Log in to take the survey")
       expect(page).to have_no_button("Submit")
     end
   end
@@ -72,8 +72,8 @@ describe "Surveys Component Settings" do
 
       fill_in question.body["en"], with: "42"
       check "questionnaire_tos_agreement"
-      accept_confirm { click_on "Submit" }
-      expect(page).to have_css(".callout.success")
+      accept_confirm { click_on("Submit") }
+      expect(page).to have_css(".flash")
       expect(page).to have_content("Already answered")
 
       expect(token.reload).to be_used
@@ -86,8 +86,8 @@ describe "Surveys Component Settings" do
 
       fill_in question.body["en"], with: "42"
       check "questionnaire_tos_agreement"
-      accept_confirm { click_on "Submit" }
-      expect(page).to have_css(".callout.success")
+      accept_confirm { click_on("Submit") }
+      expect(page).to have_css(".flash")
       expect(page).to have_content("Already answered")
 
       expect(token.reload).not_to be_used
@@ -106,14 +106,14 @@ describe "Surveys Component Settings" do
       let(:active) { false }
 
       it "has no alert callout" do
-        expect(page).to have_no_css(".callout.alert")
+        expect(page).to have_no_css(".flash")
       end
 
       context "when user is an admin" do
         let(:user) { create :user, :confirmed, :admin, organization: }
 
-        it "has a alert callout" do
-          expect(page).to have_css(".callout.alert")
+        it "has a callout" do
+          expect(page).to have_css(".flash")
           expect(page).to have_content("This survey is restricted with codes, but the group is inactive")
         end
       end
@@ -127,7 +127,7 @@ describe "Surveys Component Settings" do
       it "sends the code and fails" do
         fill_in :token, with: code
         click_on("Continue")
-        expect(page).to have_css(".callout.alert")
+        expect(page).to have_css(".flash")
         expect(page).to have_content("The introduced code has already been used.")
         expect(page).to have_content("Form restricted")
         expect(page).to have_field("token")
@@ -147,7 +147,7 @@ describe "Surveys Component Settings" do
       it "sends the code and fails" do
         fill_in :token, with: code
         click_on("Continue")
-        expect(page).to have_css(".callout.alert")
+        expect(page).to have_css(".flash")
         expect(page).to have_content("The introduced code has expired.")
         expect(page).to have_content("Form restricted")
         expect(page).to have_field("token")
@@ -160,7 +160,7 @@ describe "Surveys Component Settings" do
     it "sends the code and fails" do
       fill_in :token, with: "dirty-things"
       click_on("Continue")
-      expect(page).to have_css(".callout.alert")
+      expect(page).to have_css(".flash")
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")
       expect(page).to have_field("token")
@@ -170,7 +170,7 @@ describe "Surveys Component Settings" do
     it "sends another code and fails" do
       fill_in :token, with: another_token.token
       click_on("Continue")
-      expect(page).to have_css(".callout.alert")
+      expect(page).to have_css(".flash")
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")
       expect(page).to have_field("token")

@@ -32,7 +32,8 @@ describe "Access code groups admin menu" do
       es: "NuevoGrupo",
       ca: "Nou group"
     )
-    fill_in "Expires At", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y %H:%M")
+    fill_in "code_group_expires_at_date", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y")
+    fill_in "code_group_expires_at_time", with: (Time.zone.today + 1.day).strftime("%H:%M")
     check "Active"
     fill_in "Re-use max", with: 10
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
@@ -59,7 +60,7 @@ describe "Access code groups admin menu" do
     fill_in "Re-use max", with: 2
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
-    click_on "update"
+    click_on "Update"
 
     expect(page).to have_content("Access code group successfully updated")
     within "tr", text: "My new Group" do
