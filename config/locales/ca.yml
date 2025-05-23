@@ -30,6 +30,7 @@ ca:
             success: Access code group successfully destroyed
           edit:
             title: Edit access code group
+            update: Update
           form:
             active: Active
             expires_at: Expires At
