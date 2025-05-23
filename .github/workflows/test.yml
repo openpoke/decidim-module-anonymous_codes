@@ -59,7 +59,7 @@ jobs:
           bundler-cache: true
 
       - name: Install imagemagick and wkhtmltopdf
-      - run: sudo apt install imagemagick wkhtmltopdf
+        run: sudo apt install imagemagick wkhtmltopdf
 
       - name: Setup Database
         run: bundle exec rake test_app
