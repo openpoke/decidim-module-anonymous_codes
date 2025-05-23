@@ -20,7 +20,7 @@ describe "Token codes" do
 
     within "tr", text: existing_empty_group.title["en"] do
       expect(page).to have_link("List")
-      click_link "List"
+      click_on "List"
     end
   end
 
@@ -31,7 +31,7 @@ describe "Token codes" do
     expect(page).to have_content("Used?")
     expect(page).to have_content("Num. of uses")
 
-    click_link "Generate tokens in bulk"
+    click_on "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 10
     perform_enqueued_jobs do
@@ -40,7 +40,7 @@ describe "Token codes" do
 
     expect(page).to have_content("Codes are being generated in the background. Please wait a few seconds and refresh the page.")
 
-    click_link "Back to groups"
+    click_on "Back to groups"
     within "tr", text: "Existing empty group" do
       expect(page).to have_content("0 / 10")
     end
@@ -50,19 +50,19 @@ describe "Token codes" do
   end
 
   it "creates a token code manually" do
-    click_link "New token"
+    click_on "New token"
     expect(page).to have_content("Token")
     expect(page).to have_content("Create manual token")
 
     fill_in "Token", with: "8AEJXSA83SH12"
-    click_on "create"
+    click_on "Create"
 
     expect(page).to have_content("Token is being created successfully")
     expect(page).to have_css("tr td:first-child", text: "8AEJXSA83SH12")
   end
 
   it "destroys an existing token code" do
-    click_link "Generate tokens in bulk"
+    click_on "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 5
 
@@ -75,7 +75,7 @@ describe "Token codes" do
     within "tr", text: last_token.reload.token do
       expect(page).to have_link("Delete")
       accept_confirm do
-        click_link "Delete", match: :first
+        click_on "Delete", match: :first
       end
     end
 
@@ -83,7 +83,7 @@ describe "Token codes" do
   end
 
   it "allows sorting columns" do
-    click_link "Generate tokens in bulk"
+    click_on "Generate tokens in bulk"
 
     fill_in "Number of tokens to generate", with: 15
 
@@ -113,7 +113,7 @@ describe "Token codes" do
 
       within "tr", text: existing_group.title["en"] do
         expect(page).to have_link("List")
-        click_link "List"
+        click_on "List"
       end
 
       click_on "Available?"

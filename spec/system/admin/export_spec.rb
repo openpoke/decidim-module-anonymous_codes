@@ -31,7 +31,7 @@ describe "Export codes" do
 
   shared_examples "exports as" do |method, extension|
     it "can export as #{method}" do
-      click_link "All tokens as #{method}"
+      click_on "All tokens as #{method}"
       perform_enqueued_jobs
 
       expect(page).to have_content("Your export is currently in progress. You'll receive an email when it's complete.")

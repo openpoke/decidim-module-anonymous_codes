@@ -49,7 +49,7 @@ describe "Surveys Component Settings" do
   shared_examples "form is readonly" do
     it "sends the code" do
       fill_in :token, with: code
-      click_button("Continue")
+      click_on("Continue")
       expect(page).to have_content(question.body["en"])
       expect(page).to have_link("Sign in with your account")
       expect(page).to have_no_button("Submit")
@@ -59,20 +59,20 @@ describe "Surveys Component Settings" do
   shared_examples "form requires codes" do
     it "code is case insensitve" do
       fill_in :token, with: code.downcase
-      click_button("Continue")
+      click_on("Continue")
       expect(page).to have_no_content("The introduced code is invalid.")
       expect(page).to have_content(question.body["en"])
     end
 
     it "sends the code and the form" do
       fill_in :token, with: code
-      click_button("Continue")
+      click_on("Continue")
 
       expect(token).not_to be_used
 
       fill_in question.body["en"], with: "42"
       check "questionnaire_tos_agreement"
-      accept_confirm { click_button "Submit" }
+      accept_confirm { click_on "Submit" }
       expect(page).to have_css(".callout.success")
       expect(page).to have_content("Already answered")
 
@@ -86,7 +86,7 @@ describe "Surveys Component Settings" do
 
       fill_in question.body["en"], with: "42"
       check "questionnaire_tos_agreement"
-      accept_confirm { click_button "Submit" }
+      accept_confirm { click_on "Submit" }
       expect(page).to have_css(".callout.success")
       expect(page).to have_content("Already answered")
 
@@ -126,7 +126,7 @@ describe "Surveys Component Settings" do
 
       it "sends the code and fails" do
         fill_in :token, with: code
-        click_button("Continue")
+        click_on("Continue")
         expect(page).to have_css(".callout.alert")
         expect(page).to have_content("The introduced code has already been used.")
         expect(page).to have_content("Form restricted")
@@ -146,7 +146,7 @@ describe "Surveys Component Settings" do
 
       it "sends the code and fails" do
         fill_in :token, with: code
-        click_button("Continue")
+        click_on("Continue")
         expect(page).to have_css(".callout.alert")
         expect(page).to have_content("The introduced code has expired.")
         expect(page).to have_content("Form restricted")
@@ -159,7 +159,7 @@ describe "Surveys Component Settings" do
   shared_examples "cannot be answered with bad codes" do
     it "sends the code and fails" do
       fill_in :token, with: "dirty-things"
-      click_button("Continue")
+      click_on("Continue")
       expect(page).to have_css(".callout.alert")
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")
@@ -169,7 +169,7 @@ describe "Surveys Component Settings" do
 
     it "sends another code and fails" do
       fill_in :token, with: another_token.token
-      click_button("Continue")
+      click_on("Continue")
       expect(page).to have_css(".callout.alert")
       expect(page).to have_content("The introduced code is invalid.")
       expect(page).to have_content("Form restricted")

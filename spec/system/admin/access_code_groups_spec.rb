@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Access codes admin menu" do
+describe "Access code groups admin menu" do
   let(:organization) { component.organization }
   let(:user) { create :user, :admin, :confirmed, organization: }
   let(:component) { survey.component }
@@ -37,7 +37,7 @@ describe "Access codes admin menu" do
     fill_in "Re-use max", with: 10
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
-    click_on "create"
+    click_on "Create"
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
@@ -47,7 +47,7 @@ describe "Access codes admin menu" do
     expect(last_group.active).to be(true)
 
     within "tr", text: last_group.title["en"] do
-      click_link "Edit"
+      click_on "Edit"
     end
     fill_in_i18n(
       :code_group_title,
@@ -81,7 +81,7 @@ describe "Access codes admin menu" do
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
     perform_enqueued_jobs do
-      click_on "create"
+      click_on "Create"
     end
 
     expect(page).to have_content("Access code group successfully created")
@@ -104,7 +104,7 @@ describe "Access codes admin menu" do
     within "tr", text: existing_empty_group.title["en"] do
       expect(page).to have_link("Delete")
       accept_confirm do
-        click_link "Delete"
+        click_on "Delete"
       end
     end
 
