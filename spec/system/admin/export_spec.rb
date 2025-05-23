@@ -34,7 +34,7 @@ describe "Export codes" do
       click_on "All tokens as #{method}"
       perform_enqueued_jobs
 
-      expect(page).to have_content("Your export is currently in progress. You'll receive an email when it's complete.")
+      expect(page).to have_content("Your export is currently in progress. You will receive an email when it is complete.")
       expect(last_email.subject).to include("tokens_for_group_#{group.id}", extension)
       expect(last_email.attachments.length).to be_positive
       expect(last_email.attachments.first.filename).to match(/^tokens_for_group_#{group.id}.*\.zip$/)
