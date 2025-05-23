@@ -19,7 +19,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
       form.step_settings[key]["allow_answers"] = true
       form.step_settings[key]["allow_unregistered"] = true
     end
-    Decidim::Admin::UpdateComponent.call(form, component, admin) do
+    Decidim::Admin::UpdateComponent.call(form, component) do
       on(:ok) do
         puts "Component #{component.id} updated for allowing answers and unregistered users"
       end
