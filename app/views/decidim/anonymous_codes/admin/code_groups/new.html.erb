@@ -1,21 +1,31 @@
-<%= decidim_form_for(@form, url: code_groups_path, html: { class: "form new_code_group" }) do |f| %>
+<%= decidim_form_for(@form, url: code_groups_path, html: { class: "form form-defaults new_code_group" }) do |f| %>
   <div class="card">
-    <div class="card-divider">
-      <h2 class="card-title"><%= t(".title") %>
-        <a class="button tiny button--title hollow" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
-      </h2>
+    <div class="item_show__header">
+      <h1 class="item_show__header-title">
+        <%= t("code_groups.index.title", scope: "decidim.anonymous_codes.admin") %>
+        
+        <% if allowed_to?(:create, :anonymous_code_group) %>
+          <div class="flex ml-auto items-center gap-x-4">
+            <a class="button button__sm button__secondary new" href="<%= new_code_group_path %>">
+              <%= t("code_groups.index.new_access_code_group_button", scope: "decidim.anonymous_codes.admin") %>
+            </a>
+          </div>
+        <% end %>
+      </h1>
     </div>
 
     <div class="card-section">
-      <%= render partial: "form", object: f %>
+      <div class="form__wrapper">
+        <div class="card-section">
+          <%= render partial: "form", object: f %>
 
-      <div class="row column">
-        <%= f.number_field :num_tokens, label: t(".num_tokens") %>
+          <div class="row column">
+            <%= f.number_field :num_tokens, label: t(".num_tokens") %>
+          </div>
+        <div>
       </div>
     </div>
   </div>
 
-  <div class="button--double form-general-submit">
-    <%= f.submit "create" %>
-  </div>
+  <%= f.submit t(".create"), class: "button button__sm button__secondary" %>
 <% end %>
