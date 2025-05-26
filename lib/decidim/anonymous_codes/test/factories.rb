@@ -13,7 +13,7 @@ FactoryBot.define do
       after(:create) do |group|
         process = create(:participatory_process, organization: group.organization)
         component = create(:surveys_component, participatory_space: process)
-        group.update(resource: create(:survey, component: component))
+        group.update(resource: create(:survey, component:))
       end
     end
 
@@ -21,8 +21,8 @@ FactoryBot.define do
       after(:create) do |group|
         process = create(:participatory_process, organization: group.organization)
         component = create(:surveys_component, participatory_space: process)
-        group.update(resource: create(:survey, component: component))
-        create(:anonymous_codes_token, :used, group: group)
+        group.update(resource: create(:survey, component:))
+        create(:anonymous_codes_token, :used, group:)
       end
     end
   end
@@ -33,7 +33,7 @@ FactoryBot.define do
 
     trait :used do
       after(:create) do |token|
-        token.token_resources << create(:anonymous_codes_token_resource, token: token)
+        token.token_resources << create(:anonymous_codes_token_resource, token:)
       end
     end
   end

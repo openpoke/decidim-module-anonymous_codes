@@ -15,9 +15,9 @@ module Decidim
             title_ca: "Títol de la mostra",
             title_es: "Titulo de ejemplo",
             expires_at: expires,
-            active: active,
-            max_reuses: max_reuses,
-            num_tokens: num_tokens
+            active:,
+            max_reuses:,
+            num_tokens:
           }
         end
         let(:active) { true }
@@ -28,7 +28,7 @@ module Decidim
           CodeGroupForm.from_params(
             form_params
           ).with_context(
-            current_organization: current_organization
+            current_organization:
           )
         end
 

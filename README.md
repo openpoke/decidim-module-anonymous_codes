@@ -34,6 +34,13 @@ bin/rails db:migrate
 > bin/rails decidim_anonymous_codes:install:migrations
 > ```
 
+The compatibility table is the following:
+
+| Anonymous Code Version  | Decidim Version  |
+|---|---|
+| 1.0 | 0.27.X |
+| 1.1 | 0.29.x |
+
 ## Usage
 
 The first step is to create a group of codes in the admin, for this there is a specific menu in the admin panel.

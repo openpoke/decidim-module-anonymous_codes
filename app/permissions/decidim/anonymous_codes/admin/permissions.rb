@@ -17,7 +17,7 @@ module Decidim
         private
 
         def anonymous_codes_group_action?
-          return unless permission_action.subject == :anonymous_code_group
+          return false unless permission_action.subject == :anonymous_code_group
 
           case permission_action.action
           when :create, :update, :export
@@ -28,7 +28,7 @@ module Decidim
         end
 
         def anonymous_codes_token_action?
-          return unless permission_action.subject == :anonymous_code_token
+          return false unless permission_action.subject == :anonymous_code_token
 
           case permission_action.action
           when :view, :create, :export

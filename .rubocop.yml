@@ -1,4 +1,22 @@
-inherit_from:
-  - .rubocop_ruby.yml
-  - .rubocop_rails.yml
-  - .rubocop-disabled.yml
+inherit_gem:
+  decidim-dev: rubocop-decidim.yml
+
+AllCops:
+  Include:
+    - "**/*.rb"
+    - "**/*.rake"
+    - "**/*.ru"
+    - "**/Gemfile"
+    - "**/Rakefile"
+  Exclude:
+    - "development_app/**/*"
+    - "spec/decidim_dummy_app/**/*"
+    - "bin/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "vendor/**/*"
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/system/**/*'
+    - 'spec/i18n_spec.rb'

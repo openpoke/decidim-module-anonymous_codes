@@ -16,7 +16,7 @@ module Decidim
         it "is invalid without num_tokens" do
           form.token = nil
           expect(form).to be_invalid
-          expect(form.errors[:token]).to include("can't be blank")
+          expect(form.errors[:token]).to include("cannot be blank")
         end
 
         it "is invalid with token not being upercase" do

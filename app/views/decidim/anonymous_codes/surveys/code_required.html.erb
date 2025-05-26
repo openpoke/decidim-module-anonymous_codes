@@ -5,46 +5,52 @@
 
 <%= render partial: "decidim/shared/component_announcement" if current_component.manifest_name == "surveys" %>
 
-<div class="row columns">
-  <h2 class="section-heading"><%= translated_attribute questionnaire.title %></h2>
-  <div class="row">
-    <div class="columns large-6 medium-centered lead">
-      <%= decidim_sanitize_editor_admin translated_attribute questionnaire.description %>
-    </div>
-  </div>
-</div>
+<div class="content">
+  <main class="layout-1col cols-6">
+    <div class="row columns">
+      <div class="text-center py-10">
+        <h1 class="title-decorator inline-block text-left mb-12">
+          <%= translated_attribute questionnaire.title %>
+        </h1>
 
-<div class="row">
-  <div class="columns large-6 medium-centered">
-    <div class="card">
-      <div class="card__content">
-        <% unless questionnaire_for.try(:component)&.try(:published?) %>
-          <div class="section">
-            <div class="callout warning">
-              <p><%= t("questionnaire_not_published.body", scope: "decidim.forms.questionnaires.show") %></p>
-            </div>
-          </div>
-        <% end %>
-
-        <div class="section">
-          <div class="callout warning">
-            <h3 class="heading4"><%= t(".title") %></h3>
-            <p><%= t(".body") %></p>
-          </div>
-          <fi3eldset class="field">
-            <label class="field__label" for="code"><%= t(".label") %></label>
-            <div class="field__input">
-              <form method="get">
-                <%= text_field_tag :token, nil, class: "input", required: true, style: "text-transform: uppercase" %>
-                <button type="submit" class="button"><%= t(".submit") %></button>
-              </form>
-            </div>
+        <div class="text-left editor-content">
+          <div class="rich-text-display"><p><%= decidim_sanitize_editor_admin translated_attribute questionnaire.description %></p></div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<% content_for :js_content do %>
-  <%= javascript_pack_tag "decidim_forms" %>
-<% end %>
+    <div class="row">
+      <div class="columns large-6 medium-centered">
+        <div class="card">
+          <div class="card__content">
+            <% unless questionnaire_for.try(:component)&.try(:published?) %>
+              <div class="section">
+                <div class="callout warning">
+                  <p><%= t("questionnaire_not_published.body", scope: "decidim.forms.questionnaires.show") %></p>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="section">
+              <div class="callout warning">
+                <h2><%= t(".title") %></h2>
+                <p><%= t(".body") %></p>
+              </div>
+              <div class="field__input">
+                <form method="get">
+                  <%= label_tag :token, t(".label") %>
+                  <%= text_field_tag :token, nil, class: "input", required: true, style: "text-transform: uppercase", autocomplete: "off" %>
+                  <button type="submit" class="button button__sm button__primary"><%= t(".submit") %></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% content_for :js_content do %>
+      <%= append_javascript_pack_tag "decidim_forms" %>
+    <% end %>
+  </main>
+</div>

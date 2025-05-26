@@ -16,7 +16,7 @@ module Decidim
         it "is invalid without num_tokens" do
           form.num_tokens = nil
           expect(form).to be_invalid
-          expect(form.errors[:num_tokens]).to include("can't be blank")
+          expect(form.errors[:num_tokens]).to include("cannot be blank")
         end
 
         it "is invalid with num_tokens not being an integer" do

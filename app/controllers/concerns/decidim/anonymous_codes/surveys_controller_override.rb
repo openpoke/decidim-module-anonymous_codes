@@ -32,7 +32,7 @@ module Decidim
           next unless current_token&.available?
 
           # find any answer for the current user and questionnaire that would be used as a resource to link the usage counter
-          answer = Decidim::Forms::Answer.find_by(questionnaire: questionnaire, user: current_user, session_token: @form.context.session_token)
+          answer = Decidim::Forms::Answer.find_by(questionnaire:, user: current_user, session_token: @form.context.session_token)
           current_token.answers << answer if answer.present?
         end
 

@@ -22,7 +22,7 @@ module Decidim
       scope :used, -> { where("usage_count > 0") }
 
       def self.for(group)
-        where(group: group)
+        where(group:)
       end
 
       def available?
@@ -54,7 +54,7 @@ module Decidim
       def token_uniq_per_resource
         return unless group.resource
 
-        errors.add(:token, :taken) if Token.where(group: Group.where(resource: group.resource).where.not(id: group)).exists?(token: token)
+        errors.add(:token, :taken) if Token.where(group: Group.where(resource: group.resource).where.not(id: group)).exists?(token:)
       end
     end
   end

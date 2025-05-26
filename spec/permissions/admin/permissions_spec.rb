@@ -7,7 +7,7 @@ module Decidim::AnonymousCodes::Admin
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
     let(:organization) { create :organization }
-    let(:user) { build :user, :admin, organization: organization }
+    let(:user) { build :user, :admin, organization: }
     let(:context) do
       {}
     end
@@ -39,7 +39,7 @@ module Decidim::AnonymousCodes::Admin
 
         context "when destroyable" do
           let(:context) do
-            { code_group: code_group }
+            { code_group: }
           end
 
           let(:code_group) { create :anonymous_codes_group }
@@ -49,7 +49,7 @@ module Decidim::AnonymousCodes::Admin
 
         context "when not destroyable" do
           let(:context) do
-            { code_group: code_group }
+            { code_group: }
           end
 
           let(:code_group) { create :anonymous_codes_group, :with_used_tokens }
@@ -101,7 +101,7 @@ module Decidim::AnonymousCodes::Admin
 
         context "when token" do
           let(:context) do
-            { token: token }
+            { token: }
           end
 
           let(:token) { create :anonymous_codes_token }
@@ -111,7 +111,7 @@ module Decidim::AnonymousCodes::Admin
 
         context "when used token" do
           let(:context) do
-            { token: token }
+            { token: }
           end
 
           let(:token) { create :anonymous_codes_token, :used }

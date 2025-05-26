@@ -7,7 +7,7 @@ module Decidim
     module Admin
       describe CreateCodeGroup do
         let(:organization) { create(:organization) }
-        let(:current_user) { create(:user, :confirmed, :admin, organization: organization) }
+        let(:current_user) { create(:user, :confirmed, :admin, organization:) }
         let(:form_params) do
           {
             title_en: "Sample Title",
@@ -16,7 +16,7 @@ module Decidim
             expires_at: 1.day.from_now,
             active: true,
             max_reuses: 10,
-            num_tokens: num_tokens
+            num_tokens:
           }
         end
         let(:num_tokens) { nil }

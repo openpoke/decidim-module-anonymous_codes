@@ -17,6 +17,14 @@ module Decidim
       initializer "decidim-anonymous_codes.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
+
+      initializer "decidim-anonymous_codes.register_icons" do
+        Decidim.icons.register(name: "list", icon: "file-list-line", category: "system", description: "", engine: :core)
+        Decidim.icons.register(name: "pencil", icon: "pencil-line", category: "system", description: "", engine: :core)
+        Decidim.icons.register(name: "circle-x", icon: "close-circle-line", category: "system", description: "", engine: :core)
+        Decidim.icons.register(name: "cog", icon: "eye", category: "system", description: "", engine: :core)
+        Decidim.icons.register(name: "hard-drive", icon: "hard-drive-line", description: "Anonymous Codes", category: "system", engine: :core)
+      end
     end
   end
 end

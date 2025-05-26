@@ -1,0 +1,18 @@
+<div class="item_show__header">
+  <h1 class="item_show__header-title">
+    <%= t("codes.index.title", scope: "decidim.anonymous_codes.admin", group: translated_attribute(code_group.title)) %>
+  </h1>
+
+  <div class="flex">
+    <a class="button button__sm hollow" href="<%= code_groups_path %>"><%= t("codes.index.back", scope: "decidim.anonymous_codes.admin") %></a>
+    <div id="js-other-actions-wrapper">
+      <%= render "export_dropdown" %>
+    </div>
+
+    <% if allowed_to?(:create, :anonymous_code_token) %>
+      <a class="button button__sm new" href="<%= bulk_code_group_codes_path(code_group) %>"><%= t("codes.index.bulk_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
+
+      <a class="button button__sm" href="<%= new_code_group_code_path(code_group) %>"><%= t("codes.index.new_codes_button", scope: "decidim.anonymous_codes.admin") %></a>
+    <% end %>
+  </div>
+</div>

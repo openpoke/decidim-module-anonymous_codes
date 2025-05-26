@@ -18,7 +18,7 @@ module Decidim
       scope :inactive, -> { where(active: false) }
 
       def self.for(organization)
-        where(organization: organization)
+        where(organization:)
       end
 
       def expired?

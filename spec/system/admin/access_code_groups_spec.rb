@@ -2,13 +2,13 @@
 
 require "spec_helper"
 
-describe "Access codes admin menu", type: :system do
+describe "Access code groups admin menu" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
+  let(:user) { create :user, :admin, :confirmed, organization: }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
-  let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization: organization, resource: survey) }
-  let!(:existing_empty_group) { create(:anonymous_codes_group, title: { en: "Existing empty group" }, organization: organization, resource: survey) }
+  let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization:, resource: survey) }
+  let!(:existing_empty_group) { create(:anonymous_codes_group, title: { en: "Existing empty group" }, organization:, resource: survey) }
   let!(:anonymous_codes_token1) { create(:anonymous_codes_token, group: existing_group) }
   let!(:anonymous_codes_token2) { create(:anonymous_codes_token, :used, group: existing_group) }
 
@@ -20,7 +20,7 @@ describe "Access codes admin menu", type: :system do
   it "adds a new access code group" do
     visit decidim_admin_anonymous_codes.code_groups_path
 
-    within find("tr", text: existing_group.title["en"]) do
+    within "tr", text: existing_group.title["en"] do
       expect(page).to have_content("1 / 2")
     end
     click_on "New access code group"
@@ -32,12 +32,13 @@ describe "Access codes admin menu", type: :system do
       es: "NuevoGrupo",
       ca: "Nou group"
     )
-    fill_in "Expires At", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y %H:%M")
+    fill_in "code_group_expires_at_date", with: (Time.zone.today + 1.day).strftime("%d/%m/%Y")
+    fill_in "code_group_expires_at_time", with: (Time.zone.today + 1.day).strftime("%H:%M")
     check "Active"
     fill_in "Re-use max", with: 10
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
-    click_on "create"
+    click_on "Create"
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
@@ -46,8 +47,8 @@ describe "Access codes admin menu", type: :system do
     expect(last_group.max_reuses).to eq(10)
     expect(last_group.active).to be(true)
 
-    within find("tr", text: last_group.title["en"]) do
-      click_link "Edit"
+    within "tr", text: last_group.title["en"] do
+      click_on "Edit"
     end
     fill_in_i18n(
       :code_group_title,
@@ -59,13 +60,13 @@ describe "Access codes admin menu", type: :system do
     fill_in "Re-use max", with: 2
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
-    click_on "update"
+    click_on "Update"
 
     expect(page).to have_content("Access code group successfully updated")
-    within find("tr", text: "My new Group") do
+    within "tr", text: "My new Group" do
       expect(page).to have_content("0 / 0")
     end
-    within find("tr", text: existing_group.title["en"]) do
+    within "tr", text: existing_group.title["en"] do
       expect(page).to have_content("1 / 2")
     end
   end
@@ -81,13 +82,13 @@ describe "Access codes admin menu", type: :system do
     select "#{component.participatory_space.title["en"]} :: #{component.name["en"]}", from: "code_group_resource_id"
 
     perform_enqueued_jobs do
-      click_on "create"
+      click_on "Create"
     end
 
     expect(page).to have_content("Access code group successfully created")
     expect(page).to have_content("New access code group")
 
-    within find("tr", text: "New Group") do
+    within "tr", text: "New Group" do
       expect(page).to have_content("0 / 10")
       expect(page).to have_content("Yes")
       expect(page).to have_content("Never")
@@ -97,18 +98,18 @@ describe "Access codes admin menu", type: :system do
   it "destroys existing access code group" do
     visit decidim_admin_anonymous_codes.code_groups_path
 
-    within find("tr", text: existing_group.title["en"]) do
-      expect(page).not_to have_link("Delete")
+    within "tr", text: existing_group.title["en"] do
+      expect(page).to have_no_link("Delete")
     end
 
-    within find("tr", text: existing_empty_group.title["en"]) do
+    within "tr", text: existing_empty_group.title["en"] do
       expect(page).to have_link("Delete")
       accept_confirm do
-        click_link "Delete"
+        click_on "Delete"
       end
     end
 
     expect(page).to have_content("Access code group successfully destroyed")
-    expect(page).not_to have_content(existing_empty_group.title["en"])
+    expect(page).to have_no_content(existing_empty_group.title["en"])
   end
 end

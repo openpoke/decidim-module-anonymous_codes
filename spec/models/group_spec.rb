@@ -19,7 +19,7 @@ module Decidim
       end
 
       context "when tokens exist" do
-        let!(:token) { create(:anonymous_codes_token, group: group) }
+        let!(:token) { create(:anonymous_codes_token, group:) }
 
         it "has an organization" do
           expect(group.organization).to be_a(Decidim::Organization)
@@ -38,7 +38,7 @@ module Decidim
         end
 
         context "and tokens have been used" do
-          let!(:token) { create(:anonymous_codes_token, usage_count: 1, group: group) }
+          let!(:token) { create(:anonymous_codes_token, usage_count: 1, group:) }
 
           it "does not destroy the tokens when destroyed" do
             expect { group.destroy }.not_to change(Token, :count)

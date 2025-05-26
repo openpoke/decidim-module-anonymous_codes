@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = "Allow annonymous users to answer surveys using specific assigned tokens"
   spec.license = "AGPL-3.0"
   spec.homepage = "https://github.com/openpoke/decidim-module-anonymous_codes"
-  spec.required_ruby_version = ">= 3.0"
+  spec.required_ruby_version = ">= 3.2"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})

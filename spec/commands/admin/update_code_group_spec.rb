@@ -22,7 +22,7 @@ module Decidim
           CodeGroupForm.from_params(
             form_params
           ).with_context(
-            current_organization: current_organization
+            current_organization:
           )
         end
         let(:code_group) do

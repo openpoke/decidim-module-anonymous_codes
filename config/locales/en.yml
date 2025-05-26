@@ -30,6 +30,7 @@ en:
             success: Access code group successfully destroyed
           edit:
             title: Edit access code group
+            update: Update
           form:
             active: Active
             expires_at: Expires At
@@ -48,6 +49,7 @@ en:
             start_by: Start by adding an access code group.
             title: Access code groups
           new:
+            create: Create
             num_tokens: Num. of tokens to generate (you can do it later too)
             title: New access code group
           update:
@@ -81,7 +83,7 @@ en:
             usage_count: Num. of uses
             used: Used?
           new:
-            button_create_tokens: create
+            button_create_tokens: Create
             title: Create manual token for "%{group}"
         export:
           tokens_pdf:
@@ -105,7 +107,7 @@ en:
             groups: 'Edit groups:'
             inactive: "- ⚠️ This group is inactive! You need to activate it in order
               to restrict access to the survey."
-            new_group: "\U0001F449 Create answer codes here"
+            new_group: "👉 Create answer codes here"
       expired_code: The introduced code has expired. Please try again.
       inactive_group: <strong>Warning:</strong> This survey is restricted with codes,
         but the group is inactive. You can activate it in the <a href="%{path}">access

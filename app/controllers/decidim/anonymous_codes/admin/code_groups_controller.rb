@@ -4,7 +4,7 @@ module Decidim
   module AnonymousCodes
     module Admin
       class CodeGroupsController < ApplicationController
-        include Decidim::Admin::Paginable
+        include Decidim::Paginable
         include TranslatableAttributes
         helper_method :groups, :resource_path, :surveys, :edit_resource_path
 
@@ -16,6 +16,12 @@ module Decidim
           enforce_permission_to :create, :anonymous_code_group
 
           @form = form(CodeGroupForm).instance
+        end
+
+        def edit
+          enforce_permission_to(:update, :anonymous_code_group, code_group:)
+
+          @form = form(CodeGroupForm).from_model(code_group)
         end
 
         def create
@@ -36,14 +42,8 @@ module Decidim
           end
         end
 
-        def edit
-          enforce_permission_to :update, :anonymous_code_group, code_group: code_group
-
-          @form = form(CodeGroupForm).from_model(code_group)
-        end
-
         def update
-          enforce_permission_to :update, :anonymous_code_group, code_group: code_group
+          enforce_permission_to(:update, :anonymous_code_group, code_group:)
 
           @form = form(CodeGroupForm).from_params(params)
 
@@ -61,7 +61,7 @@ module Decidim
         end
 
         def destroy
-          enforce_permission_to :destroy, :anonymous_code_group, code_group: code_group
+          enforce_permission_to(:destroy, :anonymous_code_group, code_group:)
 
           Decidim.traceability.perform_action!("delete", code_group, current_user) do
             code_group.destroy!

@@ -41,7 +41,7 @@ module Decidim
             let(:resource) { create(:questionnaire) }
 
             it "cannot be associated" do
-              expect { create(:anonymous_codes_token_resource, token: token, resource: resource) }.to raise_error(ActiveRecord::RecordInvalid)
+              expect { create(:anonymous_codes_token_resource, token:, resource:) }.to raise_error(ActiveRecord::RecordInvalid)
             end
           end
         end
@@ -177,7 +177,7 @@ module Decidim
 
             context "when the group has the same resource linked" do
               let!(:group) { create(:anonymous_codes_group, :with_resource) }
-              let!(:token) { create(:anonymous_codes_token, group: group) }
+              let!(:token) { create(:anonymous_codes_token, group:) }
               let!(:another_group) { create(:anonymous_codes_group, organization: token.group.organization, resource: group.resource) }
               let(:another_token) { build(:anonymous_codes_token, token: token.token, group: another_group) }
 
