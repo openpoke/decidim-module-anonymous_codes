@@ -58,8 +58,8 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - name: Install imagemagick and wkhtmltopdf
-        run: sudo apt install imagemagick wkhtmltopdf
+      - name: Install imagemagick
+        run: sudo apt install imagemagick
 
       - name: Setup Database
         run: bundle exec rake test_app
