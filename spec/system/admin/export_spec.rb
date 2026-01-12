@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Export codes" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
   let!(:group) { create(:anonymous_codes_group, organization:, resource: survey) }

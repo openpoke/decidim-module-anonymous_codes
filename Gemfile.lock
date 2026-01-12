@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-anonymous_codes (1.1)
+    decidim-anonymous_codes (1.2)
       decidim-admin (>= 0.30.0, < 0.31)
       decidim-core (>= 0.30.0, < 0.31)
       decidim-forms (>= 0.30.0, < 0.31)
@@ -466,7 +466,7 @@ GEM
     invisible_captcha (0.13.0)
       rails (>= 3.2.0)
     io-console (0.8.2)
-    json (2.12.0)
+    json (2.18.0)
     jwt (3.1.2)
       base64
     kaminari (1.2.2)

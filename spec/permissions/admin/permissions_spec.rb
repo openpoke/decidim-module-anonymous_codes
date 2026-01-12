@@ -6,8 +6,8 @@ module Decidim::AnonymousCodes::Admin
   describe Permissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:user) { build :user, :admin, organization: }
+    let(:organization) { create(:organization) }
+    let(:user) { build(:user, :admin, organization:) }
     let(:context) do
       {}
     end
@@ -42,7 +42,7 @@ module Decidim::AnonymousCodes::Admin
             { code_group: }
           end
 
-          let(:code_group) { create :anonymous_codes_group }
+          let(:code_group) { create(:anonymous_codes_group) }
 
           it { is_expected.to be true }
         end
@@ -52,7 +52,7 @@ module Decidim::AnonymousCodes::Admin
             { code_group: }
           end
 
-          let(:code_group) { create :anonymous_codes_group, :with_used_tokens }
+          let(:code_group) { create(:anonymous_codes_group, :with_used_tokens) }
 
           it { is_expected.to be false }
         end
@@ -104,7 +104,7 @@ module Decidim::AnonymousCodes::Admin
             { token: }
           end
 
-          let(:token) { create :anonymous_codes_token }
+          let(:token) { create(:anonymous_codes_token) }
 
           it { is_expected.to be true }
         end
@@ -114,7 +114,7 @@ module Decidim::AnonymousCodes::Admin
             { token: }
           end
 
-          let(:token) { create :anonymous_codes_token, :used }
+          let(:token) { create(:anonymous_codes_token, :used) }
 
           it { is_expected.to be false }
         end

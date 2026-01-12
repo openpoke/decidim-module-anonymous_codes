@@ -8,7 +8,7 @@ module Decidim
       subject { described_class.perform_now(code_group, num_tokens) }
 
       let(:organization) { create(:organization) }
-      let(:code_group) { create :anonymous_codes_group }
+      let(:code_group) { create(:anonymous_codes_group) }
       let(:num_tokens) { 2 }
       let(:token1) { "TOKEN1" }
       let(:token2) { "TOKEN2" }

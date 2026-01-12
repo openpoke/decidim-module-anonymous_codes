@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Access code groups admin menu" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
   let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization:, resource: survey) }

@@ -5,9 +5,9 @@ require "spec_helper"
 describe "Surveys Component Settings" do
   let(:organization) { component.organization }
   let(:component) { survey.component }
-  let(:user) { create :user, :admin, :confirmed, organization: }
-  let(:group) { create :anonymous_codes_group, organization:, resource: }
-  let!(:token) { create :anonymous_codes_token, group: }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let(:group) { create(:anonymous_codes_group, organization:, resource:) }
+  let!(:token) { create(:anonymous_codes_token, group:) }
   let!(:survey) { create(:survey) }
   let(:resource) { nil }
 
@@ -38,7 +38,7 @@ describe "Surveys Component Settings" do
   end
 
   context "when not a surveys component" do
-    let(:component) { create :proposal_component }
+    let(:component) { create(:proposal_component) }
 
     it "has no callout" do
       expect(page).to have_no_css(".callout")

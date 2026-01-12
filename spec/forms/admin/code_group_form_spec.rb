@@ -8,7 +8,7 @@ module Decidim
       describe CodeGroupForm do
         subject { form }
         let(:current_organization) { create(:organization) }
-        let(:current_user) { create :user, organization: current_organization }
+        let(:current_user) { create(:user, organization: current_organization) }
         let(:form_params) do
           {
             title_en: "Sample Title",

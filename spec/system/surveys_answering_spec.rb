@@ -5,11 +5,11 @@ require "spec_helper"
 describe "Surveys Component Settings" do
   let(:organization) { component.organization }
   let(:component) { survey.component }
-  let(:user) { create :user, :confirmed, organization: }
-  let(:another_user) { create :user, :confirmed, organization: }
-  let(:group) { create :anonymous_codes_group, organization:, expires_at: expires, resource:, active: }
-  let!(:token) { create :anonymous_codes_token, token: code, group: }
-  let!(:another_token) { create :anonymous_codes_token }
+  let(:user) { create(:user, :confirmed, organization:) }
+  let(:another_user) { create(:user, :confirmed, organization:) }
+  let(:group) { create(:anonymous_codes_group, organization:, expires_at: expires, resource:, active:) }
+  let!(:token) { create(:anonymous_codes_token, token: code, group:) }
+  let!(:another_token) { create(:anonymous_codes_token) }
   let(:active) { true }
   let(:expires) { nil }
   let(:survey) { create(:survey, questionnaire:) }
@@ -110,7 +110,7 @@ describe "Surveys Component Settings" do
       end
 
       context "when user is an admin" do
-        let(:user) { create :user, :confirmed, :admin, organization: }
+        let(:user) { create(:user, :confirmed, :admin, organization:) }
 
         it "has a callout" do
           expect(page).to have_css(".flash")
@@ -122,7 +122,7 @@ describe "Surveys Component Settings" do
     end
 
     context "and code re-uses have exceeded" do
-      let!(:token) { create :anonymous_codes_token, token: code, group:, answers: [create(:answer, questionnaire:, user: another_user)] }
+      let!(:token) { create(:anonymous_codes_token, token: code, group:, answers: [create(:answer, questionnaire:, user: another_user)]) }
 
       it "sends the code and fails" do
         fill_in :token, with: code
