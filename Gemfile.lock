@@ -823,6 +823,9 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wicked_pdf (2.8.2)
+      activesupport
+      ostruct
     wisper (3.0.0)
     wisper-rspec (1.1.0)
     xpath (3.2.0)
@@ -847,6 +850,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   web-console
+  wicked_pdf
 
 RUBY VERSION
    ruby 3.3.4p94
