@@ -123,7 +123,7 @@ describe "Token codes" do
       expect(page).to have_content(available_token.token)
 
       click_on "Used?"
-      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
+      expect(page.body.index(used_token.token)).to be > page.body.index(available_token.token)
 
       click_on "Used?"
       used_column = all(".table-list tbody tr td:nth-child(3)").map(&:text)

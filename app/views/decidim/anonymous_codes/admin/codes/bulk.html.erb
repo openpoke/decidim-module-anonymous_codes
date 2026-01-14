@@ -1,14 +1,17 @@
-<div class="card">
+<% add_decidim_page_title(t(".title")) %>
 
-  <% add_decidim_page_title(t(".title")) %>
+<%= render partial: "header" %>
 
-  <%= render partial: "header" %>
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <%= decidim_form_for(@form, url: create_bulk_code_group_codes_path, html: { class: "form bulk_code_group_code" }) do |f| %>
+      <%= render partial: "bulk_form", object: f, locals: { title: t(".title", group: translated_attribute(code_group.title)) } %>
 
-  <%= decidim_form_for(@form, url: create_bulk_code_group_codes_path, html: { class: "form bulk_code_group_code" }) do |f| %>
-    <%= render partial: "bulk_form", object: f, locals: { title: t(".title", group: translated_attribute(code_group.title)) } %>
-
-    <div class="button button__sm button__primary form-general-submit">
-      <%= f.submit t(".button_generate_tokens") %>
-    </div>
-  <% end %>
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".button_generate_tokens"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
