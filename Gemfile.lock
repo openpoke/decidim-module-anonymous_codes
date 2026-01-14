@@ -828,6 +828,7 @@ GEM
       ostruct
     wisper (3.0.0)
     wisper-rspec (1.1.0)
+    wkhtmltopdf-binary (0.12.6.10)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.4)
@@ -851,6 +852,7 @@ DEPENDENCIES
   spring-watcher-listen
   web-console
   wicked_pdf
+  wkhtmltopdf-binary (~> 0.12.6)
 
 RUBY VERSION
    ruby 3.3.4p94

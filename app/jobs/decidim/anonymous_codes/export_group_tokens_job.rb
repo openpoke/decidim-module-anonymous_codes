@@ -8,15 +8,23 @@ module Decidim
       def perform(user, group, format)
         exporter = format == "AnonymousTokensPdf" ? Decidim::AnonymousCodes::Exporters::AnonymousTokensPdf : Decidim::Exporters.find_exporter(format)
 
-        if exporter
-          Rails.logger.info "Exporting tokens for group #{group.id} in #{format} format"
-        else
+        unless exporter
           Rails.logger.error "Cannot export tokens for group #{group.id}: Unknown format: #{format}"
+          return
         end
 
-        export_data = exporter.new(group.tokens, TokenSerializer).export
+        Rails.logger.info "Exporting tokens for group #{group.id} in #{format} format"
 
-        ExportMailer.export(user, "tokens_for_group_#{group.id}", export_data).deliver_now
+        export_data = exporter.new(group.tokens, TokenSerializer).export
+        export_for_mailer = Struct.new(:file_name, :content_type, :data, :export_type, :expires_at).new(
+          "tokens_for_group_#{group.id}.pdf",
+          "application/pdf",
+          export_data,
+          format,
+          1.week.from_now
+        )
+
+        ExportMailer.export(user, export_for_mailer).deliver_now
       end
     end
   end

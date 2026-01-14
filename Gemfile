@@ -23,6 +23,7 @@ group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", DECIDIM_VERSION
   gem "wicked_pdf"
+  gem "wkhtmltopdf-binary", "~> 0.12.6"
 end
 
 group :development do
