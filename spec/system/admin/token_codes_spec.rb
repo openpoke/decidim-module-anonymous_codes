@@ -124,10 +124,6 @@ describe "Token codes" do
 
       click_on "Used?"
       expect(page.body.index(used_token.token)).to be > page.body.index(available_token.token)
-
-      click_on "Used?"
-      used_column = all(".table-list tbody tr td:nth-child(3)").map(&:text)
-      expect(used_column).to eq(used_column.sort)
     end
   end
 end

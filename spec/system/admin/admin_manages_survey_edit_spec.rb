@@ -4,7 +4,9 @@ require "spec_helper"
 
 describe "Admin manages survey edit" do
   let!(:component) { create(:surveys_component) }
-  let!(:survey) { create(:survey, component: component) }
+  let!(:questionnaire) { create(:questionnaire) }
+  let!(:question) { create(:questionnaire_question, questionnaire:) }
+  let!(:survey) { create(:survey, :published, component:, questionnaire:) }
   let(:organization) { component.organization }
   let(:user) { create(:user, :admin, :confirmed, organization:) }
 
