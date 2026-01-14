@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Surveys Component Settings" do
+describe "Surveys Settings" do
   let(:organization) { component.organization }
   let(:component) { survey.component }
   let(:user) { create(:user, :confirmed, organization:) }
@@ -12,30 +12,18 @@ describe "Surveys Component Settings" do
   let!(:another_token) { create(:anonymous_codes_token) }
   let(:active) { true }
   let(:expires) { nil }
-  let(:survey) { create(:survey, questionnaire:) }
+  let(:survey) { create(:survey, :published, questionnaire:, allow_answers: true, allow_unregistered:) }
   let(:questionnaire) { create(:questionnaire) }
   let!(:question) { create(:questionnaire_question, body: { en: "What's the meaning of life?" }, mandatory: true, question_type: :short_answer, questionnaire:) }
   let(:resource) { survey }
   let(:code) { "SOMECODE" }
-  let(:settings) do
-    {
-      allow_answers: true,
-      allow_unregistered:
-    }
-  end
   let(:allow_unregistered) { false }
 
   def visit_component
-    visit Decidim::EngineRouter.main_proxy(component).survey_path(component.id)
+    visit Decidim::EngineRouter.main_proxy(component).survey_path(survey.id)
   end
 
   before do
-    component.update!(
-      step_settings: {
-        component.participatory_space.active_step.id => settings
-      }
-    )
-
     switch_to_host(organization.host)
   end
 
