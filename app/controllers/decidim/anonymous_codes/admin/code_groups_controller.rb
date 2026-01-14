@@ -89,17 +89,20 @@ module Decidim
         end
 
         def surveys
-          @surveys ||= Decidim::Component
-                       .where(
-                         organization: current_organization,
-                         manifest_name: "surveys"
-                       )
-                       .includes(:participatory_space)
-                       .map do |component|
-            [
-              "#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
-              component.id
-            ]
+          @surveys ||= begin
+            classes = Decidim.participatory_space_manifests.pluck :model_class_name
+            components = []
+            classes.each do |klass|
+              spaces = klass.safe_constantize.where(organization: current_organization)
+              spaces.each do |space|
+                components.concat Decidim::Component.where(participatory_space: space).pluck(:id)
+              end
+            end
+            Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
+              component = survey.component
+              ["#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
+               survey.id]
+            end
           end
         end
 
