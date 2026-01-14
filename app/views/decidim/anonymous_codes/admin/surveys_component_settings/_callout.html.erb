@@ -1,4 +1,4 @@
-<% groups = Decidim::AnonymousCodes::Group.for(@component.organization).where(resource: resource) %>
+<% groups = Decidim::AnonymousCodes::Group.for(@component&.organization).where(resource: resource) %>
 <% if groups.any? %>
   <div class="callout alert">
     <p><strong><%= t(".group_locked") %></strong></p>

@@ -2,23 +2,20 @@
 
 require "spec_helper"
 
-describe "Surveys Component Settings" do
+describe "Admin manages survey edit" do
+  let!(:component) { create(:surveys_component) }
+  let!(:survey) { create(:survey, component: component) }
   let(:organization) { component.organization }
-  let(:component) { survey.component }
   let(:user) { create(:user, :admin, :confirmed, organization:) }
+
   let(:group) { create(:anonymous_codes_group, organization:, resource:) }
   let!(:token) { create(:anonymous_codes_token, group:) }
-  let!(:survey) { create(:survey) }
   let(:resource) { nil }
-
-  def visit_component
-    visit Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id)
-  end
 
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
-    visit_component
+    visit Decidim::EngineRouter.admin_proxy(component).edit_survey_path(survey)
   end
 
   it "has callout" do
@@ -34,14 +31,6 @@ describe "Surveys Component Settings" do
       within ".callout.alert" do
         expect(page).to have_content("This survey can only be answered by using a valid code")
       end
-    end
-  end
-
-  context "when not a surveys component" do
-    let(:component) { create(:proposal_component) }
-
-    it "has no callout" do
-      expect(page).to have_no_css(".callout")
     end
   end
 end
