@@ -1,11 +1,11 @@
-<% groups = Decidim::AnonymousCodes::Group.for(@component.organization).where(resource: resource) %>
+<% groups = Decidim::AnonymousCodes::Group.for(@component&.organization).where(resource: resource) %>
 <% if groups.any? %>
   <div class="callout alert">
     <p><strong><%= t(".group_locked") %></strong></p>
     <ul>
       <% groups.each do |group| %>
         <li>
-          <%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id), target: "_blank" %>
+          <%= link_to translated_attribute(group.title), decidim_admin_anonymous_codes.edit_code_group_path(group.id), target: :blank, data: { "external-link": false } %>
           <%= content_tag "small", t(".inactive"), class: "help-text" unless group.active? %>
         </li>
       <% end %>
@@ -15,7 +15,7 @@
 <% else %>
   <div class="callout warning">
     <p><strong><%= t(".group_unlocked") %></strong></p>
-    <p><%= link_to t(".new_group"), decidim_admin_anonymous_codes.code_groups_path, target: "_blank" %></p>
+    <p><%= link_to t(".new_group"), decidim_admin_anonymous_codes.code_groups_path, target: :blank, data: { "external-link": false } %></p>
     <p class="help-text"><%= t(".group_unlocked_desc") %></p>
   </div>
 <% end %>

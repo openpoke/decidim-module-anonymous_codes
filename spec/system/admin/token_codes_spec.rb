@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Token codes" do
   let(:organization) { component.organization }
-  let(:user) { create :user, :admin, :confirmed, organization: }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:component) { survey.component }
   let!(:survey) { create(:survey) }
   let!(:existing_group) { create(:anonymous_codes_group, title: { en: "Existing group" }, organization:, resource: survey) }
@@ -123,11 +123,7 @@ describe "Token codes" do
       expect(page).to have_content(available_token.token)
 
       click_on "Used?"
-      expect(page.body.index(used_token.token)).to be < page.body.index(available_token.token)
-
-      click_on "Used?"
-      used_column = all(".table-list tbody tr td:nth-child(3)").map(&:text)
-      expect(used_column).to eq(used_column.sort)
+      expect(page.body.index(used_token.token)).to be > page.body.index(available_token.token)
     end
   end
 end

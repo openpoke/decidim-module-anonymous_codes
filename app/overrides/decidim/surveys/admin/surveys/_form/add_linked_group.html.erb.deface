@@ -1,0 +1,3 @@
+<!-- insert_after "erb[loud]:contains('form.check_box :allow_unregistered')" -->
+
+<%= render "decidim/anonymous_codes/admin/surveys_component_settings/callout", resource: form.object, component: form.object.component %>

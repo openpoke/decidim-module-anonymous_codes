@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = "Allow annonymous users to answer surveys using specific assigned tokens"
   spec.license = "AGPL-3.0"
   spec.homepage = "https://github.com/openpoke/decidim-module-anonymous_codes"
-  spec.required_ruby_version = ">= 3.2"
+  spec.required_ruby_version = ">= 3.3"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "decidim-surveys", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
   spec.add_dependency "deface", ">= 1.9.0"
 
-  spec.add_development_dependency "decidim-dev", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION
+  spec.add_development_dependency "decidim-dev", Decidim::AnonymousCodes::COMPAT_DECIDIM_VERSION # rubocop:disable Gemspec/DevelopmentDependencies
   spec.metadata["rubygems_mfa_required"] = "true"
 end
