@@ -21,16 +21,13 @@ gem "rspec", "~> 3.0"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-
   gem "decidim-dev", DECIDIM_VERSION
 end
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
+  gem "letter_opener_web"
   gem "listen", "~> 3.1"
   gem "rubocop-faker", "~> 1.1"
-  gem "spring"
-  gem "spring-watcher-listen"
   gem "web-console"
 end
 

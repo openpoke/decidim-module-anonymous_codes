@@ -7,7 +7,7 @@ module Decidim
 
       included do
         before_action do
-          next unless current_settings.allow_answers? && survey.open?
+          next unless survey&.open? && allow_answers?
           next if visitor_already_answered?
 
           if token_groups.active.any?

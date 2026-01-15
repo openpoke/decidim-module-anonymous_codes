@@ -49,6 +49,10 @@ module Decidim
         !usage_count.positive?
       end
 
+      def self.ransackable_attributes(_auth_object = nil)
+        %w(id token group_id)
+      end
+
       private
 
       def token_uniq_per_resource

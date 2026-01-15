@@ -40,6 +40,8 @@ The compatibility table is the following:
 |---|---|
 | 1.0 | 0.27.X |
 | 1.1 | 0.29.x |
+| 1.2 | 0.30.x |
+| 1.3 | 0.31.x |
 
 ## Usage
 
