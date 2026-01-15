@@ -3,6 +3,7 @@
 module Decidim
   module AnonymousCodes
     class ExportGroupTokensJob < ApplicationJob
+      include Decidim::PrivateDownloadHelper
       queue_as :exports
 
       def perform(user, group, format)
@@ -16,15 +17,9 @@ module Decidim
         Rails.logger.info "Exporting tokens for group #{group.id} in #{format} format"
 
         export_data = exporter.new(group.tokens, TokenSerializer).export
-        export_for_mailer = Struct.new(:file_name, :content_type, :data, :export_type, :expires_at).new(
-          "tokens_for_group_#{group.id}.pdf",
-          "application/pdf",
-          export_data,
-          format,
-          1.week.from_now
-        )
+        private_export = attach_archive(export_data, "anonymous_codes_group_#{group.id}_tokens", user)
 
-        ExportMailer.export(user, export_for_mailer).deliver_now
+        ExportMailer.export(user, private_export).deliver_now
       end
     end
   end

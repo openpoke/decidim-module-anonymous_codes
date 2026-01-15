@@ -100,7 +100,7 @@ module Decidim
             end
             Decidim::Surveys::Survey.where(decidim_component_id: components).map do |survey|
               component = survey.component
-              ["#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)}",
+              ["#{translated_attribute(component.participatory_space.title)} :: #{translated_attribute(component.name)} :: #{translated_attribute(survey.title)}",
                survey.id]
             end
           end
@@ -109,7 +109,7 @@ module Decidim
         def edit_resource_path(resource)
           return unless resource
 
-          Decidim::EngineRouter.admin_proxy(resource.component.participatory_space).edit_component_path(resource.component)
+          Decidim::ResourceLocatorPresenter.new(resource).edit
         end
       end
     end

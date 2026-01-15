@@ -27,18 +27,6 @@ module Decidim
             collection: collection.map { |token| Decidim::AnonymousCodes::TokenSerializer.new(token).serialize }
           }
         end
-
-        def export
-          pdf_html = controller.render_to_string(
-            template: template,
-            layout: layout,
-            locals: locals
-          )
-
-          pdf_file = WickedPdf.new.pdf_from_string(pdf_html)
-
-          Decidim::Exporters::ExportData.new(pdf_file, nil)
-        end
       end
     end
   end
